@@ -1,0 +1,7 @@
+nameSpace: http://www.claas.com/casis#
+nameSpaceKey: db
+schemeName: Functions
+preferredLanguage: de
+fileNamePrefix: Claas_TestData
+xMindRootTitle: Bike
+outputDirectory: D:/SKOSUTILS/Tests/

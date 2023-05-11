@@ -1,0 +1,8 @@
+
+.idea/
+Generic+Functional+Structure_CSP_V02.xlsx
+Generic+Functional+Structure_CSP_V02.xlsx.ttl
+venv/
+test.py
+*.xlsx
+*.ttl

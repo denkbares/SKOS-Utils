@@ -1,0 +1,128 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.denkbares.com/casis#3wrongbremshebel6> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wrongbremse5> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 6" ;
+    skos:prefLabel "WrongBremshebel",
+        "WrongBremshebel"@de .
+
+<http://www.denkbares.com/casis#3wrongbremsscheibe7> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wrongbremse5> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 7" ;
+    skos:prefLabel "WrongBremsscheibe",
+        "WrongBremsscheibe"@de .
+
+<http://www.denkbares.com/casis#3wronglenkstange2> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wronglenker1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 2" ;
+    skos:prefLabel "WrongLenkstange",
+        "WrongLenkstange"@de .
+
+<http://www.denkbares.com/casis#3wrongsattelstange12> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wrongsitz8> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 12" ;
+    skos:prefLabel "WrongSattelstange",
+        "WrongSattelstange"@de .
+
+<http://www.denkbares.com/casis#4wrongklingelgehaeuse4> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#3wrongklingel3> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 4" ;
+    skos:prefLabel "WrongKlingelgehäuse",
+        "WrongKlingelgehäuse"@de .
+
+<http://www.denkbares.com/casis#4wrongsattelfeder10> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#3wrongsattel9> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "WrongSattelfeder",
+        "WrongSattelfeder"@de .
+
+<http://www.denkbares.com/casis#4wrongsattelschraube11> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#3wrongsattel9> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 11" ;
+    skos:prefLabel "WrongSattelschraube",
+        "WrongSattelschraube"@de .
+
+<http://www.denkbares.com/casis#3wrongklingel3> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wronglenker1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#4wrongklingelgehaeuse4> ;
+    skos:note "@level: 3",
+        "@order: 3" ;
+    skos:prefLabel "WrongKlingel",
+        "WrongKlingel"@de .
+
+<http://www.denkbares.com/casis#1wrongbike0> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#2wrongbremse5>,
+        <http://www.denkbares.com/casis#2wronglenker1>,
+        <http://www.denkbares.com/casis#2wrongsitz8> ;
+    skos:note "@level: 1",
+        "@order: 0",
+        "Test0" ;
+    skos:prefLabel "WrongBike",
+        "WrongBike"@de ;
+    skos:topConceptOf <http://www.denkbares.com/casis#Functions> .
+
+<http://www.denkbares.com/casis#2wrongbremse5> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#1wrongbike0> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#3wrongbremshebel6>,
+        <http://www.denkbares.com/casis#3wrongbremsscheibe7> ;
+    skos:note "@level: 2",
+        "@order: 5" ;
+    skos:prefLabel "WrongBremse",
+        "WrongBremse"@de .
+
+<http://www.denkbares.com/casis#2wronglenker1> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#1wrongbike0> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#3wrongklingel3>,
+        <http://www.denkbares.com/casis#3wronglenkstange2> ;
+    skos:note "@level: 2",
+        "@order: 1",
+        "Test1" ;
+    skos:prefLabel "WrongLenker",
+        "WrongLenker"@de .
+
+<http://www.denkbares.com/casis#2wrongsitz8> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#1wrongbike0> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#3wrongsattel9>,
+        <http://www.denkbares.com/casis#3wrongsattelstange12> ;
+    skos:note "@level: 2",
+        "@order: 8" ;
+    skos:prefLabel "WrongSitz",
+        "WrongSitz"@de .
+
+<http://www.denkbares.com/casis#3wrongsattel9> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#2wrongsitz8> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#4wrongsattelfeder10>,
+        <http://www.denkbares.com/casis#4wrongsattelschraube11> ;
+    skos:note "@level: 3",
+        "@order: 9" ;
+    skos:prefLabel "WrongSattel",
+        "WrongSattel"@de .
+
+<http://www.denkbares.com/casis#Functions> a skos:ConceptScheme ;
+    skos:prefLabel "Functions",
+        "Functions"@de .
+

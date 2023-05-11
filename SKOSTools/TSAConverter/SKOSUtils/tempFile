@@ -1,0 +1,124 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://www.claas.com/casis#3bremshebel6> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2bremse5> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 6" ;
+    skos:prefLabel "Bremshebel",
+        "Bremshebel"@de .
+
+<http://www.claas.com/casis#3bremsscheibe7> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2bremse5> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 7" ;
+    skos:prefLabel "Bremsscheibe",
+        "Bremsscheibe"@de .
+
+<http://www.claas.com/casis#3lenkstange2> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2lenker1> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 2" ;
+    skos:prefLabel "Lenkstange",
+        "Lenkstange"@de .
+
+<http://www.claas.com/casis#3sattelstange12> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2sitz8> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 12" ;
+    skos:prefLabel "Sattelstange",
+        "Sattelstange"@de .
+
+<http://www.claas.com/casis#4klingelgehaeuse4> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#3klingel3> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 4" ;
+    skos:prefLabel "Klingelgehäuse",
+        "Klingelgehäuse"@de .
+
+<http://www.claas.com/casis#4sattelfeder10> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#3sattel9> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "Sattelfeder",
+        "Sattelfeder"@de .
+
+<http://www.claas.com/casis#4sattelschraube11> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#3sattel9> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 11" ;
+    skos:prefLabel "Sattelschraube",
+        "Sattelschraube"@de .
+
+<http://www.claas.com/casis#3klingel3> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2lenker1> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#4klingelgehaeuse4> ;
+    skos:note "@level: 3",
+        "@order: 3" ;
+    skos:prefLabel "Klingel",
+        "Klingel"@de .
+
+<http://www.claas.com/casis#1bike0> a skos:Concept ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#2bremse5>,
+        <http://www.claas.com/casis#2lenker1>,
+        <http://www.claas.com/casis#2sitz8> ;
+    skos:note "@level: 1",
+        "@order: 0",
+        "Test0" ;
+    skos:prefLabel "Bike",
+        "Bike"@de ;
+    skos:topConceptOf <http://www.claas.com/casis#Functions> .
+
+<http://www.claas.com/casis#2bremse5> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#1bike0> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#3bremshebel6>,
+        <http://www.claas.com/casis#3bremsscheibe7> ;
+    skos:note "@level: 2",
+        "@order: 5" ;
+    skos:prefLabel "Bremse",
+        "Bremse"@de .
+
+<http://www.claas.com/casis#2lenker1> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#1bike0> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#3klingel3>,
+        <http://www.claas.com/casis#3lenkstange2> ;
+    skos:note "@level: 2",
+        "@order: 1",
+        "Test1" ;
+    skos:prefLabel "Lenker",
+        "Lenker"@de .
+
+<http://www.claas.com/casis#2sitz8> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#1bike0> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#3sattel9>,
+        <http://www.claas.com/casis#3sattelstange12> ;
+    skos:note "@level: 2",
+        "@order: 8" ;
+    skos:prefLabel "Sitz",
+        "Sitz"@de .
+
+<http://www.claas.com/casis#3sattel9> a skos:Concept ;
+    skos:broader <http://www.claas.com/casis#2sitz8> ;
+    skos:inScheme <http://www.claas.com/casis#Functions> ;
+    skos:narrower <http://www.claas.com/casis#4sattelfeder10>,
+        <http://www.claas.com/casis#4sattelschraube11> ;
+    skos:note "@level: 3",
+        "@order: 9" ;
+    skos:prefLabel "Sattel",
+        "Sattel"@de .
+
+<http://www.claas.com/casis#Functions> a skos:ConceptScheme ;
+    skos:prefLabel "Functions",
+        "Functions"@de .
+
