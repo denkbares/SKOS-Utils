@@ -133,7 +133,7 @@ class TestConverter(TestCase):
         preferred_language = 'de'
         self.test_converter = TSAConverter(namespaces, local_namespace, scheme_name, preferred_language)
 
-        out_dir = '../data/Testdata/'
+        out_dir = 'Testdata/'
 
         # Original files
         self.original_xls_file = out_dir + 'Bike_Testdata_Original.xlsx'
