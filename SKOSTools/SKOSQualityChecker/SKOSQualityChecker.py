@@ -7,10 +7,10 @@ import pandas as pd
 from datetime import datetime
 import yaml
 from yaml.loader import SafeLoader
+from SKOSTools import Utils
 
-from SKOSTools.SKOSQualityChecker import CheckerModules
-
-activate_this_file = "../../../SKOSTools/venv/Scripts/activate_this.py"
+root_path = Utils.get_project_root()
+activate_this_file = os.path.join(root_path, "venv", "Scripts", "activate_this.py")
 exec(compile(open(activate_this_file, "rb").read(), activate_this_file, 'exec'), dict(__file__=activate_this_file))
 sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
 
