@@ -8,3 +8,4 @@ openpyxl==3.0.10
 numpy~=1.24.1
 PyYAML~=6.0
 odfpy~=1.4.1
+pytest==7.3.1
