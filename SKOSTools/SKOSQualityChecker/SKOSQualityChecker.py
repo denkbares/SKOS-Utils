@@ -9,9 +9,7 @@ import yaml
 from yaml.loader import SafeLoader
 from SKOSTools import Utils
 
-root_path = Utils.get_project_root()
-activate_this_file = os.path.join(root_path, "venv", "Scripts", "activate_this.py")
-exec(compile(open(activate_this_file, "rb").read(), activate_this_file, 'exec'), dict(__file__=activate_this_file))
+Utils.activate_venv()
 sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
 
 

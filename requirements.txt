@@ -1,11 +1,11 @@
-pandas==1.5.2
+pandas==2.0.1
 XMind==1.2.0
 XlsxWriter==3.0.6
 rdflib==6.2.0
 typer==0.7.0
 xmindParser==1.0.9
 openpyxl==3.0.10
-numpy~=1.24.1
+numpy==1.24.3
 PyYAML~=6.0
 odfpy~=1.4.1
 pytest==7.3.1

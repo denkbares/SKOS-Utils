@@ -1,4 +1,5 @@
 import os
+import sys
 
 from SKOSTools import Utils
 
@@ -8,10 +9,7 @@ from SKOSTools.TSAConverter.SKOSUtils.SKOSGraph import SKOSGraph
 from SKOSTools.TSAConverter.SKOSUtils.XLS2SKOS import XLS2SKOS
 from SKOSTools.TSAConverter.SKOSUtils.XMind2SKOS import XMind2SKOS
 
-root_path = Utils.get_project_root()
-activate_this_file = os.path.join(root_path, "venv", "Scripts", "activate_this.py")
-
-exec(compile(open(activate_this_file, "rb").read(), activate_this_file, 'exec'), dict(__file__=activate_this_file))
+Utils.activate_venv()
 
 from rdflib import Namespace
 import typer
@@ -36,7 +34,8 @@ def create_converter():
     if "outputDirectory" in config_data:
         result_converter.output_directory = config_data["outputDirectory"]
     else:
-        result_converter.output_directory = ""
+        root_path = Utils.get_project_root()
+        result_converter.output_directory = os.path.join(root_path, "data")
     if "fileNamePrefix" in config_data:
         result_converter.file_name_prefix = config_data["fileNamePrefix"]
     else:
@@ -104,9 +103,9 @@ def excel_to_xmind(input=None, output=None, rdf_file=None):
     remove_rdf_file = False
     converter = create_converter()
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".xlsx"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
     if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".xmind"
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
     if rdf_file is None:
         rdf_file = converter.output_directory + "temp_rdf_file.ttl"
         remove_rdf_file = True
@@ -119,10 +118,10 @@ def excel_to_xmind(input=None, output=None, rdf_file=None):
 def xmind_to_excel(input=None, output=None, rdf_file=None, xmind_root_node_title=None):
     remove_rdf_file = False
     converter = create_converter()
-    if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".xlsx"
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".xmind"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
+    if output is None:
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
     if rdf_file is None:
         rdf_file = converter.output_directory + "temp_rdf_file.ttl"
         remove_rdf_file = True
@@ -136,9 +135,9 @@ def xmind_to_excel(input=None, output=None, rdf_file=None, xmind_root_node_title
 def xmind_to_rdf(input=None, output=None, xmind_root_node_title=None):
     converter = create_converter()
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".xmind"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
     if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".ttl"
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
     converter.xmind_to_rdf(xmind_file=input, rdf_file=output, xmind_root_node_title=xmind_root_node_title)
 
 
@@ -146,9 +145,9 @@ def xmind_to_rdf(input=None, output=None, xmind_root_node_title=None):
 def excel_to_rdf(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".xlsx"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
     if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".ttl"
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
 
     print("Converting " + input + " to " + output + ".")
     converter.excel_to_rdf(xls_file=input, rdf_file=output)
@@ -158,9 +157,9 @@ def excel_to_rdf(input=None, output=None):
 def rdf_to_xmind(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".ttl"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
     if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".xmind"
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
     converter.rdf_to_xmind(rdf_file=input, xmind_file=output)
 
 
@@ -168,9 +167,9 @@ def rdf_to_xmind(input=None, output=None):
 def rdf_to_excel(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = converter.output_directory + converter.file_name_prefix + ".ttl"
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
     if output is None:
-        output = converter.output_directory + converter.file_name_prefix + ".xlsx"
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
 
     print("Converting " + input + " to " + output + ".")
     converter.rdf_to_excel(rdf_file=input, xls_file=output)
