@@ -12,7 +12,7 @@ class SchemeCoherenceChecker(StructureTestInterface):
     def message(self, result_df):
         message = ""
         if len(result_df) > 0:
-            message = "There are " + str(len(result_df)) + " concepts have violated scheme coherence."
+            message = "There are " + str(len(result_df)) + " concepts with violated scheme coherence."
         return message
 
     @property

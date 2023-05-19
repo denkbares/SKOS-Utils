@@ -1,7 +1,8 @@
 input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
+# input: tests/Testdata/EUROVOC.ttl
 output: test_results
 add_datetime_to_output: False
-write_results_to_excel: False
+write_results_to_excel: True
 tests:
   - LooseConceptIdentifier
   # - SchemeCoherenceChecker
