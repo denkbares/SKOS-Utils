@@ -100,80 +100,80 @@ class TSAConverter:
 
 
 @converterApp.command()
-def excel_to_xmind(xls_file=None, xmind_file=None, rdf_file=None):
+def excel_to_xmind(input=None, output=None, rdf_file=None):
     remove_rdf_file = False
     converter = create_converter()
-    if xls_file is None:
-        xls_file = converter.output_directory + converter.file_name_prefix + ".xlsx"
-    if xmind_file is None:
-        xmind_file = converter.output_directory + converter.file_name_prefix + ".xmind"
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".xlsx"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".xmind"
     if rdf_file is None:
         rdf_file = converter.output_directory + "temp_rdf_file.ttl"
         remove_rdf_file = True
-    converter.excel_to_xmind(xls_file=xls_file, xmind_file=xmind_file, rdf_file=rdf_file)
+    converter.excel_to_xmind(xls_file=input, xmind_file=output, rdf_file=rdf_file)
     if remove_rdf_file:
         os.remove(rdf_file)
 
 
 @converterApp.command()
-def xmind_to_excel(xmind_file=None, xls_file=None, rdf_file=None, xmind_root_node_title=None):
+def xmind_to_excel(input=None, output=None, rdf_file=None, xmind_root_node_title=None):
     remove_rdf_file = False
     converter = create_converter()
-    if xls_file is None:
-        xls_file = converter.output_directory + converter.file_name_prefix + ".xlsx"
-    if xmind_file is None:
-        xmind_file = converter.output_directory + converter.file_name_prefix + ".xmind"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".xlsx"
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".xmind"
     if rdf_file is None:
         rdf_file = converter.output_directory + "temp_rdf_file.ttl"
         remove_rdf_file = True
-    converter.xmind_to_excel(xmind_file=xmind_file, rdf_file=rdf_file, xls_file=xls_file,
+    converter.xmind_to_excel(xmind_file=input, rdf_file=rdf_file, xls_file=output,
                              xmind_root_node_title=xmind_root_node_title)
     if remove_rdf_file:
         os.remove(rdf_file)
 
 
 @converterApp.command()
-def xmind_to_rdf(xmind_file=None, rdf_file=None, xmind_root_node_title=None):
+def xmind_to_rdf(input=None, output=None, xmind_root_node_title=None):
     converter = create_converter()
-    if xmind_file is None:
-        xmind_file = converter.output_directory + converter.file_name_prefix + ".xmind"
-    if rdf_file is None:
-        rdf_file = converter.output_directory + converter.file_name_prefix + ".ttl"
-    converter.xmind_to_rdf(xmind_file=xmind_file, rdf_file=rdf_file, xmind_root_node_title=xmind_root_node_title)
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".xmind"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".ttl"
+    converter.xmind_to_rdf(xmind_file=input, rdf_file=output, xmind_root_node_title=xmind_root_node_title)
 
 
 @converterApp.command()
-def excel_to_rdf(xls_file=None, rdf_file=None):
+def excel_to_rdf(input=None, output=None):
     converter = create_converter()
-    if xls_file is None:
-        xls_file = converter.output_directory + converter.file_name_prefix + ".xlsx"
-    if rdf_file is None:
-        rdf_file = converter.output_directory + converter.file_name_prefix + ".ttl"
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".xlsx"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".ttl"
 
-    print("Converting " + xls_file + " to " + rdf_file + ".")
-    converter.excel_to_rdf(xls_file=xls_file, rdf_file=rdf_file)
+    print("Converting " + input + " to " + output + ".")
+    converter.excel_to_rdf(xls_file=input, rdf_file=output)
 
 
 @converterApp.command()
-def rdf_to_xmind(rdf_file=None, xmind_file=None):
+def rdf_to_xmind(input=None, output=None):
     converter = create_converter()
-    if rdf_file is None:
-        rdf_file = converter.output_directory + converter.file_name_prefix + ".ttl"
-    if xmind_file is None:
-        xmind_file = converter.output_directory + converter.file_name_prefix + ".xmind"
-    converter.rdf_to_xmind(rdf_file=rdf_file, xmind_file=xmind_file)
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".ttl"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".xmind"
+    converter.rdf_to_xmind(rdf_file=input, xmind_file=output)
 
 
 @converterApp.command()
-def rdf_to_excel(rdf_file=None, xls_file=None):
+def rdf_to_excel(input=None, output=None):
     converter = create_converter()
-    if rdf_file is None:
-        rdf_file = converter.output_directory + converter.file_name_prefix + ".ttl"
-    if xls_file is None:
-        xls_file = converter.output_directory + converter.file_name_prefix + ".xlsx"
+    if input is None:
+        input = converter.output_directory + converter.file_name_prefix + ".ttl"
+    if output is None:
+        output = converter.output_directory + converter.file_name_prefix + ".xlsx"
 
-    print("Converting " + rdf_file + " to " + xls_file + ".")
-    converter.rdf_to_excel(rdf_file=rdf_file, xls_file=xls_file)
+    print("Converting " + input + " to " + output + ".")
+    converter.rdf_to_excel(rdf_file=input, xls_file=output)
 
 
 if __name__ == "__main__":
