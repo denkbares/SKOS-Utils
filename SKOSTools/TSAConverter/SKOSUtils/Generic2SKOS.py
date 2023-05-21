@@ -31,7 +31,7 @@ class Generic2SKOS:
         graph.bind("skos", skos_ns)
         scheme.scheme_uri = self.create_scheme_uri(graph, scheme)
         for buri, babbr in self.bindings.items():
-            graph.bind(babbr, buri)
+            graph.bind(buri, Namespace(babbr))
         for tc in scheme.top_concepts:
             self.instantiate_rec(tc, graph)
         graph.serialize(format='turtle', destination=out_filename)
@@ -56,6 +56,8 @@ class Generic2SKOS:
         if concept.notes:
             for note in concept.notes:
                 graph.add((uri, SKOS.note, Literal(note)))
+        if concept.uuid:
+            graph.add((uri, SKOS.note, Literal('@uuid: ' + concept.uuid)))
         graph.add((uri, SKOS.inScheme, self.scheme.scheme_uri))
         for b in concept.broader:
             graph.add((uri, SKOS.broader, b.uri))
@@ -67,3 +69,14 @@ class Generic2SKOS:
 
         if concept.broader is None or len(concept.broader) == 0:
             graph.add((uri, SKOS.topConceptOf, self.scheme.scheme_uri))
+
+    @staticmethod
+    def collect_and_add_notes(notes, concept):
+        if notes:
+            for n in notes.split('\n'):
+                if n != 'nan':
+                    if n.startswith('@phrase:'):
+                        n = n[7:]
+                        concept.add_note('phrase', n)
+                    else:
+                        concept.add_note(n)

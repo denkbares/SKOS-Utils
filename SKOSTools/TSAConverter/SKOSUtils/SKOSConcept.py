@@ -1,12 +1,22 @@
+import re
 from string import punctuation
 from rdflib import URIRef
 
+from SKOSTools.TSAConverter.SKOSUtils.IDGenerator import IDGenerator
+
 
 class SKOSConcept:
-    def __init__(self, name='Noname', note=None, uri_pre='', uri_post='', namespace=None):
+    def __init__(self, name='Noname', note=None, namespace=None, uuid=None):
         self.nc = namespace
         self.name = name
-        uriname = self.urify(str(uri_pre) + name + str(uri_post))
+
+        if not uuid:
+            generator = IDGenerator()
+            uuid = 'Fu_' + generator.generate_uuid()
+
+        uriname = uuid
+        # uriname = self.urify(str(uri_pre) + name + str(uri_post))
+
         if self.nc:
             self.uri = URIRef(namespace + uriname)
         else:
@@ -15,10 +25,8 @@ class SKOSConcept:
         self.narrower = []
         self.notes = []
         self.hiddenName = None
-        if note and isinstance(note, list):
-            self.notes = note
-        elif note:
-            self.notes.append(note)
+        self.add_notes(note)
+        self.uuid = uuid
 
     def add_broader(self, concept=None):
         if concept and concept not in self.broader:
@@ -27,10 +35,6 @@ class SKOSConcept:
     def add_narrower(self, concept=None):
         if concept and concept not in self.narrower:
             self.narrower.append(concept)
-
-    def add_note(self, note=''):
-        if note:
-            self.notes.append(note)
 
     @staticmethod
     def urify(string):
@@ -55,4 +59,34 @@ class SKOSConcept:
         for x in string.split():
             new_string += x.capitalize()
         return new_string
+
+    def add_note(self, note_attr='', note_value=None):
+        if note_attr:
+            if note_value:
+                if note_value.startswith('"'):
+                    note_value = note_value[1:]
+                if note_value.endswith('"'):
+                    note_value = note_value[:-1]
+                if note_attr != 'order':
+                    note_value = '"' + note_value + '"'
+                self.notes.append('@' + note_attr + ': ' + note_value)
+            else:
+                self.notes.append(note_attr)
+
+    def add_notes(self, note):
+        if note and isinstance(note, list):
+            for n in note:
+                self.check_and_add_note(n)
+        elif note:
+            self.check_and_add_note(note)
+
+    def check_and_add_note(self, n):
+        if n.startswith('@done'):
+            pass
+        elif n.startswith('@phrase:'):
+            regex = r"@phrase:\s*\"?([^\"]+)\"?\s*"
+            value = '"' + re.sub(regex, "\\1", n, 0, re.MULTILINE) + '"'
+            self.add_note('phrase', value)
+
+
 

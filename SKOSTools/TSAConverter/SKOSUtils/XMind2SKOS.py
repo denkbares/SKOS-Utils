@@ -9,7 +9,7 @@ from SKOSTools.TSAConverter.SKOSUtils.SKOSScheme import SKOSScheme
 
 class XMind2SKOS(Generic2SKOS):
     def __init__(self, namespace, scheme_name, bindings={}, default_language='de'):
-        super(XMind2SKOS, self).__init__(namespace, scheme_name, bindings={}, default_language='de')
+        super(XMind2SKOS, self).__init__(namespace, scheme_name, bindings=bindings, default_language=default_language)
         self.counter = 0
 
     def traverse_rec(self, topic, parent_topic=None, order=None):
@@ -19,12 +19,16 @@ class XMind2SKOS(Generic2SKOS):
 
         notes = topic['note'].split('\n') if 'note' in topic else ''
         # adapt the order value according to the actual order in the topics-list
+        uuid = None
         if notes and order:
             for i, note in enumerate(notes):
                 if '@order:' in note:
                     notes[i] = re.sub('@order:\\s\\d+', '@order: ' + str(order), note)
+                elif note.startswith('@uuid:'):
+                    uuid = notes[i][6:].strip()
 
-        concept = SKOSConcept(title, note=notes, namespace=self.namespace, uri_post=str(self.counter))
+        concept = SKOSConcept(title, note=notes, namespace=self.namespace, uuid=uuid)
+        concept.add_note('order', str(self.counter))
         if parent_topic:
             concept.add_broader(parent_topic)
             parent_topic.add_narrower(concept)

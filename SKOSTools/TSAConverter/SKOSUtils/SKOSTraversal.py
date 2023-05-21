@@ -1,5 +1,7 @@
 import abc
 
+from rdflib import Literal
+
 
 class SKOSTraversal:
     def __init__(self, graph, pref_lang='en'):
@@ -12,10 +14,17 @@ class SKOSTraversal:
         return
 
     def tos(self, generator):
-        return ' '.join(str(e) for e in generator)
+        if isinstance(generator, list):
+            return ' '.join(str(e) for e in generator)
+        else:
+            return str(generator)
 
     def print_label(self, uri):
-        return self.tos(self.g.pref_label(uri, self.preferred_lang))
+        alt_label = self.g.alt_label(uri,self.preferred_lang)
+        if isinstance(alt_label, Literal):
+            return self.tos(alt_label)
+        else:
+            return self.tos(self.g.pref_label(uri, self.preferred_lang))
 
     def abbr_id(self, uri):
         return self.g.str_abbr(uri)

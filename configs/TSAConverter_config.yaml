@@ -1,5 +1,5 @@
-nameSpace: http://www.denkbares.com/casis#
-nameSpaceKey: db
+nameSpace: http://www.denkbares.com/cfus#
+nameSpaceKey: cfus
 schemeName: Functions
 preferredLanguage: de
 fileNamePrefix: TestData

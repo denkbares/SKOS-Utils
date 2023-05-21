@@ -1,4 +1,6 @@
-from rdflib import Graph, URIRef, namespace, RDF, SKOS
+import uuid
+
+from rdflib import namespace, Graph, SKOS, RDF, URIRef
 
 
 class SKOSGraph:
@@ -13,6 +15,13 @@ class SKOSGraph:
         self.g = Graph()
         self.namespaces = namespaces
         self.g.parse(rdf_filename, format='turtle')
+        self.generated_uuid = []
+
+    def generate_uuid(self):
+        short_uuid = str(uuid.uuid4())[:8]
+        while short_uuid not in self.generated_uuid:
+            short_uuid = str(uuid.uuid4())[:8]
+        return short_uuid
 
     def top_concepts(self, scheme_uri):
         return self.g.subjects(self.TOP_CONCEPT_OF, scheme_uri)
@@ -43,6 +52,13 @@ class SKOSGraph:
                 return lit
         return literals
 
+    def alt_label(self, uri, lang):
+        literals = self.g.objects(uri, SKOS.altLabel)
+        for lit in literals:
+            if lit.language == lang:
+                return lit
+        return literals
+
     def concept_schemes(self):
         return self.g.subjects(RDF.type, self.CONCEPT_SCHEME)
 
@@ -54,6 +70,13 @@ class SKOSGraph:
 
     def note(self, uri):
         return self.g.objects(uri, self.NOTE)
+
+    def note_with_prefix(self, uri, prefix):
+        for n in self.note(uri):
+            if str(n).startswith(prefix):
+                return str(n)
+        return None
+
 
     def order(self, uri):
         for note in self.note(uri):
@@ -71,7 +94,7 @@ class SKOSGraph:
         return note[:len(note) - 1]
 
     def trim_notes(self, uri, remove_with_prefixes=None):
-        """Removes all note property triples pointing to a LEVEL or ORDER note"""
+        """Removes all note property triples pointing the given List of 'remove_with_prefixes'"""
         if remove_with_prefixes:
             referred_objects = self.note(uri)
             for ref in referred_objects:

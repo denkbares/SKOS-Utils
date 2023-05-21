@@ -10,7 +10,6 @@ from SKOSTools.TSAConverter.SKOSUtils.XLS2SKOS import XLS2SKOS
 from SKOSTools.TSAConverter.SKOSUtils.XMind2SKOS import XMind2SKOS
 
 Utils.activate_venv()
-
 from rdflib import Namespace
 import typer
 import yaml

@@ -8,7 +8,8 @@ from SKOSTools.TSAConverter.SKOSUtils.SKOSScheme import SKOSScheme
 class XLS2SKOS(Generic2SKOS):
     def __init__(self, namespace, scheme_name, bindings={}, default_language='de'):
         self.last_entry_with_level = {}
-        super(XLS2SKOS, self).__init__(namespace, scheme_name, bindings={}, default_language='de')
+        super().__init__(namespace, scheme_name, bindings=bindings, default_language=default_language)
+        # super(XLS2SKOS, self).__init__(namespace, scheme_name, bindings=bindings, default_language=default_language)
 
     def read_dataframe(self, dataframe, level_col, value_col, note_col=None):
         self.scheme = SKOSScheme(self.scheme_name)
@@ -20,14 +21,10 @@ class XLS2SKOS(Generic2SKOS):
                 notes = row[note_col]
             else:
                 notes = ''
-            concept = SKOSConcept(value, namespace=self.namespace, uri_pre=level,
-                                  uri_post=str(index))
-            concept.add_note('@order: ' + str(index))
-            concept.add_note('@level: ' + str(level))
-            if notes:
-                for n in notes.split('\n'):
-                    if n != 'nan':
-                        concept.add_note(n)
+            # todo check whether there is an ID in the Excel an reuse it!
+            concept = SKOSConcept(value, namespace=self.namespace)
+            concept.add_note('order', str(index))
+            self.collect_and_add_notes(notes, concept)
             if level == 1:
                 self.scheme.add_top_concept(concept)
             else:

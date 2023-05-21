@@ -16,8 +16,7 @@ class SKOS2XLS:
         # Make a sheet for each scheme
         for scheme in schemes:
             df = self.as_dataframe(scheme)
-            df.to_excel(writer, sheet_name=self.graph.pref_label(scheme, lang=self.pref_lang))
-        # writer.save()  # deprecated statement
+            df.to_excel(writer, sheet_name=self.graph.pref_label(scheme, lang=self.pref_lang), index=False)
         writer.close()
 
     def as_dataframe(self, scheme):
