@@ -48,6 +48,7 @@
 <http://www.denkbares.com/casis#Sattelstange13> a skos:Concept ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
     skos:broader <http://www.denkbares.com/casis#Sitz9> ;
+    skos:broaderTransitive <http://www.denkbares.com/casis#Bike1> ;
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Sattelstange",
@@ -93,6 +94,7 @@
 <http://www.denkbares.com/casis#Lenker2> a skos:Concept ;
     skos:broader <http://www.denkbares.com/casis#Bike1> ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:hasTopConcept <http://www.denkbares.com/casis#Sattel10> ;
     skos:narrower <http://www.denkbares.com/casis#Klingel4>,
         <http://www.denkbares.com/casis#Lenkstange3> ;
     skos:note "@level: 2",

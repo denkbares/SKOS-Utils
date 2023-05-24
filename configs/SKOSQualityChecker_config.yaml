@@ -9,6 +9,8 @@ tests:
   # - SchemeIntegrityChecker
   # - TopConceptIdentifier
   # - SinglePrefLabelChecker
-   - IncompleteLanguageCoverageChecker
+  # - IncompleteLanguageCoverageChecker
   # - LabelConflictChecker
   # - OrphanConceptIdentifier
+  # - SolelyTransitivelyRelatedConceptsIdentifier
+   - TopConceptHavingBroaderConceptsChecker

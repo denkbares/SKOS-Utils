@@ -11,7 +11,7 @@ class TopConceptIdentifier(StructureTestInterface):
     def message(self, result_df):
         message = ""
         if len(result_df) > 0:
-            message = "There are " + str(len(result_df)) + " topConcepts in the given graph."
+            message = "There are " + str(len(result_df)) + " top concepts in the given graph."
         return message
 
     @property
