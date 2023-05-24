@@ -4,8 +4,11 @@ output: test_results
 add_datetime_to_output: False
 write_results_to_excel: True
 tests:
-  - LooseConceptIdentifier
+  # - LooseConceptIdentifier
   # - SchemeCoherenceChecker
   # - SchemeIntegrityChecker
-  - TopConceptIdentifier
-  - SinglePrefLabelChecker
+  # - TopConceptIdentifier
+  # - SinglePrefLabelChecker
+   - IncompleteLanguageCoverageChecker
+  # - LabelConflictChecker
+  # - OrphanConceptIdentifier

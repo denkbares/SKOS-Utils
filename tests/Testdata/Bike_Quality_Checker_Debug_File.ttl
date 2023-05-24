@@ -5,8 +5,8 @@
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
     skos:note "@level: 3",
         "@order: 10" ;
-    skos:prefLabel "Bremshebel",
-        "Bremshebel"@de .
+    skos:prefLabel "leva del freno",
+        "leva del freno"@it .
 
 <http://www.denkbares.com/casis#Bremsscheibe8> a skos:Concept ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
@@ -60,7 +60,10 @@
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Klingel",
-        "Klingel"@de .
+        "Klingel"@de ,
+        "Campanello"@it ,
+        "bell"@en ;
+        .
 
 <http://www.denkbares.com/casis#Bike1> a skos:Concept ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
@@ -71,7 +74,9 @@
         "@order: 0",
         "Test0" ;
     skos:prefLabel "Bike",
-        "Bike"@de ;
+        "Bicicletta"@it ,
+        "Bike"@de ,
+        "Bike"@en;
     skos:topConceptOf <http://www.denkbares.com/casis#Functions> .
 
 <http://www.denkbares.com/casis#Bremse6> a skos:Concept ;
