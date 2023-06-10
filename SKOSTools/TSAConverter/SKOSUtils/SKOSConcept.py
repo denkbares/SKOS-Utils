@@ -3,29 +3,31 @@ from string import punctuation
 from rdflib import URIRef
 
 from SKOSTools.TSAConverter.SKOSUtils.IDGenerator import IDGenerator
+from SKOSTools.examples_tobe_removed.ProcessUtils import ProcessUtils
 
 
 class SKOSConcept:
-    def __init__(self, name='Noname', note=None, namespace=None, uuid=None):
+    def __init__(self, name='Noname', note=None, namespace=None, uuid=None, uuid_prefix='C_'):
         self.nc = namespace
-        self.name = name
+        self.name = ProcessUtils.trim(name)
 
         if not uuid:
             generator = IDGenerator()
-            uuid = 'Fu_' + generator.generate_uuid()
+            uuid = uuid_prefix + generator.generate_uuid()
 
         uriname = uuid
-        # uriname = self.urify(str(uri_pre) + name + str(uri_post))
 
         if self.nc:
             self.uri = URIRef(namespace + uriname)
         else:
             self.uri = uriname
+        self.props = []
         self.broader = []
         self.narrower = []
         self.notes = []
         self.hiddenName = None
         self.add_notes(note)
+        self.add_note('xmind_name', self.name)
         self.uuid = uuid
 
     def add_broader(self, concept=None):
@@ -87,6 +89,16 @@ class SKOSConcept:
             regex = r"@phrase:\s*\"?([^\"]+)\"?\s*"
             value = '"' + re.sub(regex, "\\1", n, 0, re.MULTILINE) + '"'
             self.add_note('phrase', value)
+        elif n.startswith('@'):
+            i = n.find(' ')
+            attr = n[1:i]
+            value = n[i+1:]
+            self.add_property(attr, value)
+        else:
+            self.add_note(n)
+
+    def add_property(self, attr, value):
+        self.props.append((attr, value))
 
 
 

@@ -10,7 +10,7 @@ Utils.activate_venv()
 sys.path.append(os.path.join(os.path.abspath(".."), "SKOSUtils"))
 
 workspace = '/Users/joba/denkCloud/Staff/Projekte/CLAAS/2019 TSA/Funktionen/Funktionen2023/_temp/'
-out_name_prefix = 'Functions_44'
+out_name_prefix = 'Functions_CFUS_beta1'
 
 xmind_in_filename = workspace + 'Original_Functions_v44.xmind'
 xmind_out_filename = workspace + out_name_prefix + '.xmind'

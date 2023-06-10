@@ -9,7 +9,6 @@ class XLS2SKOS(Generic2SKOS):
     def __init__(self, namespace, scheme_name, bindings={}, default_language='de'):
         self.last_entry_with_level = {}
         super().__init__(namespace, scheme_name, bindings=bindings, default_language=default_language)
-        # super(XLS2SKOS, self).__init__(namespace, scheme_name, bindings=bindings, default_language=default_language)
 
     def read_dataframe(self, dataframe, level_col, value_col, note_col=None):
         self.scheme = SKOSScheme(self.scheme_name)

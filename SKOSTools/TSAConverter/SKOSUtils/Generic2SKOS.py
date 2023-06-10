@@ -1,7 +1,9 @@
 import uuid
 
-from rdflib import URIRef, RDF, Literal, Graph
+from rdflib import URIRef, RDF, Literal, Graph, RDFS
 from rdflib.namespace import SKOS, Namespace
+
+from SKOSTools.examples_tobe_removed.ProcessUtils import ProcessUtils
 
 
 class Generic2SKOS:
@@ -51,14 +53,20 @@ class Generic2SKOS:
             uri = URIRef(uuid.uuid4())
         self.created_concepts[uri] = uri
         graph.add((uri, RDF.type, SKOS.Concept))
-        graph.add((uri, SKOS.prefLabel, Literal(concept.name, lang=self.default_language)))
-        graph.add((uri, SKOS.prefLabel, Literal(concept.name)))
+
+        self.add_properties(graph, concept, uri)
+
+        if (uri, SKOS.prefLabel, None) not in graph:
+            graph.add((uri, SKOS.prefLabel, Literal(concept.name, lang=self.default_language)))
+            graph.add((uri, SKOS.prefLabel, Literal(concept.name)))
+
         if concept.notes:
             for note in concept.notes:
                 graph.add((uri, SKOS.note, Literal(note)))
         if concept.uuid:
             graph.add((uri, SKOS.note, Literal('@uuid: ' + concept.uuid)))
         graph.add((uri, SKOS.inScheme, self.scheme.scheme_uri))
+
         for b in concept.broader:
             graph.add((uri, SKOS.broader, b.uri))
         for n in concept.narrower:
@@ -80,3 +88,34 @@ class Generic2SKOS:
                         concept.add_note('phrase', n)
                     else:
                         concept.add_note(n)
+
+    def add_properties(self, graph, concept, uri):
+        if concept.props:
+            for (prop, value) in concept.props:
+                lang_sep = value.find('@')
+                if lang_sep > -1:
+                    lit_val = value[:lang_sep]
+                    lang = value[lang_sep+1:]
+                else:
+                    lit_val = value
+                    lang = ''
+                if lit_val:
+                    lit_val = ProcessUtils.trim(lit_val)
+                    literal = Literal(lit_val, lang=lang)
+                    prop = self.adjust_namespace(prop, graph)
+                    my_property = URIRef(prop)
+                    graph.add((uri, my_property, literal))
+
+    @staticmethod
+    def adjust_namespace(prop, graph):
+        if prop.startswith('skos:'):
+            prop = Namespace(SKOS) + prop[5:]
+        elif prop.startswith('rdf'):
+            prop = Namespace(RDF) + prop[4:]
+        elif prop.startswith('rdfs'):
+            prop = Namespace(RDFS) + prop[5:]
+        return prop
+
+
+
+

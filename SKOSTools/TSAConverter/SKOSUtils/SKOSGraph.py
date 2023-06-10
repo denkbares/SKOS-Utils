@@ -26,25 +26,6 @@ class SKOSGraph:
     def top_concepts(self, scheme_uri):
         return self.g.subjects(self.TOP_CONCEPT_OF, scheme_uri)
 
-    # def pref_labels(self, uri, lang=None):
-    #
-    #     labels = self.pref_label(uri, lang=lang)
-    #
-    #     if not lang:
-    #         return labels
-    #     selected_labels = []
-    #     for l in labels:
-    #         if l[1].language == lang:
-    #             selected_labels.append(l[1])
-    #     return selected_labels
-
-    # def pref_label(self, uri, lang):
-    #     labels = self.pref_label(uri, lang=lang)
-    #     for label in labels:
-    #         if label[1].language == lang:
-    #             return label[1]
-    #     return None
-
     def pref_label(self, uri, lang):
         literals = self.g.objects(uri, SKOS.prefLabel)
         for lit in literals:
@@ -76,7 +57,6 @@ class SKOSGraph:
             if str(n).startswith(prefix):
                 return str(n)
         return None
-
 
     def order(self, uri):
         for note in self.note(uri):
