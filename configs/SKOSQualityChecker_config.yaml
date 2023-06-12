@@ -1,16 +1,16 @@
 input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
 # input: tests/Testdata/EUROVOC.ttl
 output: test_results
-add_datetime_to_output: False
+add_datetime_to_output: True
 write_results_to_excel: True
 tests:
-  # - LooseConceptIdentifier
-  # - SchemeCoherenceChecker
-  # - SchemeIntegrityChecker
-  # - TopConceptIdentifier
-  # - SinglePrefLabelChecker
-  # - IncompleteLanguageCoverageChecker
-  # - LabelConflictChecker
-  # - OrphanConceptIdentifier
-  # - SolelyTransitivelyRelatedConceptsIdentifier
+   - LooseConceptIdentifier
+   - SchemeCoherenceChecker
+   - SchemeIntegrityChecker
+   - TopConceptIdentifier
+   - SinglePrefLabelChecker
+   - IncompleteLanguageCoverageChecker
+   - LabelConflictChecker
+   - OrphanConceptIdentifier
+   - SolelyTransitivelyRelatedConceptsIdentifier
    - TopConceptHavingBroaderConceptsChecker
