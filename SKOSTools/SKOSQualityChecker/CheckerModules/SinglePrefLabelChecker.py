@@ -4,6 +4,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import
 class SinglePrefLabelChecker(StructureTestInterface):
     """
     Check whether every concept has at most one prefLabel for each language.
+    Considers prefLabels defined in standard SKOS and SKOS-XL.
     """
     @property
     def status(self):
@@ -18,7 +19,9 @@ class SinglePrefLabelChecker(StructureTestInterface):
     def query(self):
         return """
             SELECT DISTINCT ?concept
-            WHERE { ?concept skos:prefLabel ?label1, ?label2 .
+            WHERE { { ?concept skos:prefLabel ?label1, ?label2 . }
+                    UNION
+                    { ?concept skosxl:prefLabel/skosxl:literalForm ?label1, ?label2 . }
                     FILTER (?label1 != ?label2)
                     FILTER (lang(?label1) = lang(?label2))
             }

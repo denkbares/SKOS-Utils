@@ -1,4 +1,5 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
 
 <http://www.denkbares.com/casis#Bremshebel7> a skos:Concept ;
     skos:broader <http://www.denkbares.com/casis#Bremse6> ;
@@ -13,7 +14,10 @@
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Bremsscheibe",
-        "Bremsscheibe"@de .
+        "Bremsscheibe"@de ;
+    skosxl:prefLabel [ skosxl:literalForm "Bremsscheibe"@de ],
+        [ skosxl:literalForm "Brake disk"@en ] ,
+        [ skosxl:literalForm "Brake dance"@en ] .
 
 <http://www.denkbares.com/casis#Klingelgehaeuse5> a skos:Concept ;
     skos:broader <http://www.denkbares.com/casis#Klingel4> ;

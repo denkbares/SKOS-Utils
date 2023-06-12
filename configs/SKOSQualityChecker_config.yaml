@@ -1,16 +1,17 @@
 input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
-# input: tests/Testdata/EUROVOC.ttl
+#input: tests/Testdata/agrovoc_2023-06-06_core.ttl
+#input: tests/Testdata/EUROVOC.ttl
 output: test_results
 add_datetime_to_output: True
-write_results_to_excel: True
+write_results_to_excel: False
 tests:
-   - LooseConceptIdentifier
-   - SchemeCoherenceChecker
-   - SchemeIntegrityChecker
-   - TopConceptIdentifier
+#   - LooseConceptIdentifier
+#   - SchemeCoherenceChecker
+#   - SchemeIntegrityChecker
+#   - TopConceptIdentifier
    - SinglePrefLabelChecker
-   - IncompleteLanguageCoverageChecker
-   - LabelConflictChecker
-   - OrphanConceptIdentifier
-   - SolelyTransitivelyRelatedConceptsIdentifier
-   - TopConceptHavingBroaderConceptsChecker
+#   - IncompleteLanguageCoverageChecker
+#   - LabelConflictChecker
+#   - OrphanConceptIdentifier
+#   - SolelyTransitivelyRelatedConceptsIdentifier
+#   - TopConceptHavingBroaderConceptsChecker
