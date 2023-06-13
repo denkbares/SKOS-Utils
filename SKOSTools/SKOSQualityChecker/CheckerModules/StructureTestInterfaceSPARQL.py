@@ -6,8 +6,6 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import
 
 
 class StructureTestInterfaceSPARQL(StructureTestInterface):
-    pass
-
     @property
     @abstractmethod
     def query(self):
