@@ -1,7 +1,7 @@
-from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
+from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-class LabelConflictChecker(StructureTestInterface):
+class LabelConflictCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Check whether narrower and broader concepts of a concept are in the same conceptScheme.
     """
@@ -18,14 +18,14 @@ class LabelConflictChecker(StructureTestInterface):
     @property
     def query(self):
         return """
-                SELECT ?concept1
+                SELECT ?concept
                 WHERE {
-                  ?concept1 a skos:Concept ;
+                  ?concept a skos:Concept ;
                             skos:prefLabel ?label1 .
                   ?concept2 a skos:Concept ;
                             skos:prefLabel ?label2 .
                   
-                  FILTER (?label1 = ?label2 && ?concept1 != ?concept2)
+                  FILTER (?label1 = ?label2 && ?concept != ?concept2)
                 }
         """
 

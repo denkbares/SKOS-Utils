@@ -1,7 +1,7 @@
-from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
+from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-class IncompleteLanguageCoverageChecker(StructureTestInterface):
+class IncompleteLanguageCoverageCheckerSPARQL(StructureTestInterfaceSPARQL):
 
     @property
     def status(self):

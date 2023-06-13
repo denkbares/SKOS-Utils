@@ -57,12 +57,12 @@ def main(file_name):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="This script checks the structure of the graph in a given RDF-file.")
 
-    with open('../../configs/SKOSQualityChecker_config.yaml') as f:
+    with open('configs/SKOSQualityChecker_config.yaml') as f:
         config_data = yaml.load(f, Loader=SafeLoader)
 
     # Get input file name from config file if existing
     if "input" in config_data:
-        input_file = os.path.join("../" + config_data["input"])
+        input_file = config_data["input"]
     else:
         args = parser.parse_args()
         input_file = args.input

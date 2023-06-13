@@ -1,8 +1,8 @@
-from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
+from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
 # Identify concepts without a topConcept
-class LooseConceptIdentifier(StructureTestInterface):
+class LooseConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
 
     @property
     def status(self):

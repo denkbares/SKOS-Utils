@@ -10,20 +10,17 @@ class StructureTestInterface(ABC):
         pass
 
     @abstractmethod
-    def message(self, result_df):
+    def message(self, datafolder):
+        """Define me"""
         pass
 
-    @property
-    @abstractmethod
-    def query(self):
-        pass
-
-    def execute(self, graph):
-        results_query = graph.query(self.query)
-        results_df = pd.DataFrame(results_query, columns=['Concept'])
+    def create_result(self, concepts_results):
+        results_df = pd.DataFrame(concepts_results, columns=['Concept'])
         # Add other columns ("Status", "CheckName", "Msg", "URIs")
         results_df.insert(0, 'Status', self.status)
         results_df.insert(0, 'CheckName', self.__class__.__name__)
         results_df.insert(2, 'Message', self.message(results_df))
-
         return results_df
+
+    def execute(self, graph):
+        pass

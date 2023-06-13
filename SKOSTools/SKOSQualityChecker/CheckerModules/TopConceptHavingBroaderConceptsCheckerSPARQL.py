@@ -1,8 +1,8 @@
-from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
+from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
 # Identify concepts without a topConcept
-class TopConceptHavingBroaderConceptsChecker(StructureTestInterface):
+class TopConceptHavingBroaderConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
 
     @property
     def status(self):
@@ -20,16 +20,16 @@ class TopConceptHavingBroaderConceptsChecker(StructureTestInterface):
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
                 # Select all top concepts and filter those with broader concepts
-                SELECT DISTINCT ?topConcept
+                SELECT DISTINCT ?concept
                 WHERE {
                   {
-                    ?topConcept skos:topConceptOf ?scheme .
+                    ?concept skos:topConceptOf ?scheme .
                   }
                   UNION
                   {
-                    ?otherConcept skos:hasTopConcept ?topConcept .
+                    ?otherConcept skos:hasTopConcept ?concept .
                   }
-                    FILTER EXISTS {?topConcept skos:broader ?parent}
+                  FILTER EXISTS {?concept skos:broader ?parent}
                 }
                 """
 
