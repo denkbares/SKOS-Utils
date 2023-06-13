@@ -1,10 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-# Check if narrower and broader concepts of a concept are in the same conceptScheme
-
 class SchemeCoherenceCheckerSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Check if narrower and broader concepts of a concept are in the same conceptScheme.
+    """
     @property
     def status(self):
         return "Warning"

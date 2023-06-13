@@ -9,6 +9,7 @@ from datetime import datetime
 import yaml
 from yaml.loader import SafeLoader
 from SKOSTools import Utils
+import time
 
 Utils.activate_venv()
 sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
@@ -48,18 +49,30 @@ class SKOSQualityChecker:
         print(str(len(selected_tests)) + " tests selected:")
 
         result_df_list = []
+        benchmark_list = []
+
         for test_name in selected_tests:
             print("Running " + test_name + ".")
             logging.info("Running " + test_name + ".")
+            start_time = time.time()
             result_df = self.run_test(test_name, graph)
+            end_time = time.time()
+            # print(end_time - start_time)
+            elapsed_time = format_duration(end_time - start_time)
+
             result_df_list.append(result_df)
+            benchmark_result = [test_name, elapsed_time]
+            benchmark_list.append(benchmark_result)
 
         final = pd.concat(result_df_list, ignore_index=True)
+        benchmark_df = pd.DataFrame(columns=['CheckName', 'Time'], data=benchmark_list)
+
         print(final)
+        print(benchmark_df)
 
         # Set date and time string to concat to output file name
         now = ""
-        if config_data["add_datetime_to_output"]:
+        if config_data["add_datetime_to_output_file"]:
             now = datetime.now().strftime('%Y-%m-%d_%H-%M')
 
         if "output" in config_data:
@@ -69,7 +82,19 @@ class SKOSQualityChecker:
 
         # export dataframe to excel
         if config_data["write_results_to_excel"]:
-            final.to_excel(output_file)
+            # final.to_excel(output_file)
+            with pd.ExcelWriter(output_file) as writer:
+                final.to_excel(writer, sheet_name='Checker_Results')
+                benchmark_df.to_excel(writer, sheet_name='Checker_Benchmark')
+
+
+def format_duration(seconds):
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+    milliseconds = seconds * 1000
+
+    duration_string = "{:02d}:{:02d}:{:02d}:{:03d}".format(int(hours), int(minutes), int(seconds), int(milliseconds))
+    return duration_string
 
 
 if __name__ == '__main__':

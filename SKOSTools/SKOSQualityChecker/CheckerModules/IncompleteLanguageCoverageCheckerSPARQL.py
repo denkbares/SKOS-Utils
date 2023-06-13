@@ -2,7 +2,9 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 
 class IncompleteLanguageCoverageCheckerSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Checks language tags against a list of all language used in the graph.
+    """
     @property
     def status(self):
         return "Warning"
@@ -17,7 +19,6 @@ class IncompleteLanguageCoverageCheckerSPARQL(StructureTestInterfaceSPARQL):
 
     @property
     def query(self):
-        # Check language tags against a list of all language used in the graph.
         return """
         
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>

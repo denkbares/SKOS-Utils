@@ -1,10 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
 
 
-# Check if narrower and broader concepts of a concept are in the same conceptScheme
-
 class InvalidLanguageTagChecker(StructureTestInterface):
-
+    """
+    Check if narrower and broader concepts of a concept are in the same conceptScheme
+    """
     @property
     def status(self):
         return "Error"

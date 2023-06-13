@@ -1,9 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-# Identify concepts without a topConcept
 class TopConceptHavingBroaderConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Check if Top Concepts have broader concepts.
+    """
     @property
     def status(self):
         return "Info"
