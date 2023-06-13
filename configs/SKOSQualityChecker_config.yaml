@@ -6,6 +6,8 @@ input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
 output: data/test_results
 add_datetime_to_output: True
 write_results_to_excel: True
+logging: True
+log_file: SKOSQualityChecker.log
 tests:
    #- SinglePrefLabelCheckerSPARQL
    - SinglePrefLabelChecker

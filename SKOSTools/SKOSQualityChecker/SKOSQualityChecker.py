@@ -1,5 +1,6 @@
 import argparse
 import importlib
+import logging
 import os
 import sys
 import rdflib
@@ -13,45 +14,62 @@ Utils.activate_venv()
 sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
 
 
-def run_test(test_name, graph):
-    # import the module containing the test class
-    test_module = importlib.import_module("CheckerModules." + test_name)
+class SKOSQualityChecker:
 
-    test_class = getattr(test_module, test_name)
-    test = test_class()
-    return test.execute(graph)
+    def __init__(self, config):
+        self.config = config
 
+    @staticmethod
+    def run_test(test_name, graph):
+        # import the module containing the test class
+        test_module = importlib.import_module("CheckerModules." + test_name)
 
-def main(file_name):
-    graph = rdflib.Graph()
-    graph.parse(file_name, format='turtle')
+        test_class = getattr(test_module, test_name)
+        test = test_class()
+        return test.execute(graph)
 
-    # Read the selected tests from a config file and only run those
-    selected_tests = config_data["tests"]
-    print(str(len(selected_tests)) + " tests selected:")
+    def main(self, file_name):
+        if self.config['logging']:
+            if 'log_file' in self.config:
+                log_file = self.config['log_file']
+            else:
+                log_file = 'SKOSQualityChecker.log'
+            logging.basicConfig(filename=log_file, filemode='w',
+                                format='%(asctime)s - %(levelname)s - %(message)s',
+                                level=logging.INFO)
 
-    result_df_list = []
-    for test_name in selected_tests:
-        print("Running " + test_name + ".")
-        result_df = run_test(test_name, graph)
-        result_df_list.append(result_df)
+        logging.info('Open SKOS file.')
+        graph = rdflib.Graph()
+        graph.parse(file_name, format='turtle')
+        logging.info('SKOS file parsed.')
 
-    final = pd.concat(result_df_list, ignore_index=True)
-    print(final)
+        # Read the selected tests from a config file and only run those
+        selected_tests = config_data["tests"]
+        print(str(len(selected_tests)) + " tests selected:")
 
-    # Set date and time string to concat to output file name
-    now = ""
-    if config_data["add_datetime_to_output"]:
-        now = datetime.now().strftime('%Y-%m-%d_%H-%M')
+        result_df_list = []
+        for test_name in selected_tests:
+            print("Running " + test_name + ".")
+            logging.info("Running " + test_name + ".")
+            result_df = self.run_test(test_name, graph)
+            result_df_list.append(result_df)
 
-    if "output" in config_data:
-        output_file = config_data["output"] + now + ".xlsx"
-    else:
-        output_file = f'test_results_{now}.xlsx'
+        final = pd.concat(result_df_list, ignore_index=True)
+        print(final)
 
-    # export dataframe to excel
-    if config_data["write_results_to_excel"]:
-        final.to_excel(output_file)
+        # Set date and time string to concat to output file name
+        now = ""
+        if config_data["add_datetime_to_output"]:
+            now = datetime.now().strftime('%Y-%m-%d_%H-%M')
+
+        if "output" in config_data:
+            output_file = config_data["output"] + now + ".xlsx"
+        else:
+            output_file = f'test_results_{now}.xlsx'
+
+        # export dataframe to excel
+        if config_data["write_results_to_excel"]:
+            final.to_excel(output_file)
 
 
 if __name__ == '__main__':
@@ -68,4 +86,5 @@ if __name__ == '__main__':
         input_file = args.input
     parser.add_argument("input")
 
-    main(input_file)
+    app = SKOSQualityChecker(config=config_data)
+    app.main(input_file)
