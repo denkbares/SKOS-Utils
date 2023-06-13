@@ -1,4 +1,4 @@
-from rdflib import SKOS
+from rdflib import SKOS, RDF
 
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
@@ -18,6 +18,21 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
         return ""
 
     def find_concepts(self, graph):
-        #obj = graph.ojects(None, SKOS.prefLabel, None)
-        # todo navigate graph and find deficiencies
-        return []
+        bad_concepts_list = []
+        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+            labels = graph.objects(concept, SKOS.prefLabel, None)
+            if self.duplicate_labels(labels):
+                bad_concepts_list.append(concept)
+        return bad_concepts_list
+
+    @staticmethod
+    def duplicate_labels(labels):
+        labels = list(labels)
+        labels.sort(key=lambda l: l.language if l.language else "")
+        for i in range(len(labels)):
+            if (i+1) < len(labels):
+                l1 = labels[i]
+                l2 = labels[i+1]
+                if l1.language == l2.language:
+                    return True
+        return False
