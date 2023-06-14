@@ -58,7 +58,7 @@ class SKOSQualityChecker:
             result_df = self.run_test(test_name, graph)
             end_time = time.time()
             # print(end_time - start_time)
-            elapsed_time = format_duration(end_time - start_time)
+            elapsed_time = self.format_duration (end_time - start_time)
 
             result_df_list.append(result_df)
             benchmark_result = [test_name, elapsed_time]
@@ -89,13 +89,14 @@ class SKOSQualityChecker:
                 benchmark_df.to_excel(writer, sheet_name='Checker_Benchmark')
         logging.info('Idle.')
 
-def format_duration(seconds):
-    hours, seconds = divmod(seconds, 3600)
-    minutes, seconds = divmod(seconds, 60)
-    milliseconds = seconds * 1000
+    @staticmethod
+    def format_duration(seconds):
+        hours, seconds = divmod(seconds, 3600)
+        minutes, seconds = divmod(seconds, 60)
+        milliseconds = seconds * 1000
 
-    duration_string = "{:02d}:{:02d}:{:02d}:{:03d}".format(int(hours), int(minutes), int(seconds), int(milliseconds))
-    return duration_string
+        duration_string = "{:02d}:{:02d}:{:02d}:{:03d}".format(int(hours), int(minutes), int(seconds), int(milliseconds))
+        return duration_string
 
 
 if __name__ == '__main__':
