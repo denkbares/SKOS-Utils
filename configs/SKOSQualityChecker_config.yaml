@@ -1,22 +1,23 @@
-input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
-#input: tests/Testdata/EUROVOC.ttl
-#input: /Users/joba/Downloads/agrovoc_2023-06-06_core.ttl
+#input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
 #input: /Users/joba/Downloads/eurovoc-skos-ap-eu.ttl
+#input: /Users/joba/Downloads/datasets/agrovoc_2023-06-06_core.ttl
+input: /Users/joba/Downloads/datasets/eurovoc-skos-ap-eu.ttl
 #output: /Users/joba/Downloads/test_results
 output: data/test_results
-add_datetime_to_output: True
+add_datetime_to_output_file: False
 write_results_to_excel: True
 logging: True
 log_file: /Users/joba/Downloads/SKOSQualityChecker.log
 tests:
-   - SinglePrefLabelCheckerSPARQL
-   # - SinglePrefLabelChecker
+   # - SinglePrefLabelCheckerSPARQL
+   - SinglePrefLabelChecker
    #- LooseConceptIdentifierSPARQL
    #- SchemeCoherenceCheckerSPARQL
    #- SchemeIntegrityCheckerSPARQL
    #- TopConceptIdentifierSPARQL
    #- IncompleteLanguageCoverageCheckerSPARQL
-   #- LabelConflictCheckerSPARQL
+   # - LabelConflictCheckerSPARQL
+   # - LabelConflictChecker
    #- OrphanConceptIdentifierSPARQL
    #- SolelyTransitivelyRelatedConceptsIdentifierSPARQL
    #- TopConceptHavingBroaderConceptsCheckerSPARQL
