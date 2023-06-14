@@ -2,9 +2,10 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
 
 
-# Check if every concept has a conceptScheme
 class SolelyTransitivelyRelatedConceptsIdentifierSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Check if every concept has a conceptScheme.
+    """
     @property
     def status(self):
         return "Info"

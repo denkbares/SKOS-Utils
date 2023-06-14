@@ -1,9 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-# Identify concepts without a topConcept
 class TopConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Identify top concepts.
+    """
     @property
     def status(self):
         return "Info"

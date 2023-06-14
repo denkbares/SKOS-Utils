@@ -1,9 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-# Check if every concept has a conceptScheme
 class SchemeIntegrityCheckerSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Check if every concept has a conceptScheme.
+    """
     @property
     def status(self):
         return "Error"

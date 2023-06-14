@@ -1,9 +1,10 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-# Identify concepts without a topConcept
 class OrphanConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
-
+    """
+    Identify concepts without a topConcept.
+    """
     @property
     def status(self):
         return "Warning"
