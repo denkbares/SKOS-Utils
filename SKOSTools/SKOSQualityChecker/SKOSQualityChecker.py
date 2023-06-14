@@ -19,14 +19,13 @@ class SKOSQualityChecker:
     def __init__(self, config):
         self.config = config
 
-    @staticmethod
-    def run_test(test_name, graph):
+    def run_test(self, test_name, graph):
         # import the module containing the test class
         test_module = importlib.import_module("CheckerModules." + test_name)
 
         test_class = getattr(test_module, test_name)
         test = test_class()
-        return test.execute(graph)
+        return test.execute(graph, self.config['logging'])
 
     def main(self, file_name):
         if self.config['logging']:
@@ -38,25 +37,26 @@ class SKOSQualityChecker:
                                 format='%(asctime)s - %(levelname)s - %(message)s',
                                 level=logging.INFO)
 
-        logging.info('Open SKOS file.')
+        logging.info('Open SKOS file [' + file_name + ']')
         graph = rdflib.Graph()
         graph.parse(file_name, format='turtle')
-        logging.info('SKOS file parsed.')
+        logging.info('SKOS file parsed')
 
         # Read the selected tests from a config file and only run those
         selected_tests = config_data["tests"]
-        print(str(len(selected_tests)) + " tests selected:")
+        print(str(len(selected_tests)) + " checks selected:")
+        logging.info(str(len(selected_tests)) + " checks selected.")
 
         result_df_list = []
         for test_name in selected_tests:
             print("Running " + test_name + ".")
-            logging.info("Running " + test_name + ".")
+            logging.info("Running " + test_name)
             result_df = self.run_test(test_name, graph)
             result_df_list.append(result_df)
+        logging.info('Checks finished.')
 
         final = pd.concat(result_df_list, ignore_index=True)
         print(final)
-
         # Set date and time string to concat to output file name
         now = ""
         if config_data["add_datetime_to_output"]:
@@ -70,6 +70,7 @@ class SKOSQualityChecker:
         # export dataframe to excel
         if config_data["write_results_to_excel"]:
             final.to_excel(output_file)
+        logging.info('Idle.')
 
 
 if __name__ == '__main__':

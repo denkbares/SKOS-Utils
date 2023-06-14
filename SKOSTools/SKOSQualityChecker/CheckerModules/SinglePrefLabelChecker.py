@@ -1,3 +1,5 @@
+import logging
+
 from rdflib import SKOS, RDF, Namespace, URIRef
 
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
@@ -20,10 +22,19 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
     def find_concepts(self, graph):
         bad_concepts_list = []
         for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+            # we need to separate vanilla and xl SKOS labels, since some ontologies define labels in both ways
             labels = self.all_pref_labels(concept, graph)
-            if self.duplicate_labels(labels):
+            the_lang = self.duplicate_labels(labels)
+            if the_lang:
+                self.send_log('<' + str(concept) + '> (' + the_lang + ')')
+                bad_concepts_list.append(concept)
+            labels_xl = self.all_pref_labels_xl(concept, graph)
+            the_lang = self.duplicate_labels(labels_xl)
+            if the_lang:
+                self.send_log('<' + str(concept) + '> (' + the_lang + ')')
                 bad_concepts_list.append(concept)
 
+        self.send_log(str(len(bad_concepts_list)) + ' concepts with multiple prefLabels found.')
         return bad_concepts_list
 
     @staticmethod
@@ -35,5 +46,6 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
                 l1 = labels[i]
                 l2 = labels[i+1]
                 if l1.language == l2.language:
-                    return True
+                    return str(l1.language)
         return False
+

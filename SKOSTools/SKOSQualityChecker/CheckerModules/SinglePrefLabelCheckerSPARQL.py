@@ -21,9 +21,9 @@ class SinglePrefLabelCheckerSPARQL(StructureTestInterfaceSPARQL):
             SELECT DISTINCT ?concept
             WHERE { { ?concept skos:prefLabel ?label1, ?label2 . }
                     UNION
-                    { ?concept skosxl:prefLabel/skosxl:literalForm ?label1, ?label2 . }
-                    FILTER (?label1 != ?label2)
-                    FILTER (lang(?label1) = lang(?label2))
+                    { ?concept skosxl:prefLabel/skosxl:literalForm ?label3, ?label4 . }
+                    FILTER ((?label1 != ?label2 && lang(?label1) = lang(?label2)) ||
+                            (?label3 != ?label4 && lang(?label3) = lang(?label4)))
             }
             GROUP BY ?concept
             """

@@ -7,10 +7,10 @@ output: data/test_results
 add_datetime_to_output: True
 write_results_to_excel: True
 logging: True
-log_file: SKOSQualityChecker.log
+log_file: /Users/joba/Downloads/SKOSQualityChecker.log
 tests:
-   #- SinglePrefLabelCheckerSPARQL
-   - SinglePrefLabelChecker
+   - SinglePrefLabelCheckerSPARQL
+   # - SinglePrefLabelChecker
    #- LooseConceptIdentifierSPARQL
    #- SchemeCoherenceCheckerSPARQL
    #- SchemeIntegrityCheckerSPARQL

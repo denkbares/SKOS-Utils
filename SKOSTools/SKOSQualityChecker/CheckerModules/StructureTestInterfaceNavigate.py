@@ -11,8 +11,12 @@ class StructureTestInterfaceNavigate(StructureTestInterface):
     LITERAL_FORM_XL = URIRef(SKOSXL_NS + 'literalForm')
 
     def all_pref_labels(self, concept, graph):
-        """Returns all prefLabels of a given concept, including the SKOS-XL labels."""
-        all_labels = list(graph.objects(concept, SKOS.prefLabel, None))
+        """Returns all prefLabels of a given concept (only standard SKOS)."""
+        return list(graph.objects(concept, SKOS.prefLabel, None))
+
+    def all_pref_labels_xl(self, concept, graph):
+        """Returns all prefLabels in SKOS-XL of a given concept."""
+        all_labels = []
         for s, p, label in graph.triples((concept, self.PREF_LABEL_XL, None)):
             for su, pr, literal in graph.triples((label, self.LITERAL_FORM_XL, None)):
                 all_labels.append(literal)
@@ -22,6 +26,8 @@ class StructureTestInterfaceNavigate(StructureTestInterface):
     def find_concepts(self, graph):
         """Define me, so that a list of bad concept URIs is returned."""
 
-    def execute(self, graph):
+    def execute(self, graph, logging=None):
+        if logging:
+            self.log = True
         concepts_result = self.find_concepts(graph)
         return self.create_result(concepts_results=concepts_result)
