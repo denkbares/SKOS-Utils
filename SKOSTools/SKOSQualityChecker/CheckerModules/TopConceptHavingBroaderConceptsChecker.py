@@ -18,6 +18,7 @@ class TopConceptHavingBroaderConceptsChecker(StructureTestInterfaceNavigate):
         return message
 
     def find_concepts(self, graph):
+        # TODO Write utility function "get_all_top_concepts()"?
         top_concept_list = []
         bad_concepts_list = []
         for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
