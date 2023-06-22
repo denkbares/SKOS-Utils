@@ -28,6 +28,10 @@ class OrphanConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
                     FILTER NOT EXISTS {
                         ?concept skos:narrower|skos:broader|skos:related|skos:topConceptOf|skos:hasTopConcept ?relatedConcept .
                     }
+                    
+                    FILTER NOT EXISTS {
+                        ?otherRelatedConcept skos:narrower|skos:broader|skos:related|skos:topConceptOf|skos:hasTopConcept ?concept .
+                    }
                 } 
                 """
 

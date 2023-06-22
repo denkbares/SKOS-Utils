@@ -1,9 +1,7 @@
-from rdflib import RDF, SKOS, RDFS
-
-from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
+from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-class CyclicHierarchicalRelationCheckerSPARQL(StructureTestInterfaceNavigate):
+class CyclicHierarchicalRelationCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Check whether there is a hierarchical relation.
     """
@@ -18,7 +16,10 @@ class CyclicHierarchicalRelationCheckerSPARQL(StructureTestInterfaceNavigate):
             message = "There are " + str(len(result_df)) + " concepts with cyclic hierarchical relations."
         return message
 
-    def find_concepts(self, graph):
-        # TODO
-        return
+    @property
+    def query(self):
+        # TODO:
+        return """
+                
+        """
 

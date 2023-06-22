@@ -36,6 +36,13 @@ class TopConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
                                     skos:inScheme ?scheme ;
                                     skos:topConceptOf ?someConcept .
                     }
+                    UNION
+                    {
+                        # Concepts, that are topConcepts of other concepts with "hasTopConcept"
+                        ?someChildConcepts a skos:Concept ;
+                                    skos:inScheme ?scheme ;
+                                    skos:hasTopConcept ?concept .
+                    }
                 }
                 GROUP BY ?concept
 
