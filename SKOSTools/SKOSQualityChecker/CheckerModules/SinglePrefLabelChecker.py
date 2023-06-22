@@ -24,12 +24,12 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
         for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
             # we need to separate vanilla and xl SKOS labels, since some ontologies define labels in both ways
             labels = self.all_pref_labels(concept, graph)
-            the_lang = self.duplicate_labels(labels)
+            the_lang = self.is_duplicated_label(labels)
             if the_lang:
                 self.send_log('<' + str(concept) + '> (' + the_lang + ')')
                 bad_concepts_list.append(concept)
             labels_xl = self.all_pref_labels_xl(concept, graph)
-            the_lang = self.duplicate_labels(labels_xl)
+            the_lang = self.is_duplicated_label(labels_xl)
             if the_lang:
                 self.send_log('<' + str(concept) + '> (' + the_lang + ')')
                 bad_concepts_list.append(concept)
@@ -38,7 +38,7 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
         return bad_concepts_list
 
     @staticmethod
-    def duplicate_labels(labels):
+    def is_duplicated_label(labels):
         labels = list(labels)
         labels.sort(key=lambda l: l.language if l.language else "")
         for i in range(len(labels)):

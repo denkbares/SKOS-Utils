@@ -19,6 +19,7 @@ class LooseConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
 
     @property
     def query(self):
+        # TODO: Add concepts, that are connected to a topConcept with "narrower"
         return """
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     

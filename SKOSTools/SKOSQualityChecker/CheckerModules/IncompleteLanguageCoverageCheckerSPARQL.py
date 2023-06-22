@@ -12,9 +12,7 @@ class IncompleteLanguageCoverageCheckerSPARQL(StructureTestInterfaceSPARQL):
     def message(self, result_df):
         message = ""
         if len(result_df) > 0:
-            # TODO: Specify missing prefLabel languages
             message = "There are " + str(len(result_df)) + " concepts with incomplete language coverage."
-            # message = "Missing prefLabel languages: "
         return message
 
     @property

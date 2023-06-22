@@ -1,9 +1,7 @@
-from rdflib import RDF, SKOS, RDFS
-
-from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
+from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
 
 
-class InvalidLanguageTagChecker(StructureTestInterfaceNavigate):
+class InvalidLanguageTagChecker(StructureTestInterface):
     """
     Check if narrower and broader concepts of a concept are in the same conceptScheme
     """
@@ -17,7 +15,10 @@ class InvalidLanguageTagChecker(StructureTestInterfaceNavigate):
             message = "There are " + str(len(result_df)) + " concepts with invalid language tags."
         return message
 
-    def find_concepts(self, graph):
+    @property
+    def query(self):
         # TODO: Check language tags against a list of all language tags defined in RFC3066.
-        return
+        return """
+            
+        """
 
