@@ -58,9 +58,9 @@ class TSAConverter:
         self.file_name_prefix = None
         self.xmind_root_node_title = xmind_root_node_title
 
-    def xmind_to_rdf(self, xmind_file, rdf_file, xmind_root_node_title=None, sheet_no=1):
-        if xmind_root_node_title is None:
-            xmind_root_node_title = self.xmind_root_node_title
+    def xmind_to_rdf(self, xmind_file, rdf_file, xmind_root_node_title=None, sheet_no=0):
+        #if xmind_root_node_title is None:
+        #    xmind_root_node_title = self.xmind_root_node_title
         xmindapp = XMind2SKOS(self.local_namespace, self.scheme_name, default_language=self.preferred_language,
                               bindings=self.namespaces)
         xmindapp.read_xmind(xmind_file=xmind_file, rdf_file=rdf_file,

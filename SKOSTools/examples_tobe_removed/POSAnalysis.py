@@ -13,7 +13,7 @@ class POSAnalysis:
     """
     def __init__(self):
         # initialize the standard spacy models for some default languages
-        self.spacy_model = {'FR': 'fr_core_news_sm', 'DE': 'en_core_web_sm', 'DE': 'de_core_news_sm'}
+        self.spacy_model = {'FR': 'fr_core_news_sm', 'EN': 'en_core_web_sm', 'DE': 'de_core_news_sm'}
 
     def analyse(self, graph, language='EN', pos_tag='VERB'):
         """
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     app = POSAnalysis()
 
     g = Graph()
-    g.parse(workspace_dir+'Functions_CFUS_beta1_with_IDs.rdf', format='turtle')
+    g.parse(workspace_dir+'Functions_CFUS_20230619.ttl', format='turtle')
 
     dataframe = app.analyse(g, language='de', pos_tag='VERB')
     dataframe.to_excel(workspace_dir+'verb_count.xlsx', index=False)

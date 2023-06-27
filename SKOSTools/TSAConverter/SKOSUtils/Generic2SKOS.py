@@ -69,8 +69,10 @@ class Generic2SKOS:
 
         for b in concept.broader:
             graph.add((uri, SKOS.broader, b.uri))
+            graph.add((b.uri, SKOS.narrower, uri))
         for n in concept.narrower:
             graph.add((uri, SKOS.narrower, n.uri))
+            graph.add((n.uri, SKOS.broader, uri))
 
         for kid in concept.narrower:
             self.instantiate_rec(kid, graph)

@@ -23,7 +23,10 @@ class QuickRDFConverter:
 
 
 if __name__ == '__main__':
+    #in_file = '/Users/joba/denkbares/skos-tools/tests/Testdata/Bike_Testdata_Original.ttl'
+    #out_file = '/Users/joba/denkbares/skos-tools/tests/Testdata/Bike_Testdata_Original.rdf'
+
     in_file = '/Users/joba/Downloads/datasets/geonames_ontology_v3.3.rdf'
     out_file = '/Users/joba/Downloads/datasets/geonames_ontology_v3.3.ttl'
     app = QuickRDFConverter()
-    app.convert(in_file=in_file, out_file=out_file, in_syntax='xml', out_syntax='ttl')
+    app.convert(in_file=in_file, out_file=out_file, in_syntax='ttl', out_syntax='xml')

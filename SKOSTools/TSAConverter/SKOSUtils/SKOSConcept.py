@@ -98,6 +98,8 @@ class SKOSConcept:
             self.add_note(n)
 
     def add_property(self, attr, value):
+        if attr.endswith(':'):
+            attr = attr[:-1]
         self.props.append((attr, value))
 
 
