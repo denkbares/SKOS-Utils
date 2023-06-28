@@ -3,7 +3,7 @@ from rdflib import RDF, SKOS, RDFS
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
 
-class OrphanConceptIdentifier(StructureTestInterfaceNavigate):
+class OrphanConceptChecker(StructureTestInterfaceNavigate):
     """
     Identify concepts without a topConcept.
     """

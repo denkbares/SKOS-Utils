@@ -21,20 +21,6 @@ class SchemeCoherenceCheckerSPARQL(StructureTestInterfaceSPARQL):
         return """
             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
     
-            SELECT ?concept 
-            WHERE {
-                ?concept a skos:Concept .
-                # FILTER NOT EXISTS {
-                    ?concept skos:inScheme/rdf:type skos:ConceptScheme .
-                # }
-                # OPTIONAL {
-                #     ?concept skos:narrower|skos:broader ?relatedConcept .
-                #     ?relatedConcept skos:inScheme ?scheme
-                #     FILTER(?scheme = ?concept/skos:inScheme)
-                # }
-                # FILTER(?scheme = ?concept/skos:inScheme)
-    
-            }
-            GROUP BY ?concept
+            
         """
 

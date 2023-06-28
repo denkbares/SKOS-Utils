@@ -1,7 +1,7 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-class OrphanConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
+class OrphanConceptCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Identify concepts without a topConcept.
     """

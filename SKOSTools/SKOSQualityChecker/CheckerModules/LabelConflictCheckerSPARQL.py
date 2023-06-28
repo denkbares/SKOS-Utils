@@ -17,7 +17,7 @@ class LabelConflictCheckerSPARQL(StructureTestInterfaceSPARQL):
     @property
     def query(self):
         return """
-                SELECT ?concept
+                SELECT DISTINCT ?concept
                 WHERE {
                   ?concept a skos:Concept ;
                             skos:prefLabel ?label1 .

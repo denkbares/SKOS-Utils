@@ -3,7 +3,7 @@ from rdflib import RDF, SKOS, RDFS
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
 
-class SolelyTransitivelyRelatedConceptsIdentifier(StructureTestInterfaceNavigate):
+class SolelyTransitivelyRelatedConceptsChecker(StructureTestInterfaceNavigate):
     """
     Check if every concept has a conceptScheme.
     """

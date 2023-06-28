@@ -91,9 +91,11 @@ class SKOSQualityChecker:
 
     @staticmethod
     def format_duration(seconds):
-        hours, seconds = divmod(seconds, 3600)
-        minutes, seconds = divmod(seconds, 60)
-        milliseconds = seconds * 1000
+        round_seconds = round(seconds, 3)
+        hours = seconds // 3600
+        minutes = (seconds % 3600) // 60
+        seconds = seconds % 60
+        milliseconds = int((round_seconds - int(round_seconds)) * 1000)
 
         duration_string = "{:02d}:{:02d}:{:02d}:{:03d}".format(int(hours), int(minutes), int(seconds), int(milliseconds))
         return duration_string

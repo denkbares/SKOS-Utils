@@ -1,7 +1,7 @@
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL import StructureTestInterfaceSPARQL
 
 
-class LooseConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
+class LooseConceptCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Identify concepts without a topConcept.
     """

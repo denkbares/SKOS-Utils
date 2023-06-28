@@ -2,7 +2,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import StructureTestInterface
 
 
-class SolelyTransitivelyRelatedConceptsIdentifierSPARQL(StructureTestInterfaceSPARQL):
+class SolelyTransitivelyRelatedConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Check if every concept has a conceptScheme.
     """
