@@ -7,7 +7,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class CyclicHierarchicalRelationChecker(StructureTestInterfaceNavigate):
     """
-    Check whether there is a hierarchical relation.
+    Check whether there is a cyclic hierarchical relation.
     """
 
     @property

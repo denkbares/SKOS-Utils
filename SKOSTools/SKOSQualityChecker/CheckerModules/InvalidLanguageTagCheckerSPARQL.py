@@ -3,7 +3,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import
 
 class InvalidLanguageTagChecker(StructureTestInterface):
     """
-    Check if narrower and broader concepts of a concept are in the same conceptScheme
+    Checks language tags against a list of all valid language tags defined in RFC3066.
     """
     @property
     def status(self):

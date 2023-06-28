@@ -3,7 +3,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 class CyclicHierarchicalRelationCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
-    Check whether there is a hierarchical relation.
+    Identify cyclic hierarchical relations.
     """
 
     @property

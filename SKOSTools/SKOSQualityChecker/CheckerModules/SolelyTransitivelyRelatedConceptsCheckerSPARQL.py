@@ -4,7 +4,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.Structure_Test_Interface import
 
 class SolelyTransitivelyRelatedConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
-    Check if every concept has a conceptScheme.
+    Check if two concepts are related by skos:broaderTransitive and/or skos:narrowerTransitive.
     """
     @property
     def status(self):

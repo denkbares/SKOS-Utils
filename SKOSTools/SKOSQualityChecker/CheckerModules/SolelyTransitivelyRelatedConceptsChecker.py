@@ -5,7 +5,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SolelyTransitivelyRelatedConceptsChecker(StructureTestInterfaceNavigate):
     """
-    Check if every concept has a conceptScheme.
+    Check if two concepts are related by skos:broaderTransitive and/or skos:narrowerTransitive.
     """
 
     @property
