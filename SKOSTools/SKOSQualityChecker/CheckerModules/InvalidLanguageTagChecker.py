@@ -1,5 +1,5 @@
 from rdflib import RDF, SKOS, RDFS
-
+from langcodes import Language
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
 
@@ -18,6 +18,23 @@ class InvalidLanguageTagChecker(StructureTestInterfaceNavigate):
         return message
 
     def find_concepts(self, graph):
-        # TODO: Check language tags against a list of all language tags defined in RFC3066.
-        return
+        bad_concepts_list = set()
 
+        # Check language tags against a list of all language tags defined in RFC3066.
+        for concept in graph.subjects(predicate=RDF.type, object=SKOS.Concept):
+            concept_labels = [self.all_pref_labels(concept, graph), self.all_pref_labels_xl(concept, graph)]
+            concept_langs = self.get_all_used_languages(concept_labels)
+            for lang in concept_langs:
+                if not Language.get(lang).is_valid():
+                    bad_concepts_list.add(concept)
+
+        return bad_concepts_list
+
+    @staticmethod
+    def get_all_used_languages(labels):
+        languages = []
+        for label_list in labels:
+            for label in label_list:
+                if label.language is not None and not languages.__contains__(label.language):
+                    languages.append(label.language)
+        return languages

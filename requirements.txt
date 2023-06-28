@@ -10,3 +10,4 @@ PyYAML~=6.0
 odfpy~=1.4.1
 pytest==7.3.1
 spacy~=3.5.2
+langcodes==3.3.0
