@@ -30,7 +30,6 @@ class StructureTestInterface(ABC):
     def execute(self, graph, logging=None):
         pass
 
-
     def check_name(self):
         return str(self.__class__.__name__)
 

@@ -22,7 +22,7 @@ class CyclicHierarchicalRelationChecker(StructureTestInterfaceNavigate):
 
     def find_concepts(self, graph):
         stack = []
-        cyclic_relation_concepts = []
+        cyclic_relation_concepts = set()
         connected_concepts = []
 
         for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
@@ -40,7 +40,7 @@ class CyclicHierarchicalRelationChecker(StructureTestInterfaceNavigate):
             narrower_concepts = set(itertools.chain(narrower_concepts1, narrower_concepts2))
             for narrower_concept in narrower_concepts:
                 if narrower_concept in connected_concepts:
-                    cyclic_relation_concepts.append(concept)
+                    cyclic_relation_concepts.add(concept)
                 else:
                     stack.append(narrower_concept)
 

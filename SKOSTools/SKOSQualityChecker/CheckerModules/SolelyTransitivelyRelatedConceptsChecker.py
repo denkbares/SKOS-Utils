@@ -24,7 +24,6 @@ class SolelyTransitivelyRelatedConceptsChecker(StructureTestInterfaceNavigate):
         bad_concepts_list = []
 
         for concept in graph.subjects(RDF.type, SKOS.Concept):
-        # for concept in graph.triples((None, RDF.type, SKOS.Concept)):
             if any(((concept, SKOS.broaderTransitive, None) in graph,
                     (concept, SKOS.narrowerTransitive, None) in graph)):
                 bad_concepts_list.append(concept)

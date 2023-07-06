@@ -3,7 +3,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 class OrphanConceptCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
-    Identify concepts without a topConcept.
+    Identify concepts without any relation to another concept.
     """
     @property
     def status(self):

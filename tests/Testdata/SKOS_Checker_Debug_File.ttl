@@ -1,0 +1,301 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+
+<http://www.denkbares.com/casis#TopConcept1> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#Concept1>,
+        <http://www.denkbares.com/casis#Concept2>,
+        <http://www.denkbares.com/casis#Concept3> ;
+    skos:note "@level: 1",
+        "@order: 0",
+        "Test0" ;
+    skos:prefLabel "TopConcept1",
+        "TopConcept1"@it ,
+        "TopConcept1"@de ,
+        "TopConcept1"@en;
+    skos:topConceptOf <http://www.denkbares.com/casis#Concept1> .
+<http://www.denkbares.com/casis#TopConcept2> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 1",
+        "@order: 0",
+        "Test0" ;
+    skos:prefLabel "TopConcept2",
+        "TopConcept2"@it ,
+        "TopConcept2"@de ,
+        "TopConcept2"@en; .
+
+<http://www.denkbares.com/casis#TopConceptWithoutPredicate> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 1",
+        "@order: 0",
+        "Test0" ;
+    skos:prefLabel "TopConcept3",
+        "TopConcept3"@it ,
+        "TopConcept3"@de ,
+        "TopConcept3"@en; .
+<http://www.denkbares.com/casis#Concept1> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#TopConcept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Concept1",
+        "Concept1"@it ,
+        "Concept1"@de ,
+        "Concept1"@en; .
+
+<http://www.denkbares.com/casis#Concept2> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 20" ;
+    skos:prefLabel "Concept2",
+        "Concept2"@de ;
+    skosxl:prefLabel [ skosxl:literalForm "Concept2"@de ],
+        [ skosxl:literalForm "Concept2"@en ] ,
+        [ skosxl:literalForm "Concept2"@it ] .
+
+<http://www.denkbares.com/casis#Concept3> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#TopConcept1> ;
+    skos:narrower <http://www.denkbares.com/casis#Concept3_1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "Concept3",
+        "Concept3"@it ,
+        "Concept3"@de ,
+        "Concept3"@en; .
+
+<http://www.denkbares.com/casis#Concept4> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#RelatedConcept1> ;
+    skos:narrower <http://www.denkbares.com/casis#RelatedConcept3> ;
+    skos:narrower <http://www.denkbares.com/casis#RelatedConcept4> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "Concept4",
+        "Concept4"@it ,
+        "Concept4"@de ,
+        "Concept4"@en; .
+
+<http://www.denkbares.com/casis#Concept5> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#RelatedConcept2> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "Concept5",
+        "Concept5"@it ,
+        "Concept5"@de ,
+        "Concept5"@en; .
+
+<http://www.denkbares.com/casis#Concept6> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#TopConcept2> ;
+    skos:hasTopConcept <http://www.denkbares.com/casis#TopConcept2> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Concept6",
+        "Concept6"@it ,
+        "Concept6"@de ,
+        "Concept6"@en; .
+<http://www.denkbares.com/casis#OmittedConcept> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#TopConceptWithoutPredicate> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "OmittedConcept",
+        "OmittedConcept"@it ,
+        "OmittedConcept"@de ,
+        "OmittedConcept"@en; .
+<http://www.denkbares.com/casis#CyclicRelation1> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept3_1> ;
+    skos:narrower <http://www.denkbares.com/casis#Concept3> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:related <http://www.denkbares.com/casis#Klingelgehaeuse5> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "CyclicRelation1",
+        "CyclicRelation1"@it ,
+        "CyclicRelation1"@de ,
+        "CyclicRelation1"@en; .
+
+<http://www.denkbares.com/casis#Concept3_1> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#CyclicRelation1> ;
+    skos:note "@level: 4",
+        "@order: 10" ;
+    skos:prefLabel "Concept3_1",
+        "Concept3_1"@it ,
+        "Concept3_1"@de ,
+        "Concept3_1"@en; .
+
+<http://www.denkbares.com/casis#WrongScheme> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions1> ;
+    skos:broader <http://www.denkbares.com/casis#TopConcept2> ;
+    skos:note "@level: 4",
+        "@order: 20" ;
+    skosxl:prefLabel [ skosxl:literalForm "WrongScheme"@de ],
+        [ skosxl:literalForm "WrongScheme"@en ] ,
+        [ skosxl:literalForm "WrongScheme"@it ] .
+
+<http://www.denkbares.com/casis#InvalidLanguageTag> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:broader <http://www.denkbares.com/casis#Concept2> ;
+    skos:note "@level: 3",
+        "@order: 20" ;
+    skos:prefLabel "InvalidLanguageTag",
+        "InvalidLanguageTag"@it ,
+        "InvalidLanguageTag"@de ,
+        "InvalidLanguageTag"@dr ,
+        "InvalidLanguageTag"@en; .
+<http://www.denkbares.com/casis#IncompleteLanguageTags> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:broader <http://www.denkbares.com/casis#Concept2> ;
+    skos:note "@level: 3",
+        "@order: 20" ;
+    skos:prefLabel "IncompleteLanguageTags",
+        "IncompleteLanguageTags"@it ,
+        "IncompleteLanguageTags"@de .
+
+<http://www.denkbares.com/casis#BroaderTransitive> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:broaderTransitive <http://www.denkbares.com/casis#TopConcept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 20" ;
+    skos:prefLabel "BroaderTransitive",
+        "BroaderTransitive"@de ,
+        "BroaderTransitive"@it ,
+        "BroaderTransitive"@en ; .
+
+<http://www.denkbares.com/casis#NarrowerTransitive> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept3> ;
+    skos:narrowerTransitive <http://www.denkbares.com/casis#Concept3_1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 20" ;
+    skos:prefLabel "NarrowerTransitive",
+        "NarrowerTransitive"@de ,
+        "NarrowerTransitive"@it ,
+        "NarrowerTransitive"@en ; .
+
+<http://www.denkbares.com/casis#LabelConflict1> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#BroaderTransitive> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#Bremshebel7> ;
+    skos:narrower <http://www.denkbares.com/casis#Bremsscheibe8>;
+     skos:note "@level: 2",
+        "@order: 20" ;
+    skos:prefLabel "LabelConflict1",
+        "LabelConflict1"@de ,
+        "LabelConflict1"@it ,
+        "LabelConflict1"@en ; .
+
+<http://www.denkbares.com/casis#LabelConflict2> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept3> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:hasTopConcept <http://www.denkbares.com/casis#TopConcept1> ;
+    skos:note "@level: 2",
+        "@order: 10",
+        "Test1" ;
+    skos:prefLabel "LabelConflict1",
+        "LabelConflict1"@en ,
+        "LabelConflict1"@it ,
+        "LabelConflict1"@de ; .
+
+<http://www.denkbares.com/casis#TopConceptWithBroaderConcept> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#TopConcept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#RelatedConcept1> ;
+    skos:narrower <http://www.denkbares.com/casis#RelatedConcept2> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "TopWBroader",
+        "TopWBroader"@en ,
+        "TopWBroader"@it ,
+        "TopWBroader"@de ; .
+
+<http://www.denkbares.com/casis#RelatedConcept1> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:related <http://www.denkbares.com/casis#RelatedConcept2>  ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Related1",
+        "Related1"@en ,
+        "Related1"@it ,
+        "Related1"@de ; .
+
+<http://www.denkbares.com/casis#RelatedConcept2> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:narrower <http://www.denkbares.com/casis#Concept5> ;
+    skos:related <http://www.denkbares.com/casis#RelatedConcept1>  ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Related2",
+        "Related2"@en ,
+        "Related2"@it ,
+        "Related2"@de ; .
+
+<http://www.denkbares.com/casis#RelatedConcept3> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:related <http://www.denkbares.com/casis#RelatedConcept4>  ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Related3",
+        "Related3"@en ,
+        "Related3"@it ,
+        "Related3"@de ; .
+
+<http://www.denkbares.com/casis#RelatedConcept4> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:related <http://www.denkbares.com/casis#RelatedConcept3>  ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "Related4",
+        "Related4"@en ,
+        "Related4"@it ,
+        "Related4"@de ; .
+
+<http://www.denkbares.com/casis#OrphanConcept> a skos:Concept ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "OrphanConcept",
+        "OrphanConcept"@en ,
+        "OrphanConcept"@it ,
+        "OrphanConcept"@de ; .
+
+<http://www.denkbares.com/casis#ConceptWithoutScheme> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "WithoutScheme",
+        "WithoutScheme"@en ,
+        "WithoutScheme"@it ,
+        "WithoutScheme"@de ; .
+
+<http://www.denkbares.com/casis#DoubleLabel> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+    skos:prefLabel "DoubleLabel1",
+            "DoubleLabel1"@en ,
+            "DoubleLabel1"@it ,
+            "DoubleLabel1"@de ,
+            "DoubleLabel11"@de ;.
+
+<http://www.denkbares.com/casis#DoubleLabelSkosXL> a skos:Concept ;
+    skos:broader <http://www.denkbares.com/casis#Concept1> ;
+    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+    skos:note "@level: 3",
+        "@order: 10" ;
+skosxl:prefLabel [ skosxl:literalForm "DoubleLabel2"@de ],
+        [ skosxl:literalForm "DoubleLabel2"@en ] ,
+        [ skosxl:literalForm "DoubleLabel22"@en ] ,
+        [ skosxl:literalForm "DoubleLabel2"@it ] .
+
+<http://www.denkbares.com/casis#Functions> a skos:ConceptScheme ;
+    skos:prefLabel "Functions",
+        "Functions"@de .
+

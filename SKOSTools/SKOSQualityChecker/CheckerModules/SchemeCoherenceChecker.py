@@ -18,6 +18,20 @@ class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
         return message
 
     def find_concepts(self, graph):
-        # TODO: Write function
-        return
+        bad_concepts = set()
+        narrower_and_broader_concepts = set()
+        for concept, p, scheme in graph.triples((None, SKOS.inScheme, None)):
+            for narrower_concept in graph.objects(concept, SKOS.narrower, None):
+                narrower_and_broader_concepts.add(narrower_concept)
+            for broader_concept in graph.objects(concept, SKOS.broader, None):
+                narrower_and_broader_concepts.add(broader_concept)
+
+            for other_concept in narrower_and_broader_concepts:
+                other_scheme = graph.value(subject=other_concept, predicate=SKOS.inScheme)
+                # TODO: This is not working as intended
+                if str(scheme) != str(other_scheme):
+                    bad_concepts.add(concept)
+
+        return bad_concepts
+
 

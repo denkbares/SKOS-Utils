@@ -1,5 +1,5 @@
 from rdflib import RDF, SKOS, RDFS
-
+from langcodes import Language
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
 
@@ -28,6 +28,11 @@ class IncompleteLanguageCoverageChecker(StructureTestInterfaceNavigate):
         # Get all languages used in the graph
         global_langs = self.get_all_used_languages(global_labels)
 
+        # Check global_langs against valid language tags
+        for lang in global_langs.copy():
+            if not Language.get(lang).is_valid():
+                global_langs.remove(lang)
+
         for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
             concept_labels = [self.all_pref_labels(concept, graph), self.all_pref_labels_xl(concept, graph)]
             concept_langs = self.get_all_used_languages(concept_labels)
@@ -38,9 +43,9 @@ class IncompleteLanguageCoverageChecker(StructureTestInterfaceNavigate):
 
     @staticmethod
     def get_all_used_languages(labels):
-        languages = []
+        languages = set()
         for label_list in labels:
             for label in label_list:
-                if label.language is not None and not languages.__contains__(label.language):
-                    languages.append(label.language)
+                if label.language is not None:  # and not languages.__contains__(label.language):
+                    languages.add(label.language)
         return languages

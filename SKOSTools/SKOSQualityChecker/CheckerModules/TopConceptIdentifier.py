@@ -18,14 +18,15 @@ class TopConceptIdentifier(StructureTestInterfaceNavigate):
         return message
 
     def find_concepts(self, graph):
-        top_concept_list = []
+        top_concept_list = set()
         concepts_without_broader = set()
         narrower_concepts = set()
 
         for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
-            top_concept_list.append(concept)
+            top_concept_list.add(concept)
         for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
-            top_concept_list.append(o)
+            top_concept_list.add(o)
+        # Concepts without broader and which are not narrower of other concepts
         for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
             if (concept, SKOS.broader, None) not in graph:
                 concepts_without_broader.add(concept)
@@ -35,8 +36,7 @@ class TopConceptIdentifier(StructureTestInterfaceNavigate):
         final_concepts = concepts_without_broader - narrower_concepts
 
         for c in final_concepts:
-            if not top_concept_list.__contains__(c):
-                top_concept_list.append(c)
+            top_concept_list.add(c)
 
         return top_concept_list
 

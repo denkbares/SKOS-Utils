@@ -31,24 +31,22 @@ class ValuelessAssociativeRelationsChecker(StructureTestInterfaceNavigate):
         # For each concept-tuple, get broader and narrower concepts and compare
         for pair in related_concepts:
             concept1, concept2 = pair
-            narrower_concepts1 = []
-            narrower_concepts2 = []
             broader_concepts1 = []
             broader_concepts2 = []
 
-            for narrower_concept in graph.objects(subject=concept1, predicate=SKOS.narrower):
-                narrower_concepts1.append(narrower_concept)
-            for narrower_concept in graph.objects(subject=concept2, predicate=SKOS.narrower):
-                narrower_concepts2.append(narrower_concept)
             for broader_concept in graph.objects(subject=concept1, predicate=SKOS.broader):
                 broader_concepts1.append(broader_concept)
             for broader_concept in graph.objects(subject=concept2, predicate=SKOS.broader):
                 broader_concepts2.append(broader_concept)
+            # Check narrower relations from broader concepts
+            for broader_concept in graph.subjects(predicate=SKOS.narrower, object=concept1):
+                broader_concepts1.append(broader_concept)
+            for broader_concept in graph.subjects(predicate=SKOS.narrower, object=concept2):
+                broader_concepts2.append(broader_concept)
 
-            same_narrower_concepts = collections.Counter(narrower_concepts1) == collections.Counter(narrower_concepts2)
             same_broader_concepts = collections.Counter(broader_concepts1) == collections.Counter(broader_concepts2)
 
-            if same_narrower_concepts and same_broader_concepts:
+            if same_broader_concepts:  # and same_narrower_concepts
                 bad_concepts_list.add(concept1)
                 bad_concepts_list.add(concept2)
         return bad_concepts_list

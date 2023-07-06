@@ -5,7 +5,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class OrphanConceptChecker(StructureTestInterfaceNavigate):
     """
-    Identify concepts without a topConcept.
+    Identify concepts without any relation to another concept.
     """
 
     @property
