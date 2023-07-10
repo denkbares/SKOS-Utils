@@ -1,4 +1,4 @@
-from rdflib import RDF, SKOS, RDFS
+from rdflib import RDF, SKOS, RDFS, Literal
 
 from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate import StructureTestInterfaceNavigate
 
@@ -29,7 +29,7 @@ class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
             for other_concept in narrower_and_broader_concepts:
                 other_scheme = graph.value(subject=other_concept, predicate=SKOS.inScheme)
                 # TODO: This is not working as intended
-                if str(scheme) != str(other_scheme):
+                if Literal(scheme) != Literal(other_scheme):
                     bad_concepts.add(concept)
 
         return bad_concepts

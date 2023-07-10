@@ -45,31 +45,30 @@ class SKOSQualityChecker:
 
         # Read the selected tests from a config file and only run those
         selected_tests = config_data["tests"]
-        print(str(len(selected_tests)) + " checks selected:")
+        # print(str(len(selected_tests)) + " checks selected:")
         logging.info(str(len(selected_tests)) + " checks selected.")
 
         result_df_list = []
         benchmark_list = []
 
         for test_name in selected_tests:
-            print("Running " + test_name + ".")
+            # print("Running " + test_name + ".")
             logging.info("Running " + test_name + ".")
             start_time = time.time()
             result_df = self.run_test(test_name, graph)
             end_time = time.time()
-            # print(end_time - start_time)
-            elapsed_time = self.format_duration (end_time - start_time)
+            elapsed_time = self.format_duration(end_time - start_time)
 
             result_df_list.append(result_df)
-            benchmark_result = [test_name, elapsed_time]
+            benchmark_result = [test_name, elapsed_time, len(result_df)]
             benchmark_list.append(benchmark_result)
         logging.info('Checks finished.')
 
         final = pd.concat(result_df_list, ignore_index=True)
-        benchmark_df = pd.DataFrame(columns=['CheckName', 'Time'], data=benchmark_list)
+        benchmark_df = pd.DataFrame(columns=['CheckName', 'Time', 'Findings'], data=benchmark_list)
 
         print(final)
-        print(benchmark_df)
+        # print(benchmark_df)
 
         # Set date and time string to concat to output file name
         now = ""

@@ -180,8 +180,6 @@
 <http://www.denkbares.com/casis#LabelConflict1> a skos:Concept ;
     skos:broader <http://www.denkbares.com/casis#BroaderTransitive> ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Bremshebel7> ;
-    skos:narrower <http://www.denkbares.com/casis#Bremsscheibe8>;
      skos:note "@level: 2",
         "@order: 20" ;
     skos:prefLabel "LabelConflict1",
@@ -202,6 +200,7 @@
         "LabelConflict1"@de ; .
 
 <http://www.denkbares.com/casis#TopConceptWithBroaderConcept> a skos:Concept ;
+    skos:topConceptOf <http://www.denkbares.com/casis#RelatedConcept1> ;
     skos:broader <http://www.denkbares.com/casis#TopConcept1> ;
     skos:inScheme <http://www.denkbares.com/casis#Functions> ;
     skos:narrower <http://www.denkbares.com/casis#RelatedConcept1> ;
