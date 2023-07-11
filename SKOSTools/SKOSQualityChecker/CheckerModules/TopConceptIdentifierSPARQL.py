@@ -3,7 +3,10 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 class TopConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
     """
-    Identify top concepts.
+    Identify top concepts. "Keep the number of top concepts in any single concept scheme small (i.e., fewer than a half
+    dozen)"
+    Implements a part of the definition as described in:
+    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
     """
     @property
     def status(self):

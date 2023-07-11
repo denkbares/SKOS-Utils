@@ -6,6 +6,9 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 class TopConceptHavingBroaderConceptsChecker(StructureTestInterfaceNavigate):
     """
     Check if Top Concepts have broader concepts.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
     @property
     def status(self):
@@ -21,9 +24,9 @@ class TopConceptHavingBroaderConceptsChecker(StructureTestInterfaceNavigate):
         # TODO Write utility function "get_all_top_concepts()"?
         top_concept_list = []
         bad_concepts_list = []
-        for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
+        for concept in graph.subjects(predicate=SKOS.topConceptOf):
             top_concept_list.append(concept)
-        for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
+        for o in graph.objects(predicate=SKOS.hasTopConcept):
             top_concept_list.append(o)
 
         for top_concept in top_concept_list:

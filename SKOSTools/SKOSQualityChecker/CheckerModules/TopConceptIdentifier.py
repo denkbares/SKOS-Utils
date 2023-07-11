@@ -5,7 +5,10 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class TopConceptIdentifier(StructureTestInterfaceNavigate):
     """
-    Identify top concepts.
+    Identify top concepts. "Keep the number of top concepts in any single concept scheme small (i.e., fewer than a half
+    dozen)"
+    Implements a part of the definition as described in:
+    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
     """
     @property
     def status(self):
@@ -22,12 +25,12 @@ class TopConceptIdentifier(StructureTestInterfaceNavigate):
         concepts_without_broader = set()
         narrower_concepts = set()
 
-        for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
+        for concept in graph.subjects(predicate=SKOS.topConceptOf):
             top_concept_list.add(concept)
-        for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
+        for o in graph.objects(predicate=SKOS.hasTopConcept):
             top_concept_list.add(o)
         # Concepts without broader and which are not narrower of other concepts
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        for concept in graph.subjects(predicate=RDF.type, object=SKOS.Concept):
             if (concept, SKOS.broader, None) not in graph:
                 concepts_without_broader.add(concept)
             if (None, SKOS.narrower, concept) in graph:

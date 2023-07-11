@@ -52,7 +52,7 @@ class SKOSQualityChecker:
         benchmark_list = []
 
         for test_name in selected_tests:
-            # print("Running " + test_name + ".")
+            print("Running " + test_name + ".")
             logging.info("Running " + test_name + ".")
             start_time = time.time()
             result_df = self.run_test(test_name, graph)
@@ -67,8 +67,8 @@ class SKOSQualityChecker:
         final = pd.concat(result_df_list, ignore_index=True)
         benchmark_df = pd.DataFrame(columns=['CheckName', 'Time', 'Findings'], data=benchmark_list)
 
-        print(final)
-        # print(benchmark_df)
+        # print(final)
+        print(benchmark_df)
 
         # Set date and time string to concat to output file name
         now = ""

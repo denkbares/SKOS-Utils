@@ -10,6 +10,9 @@ class ValuelessAssociativeRelationsChecker(StructureTestInterfaceNavigate):
     Checks if there are concepts in the graph that are related by the property skos:related and have the same narrower
     and broader concepts. These relations could overload the thesaurus with valueless relationships.
     check ISO/DIS 25964-1 for more info.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
     @property
     def status(self):
@@ -46,7 +49,7 @@ class ValuelessAssociativeRelationsChecker(StructureTestInterfaceNavigate):
 
             same_broader_concepts = collections.Counter(broader_concepts1) == collections.Counter(broader_concepts2)
 
-            if same_broader_concepts:  # and same_narrower_concepts
+            if same_broader_concepts:
                 bad_concepts_list.add(concept1)
                 bad_concepts_list.add(concept2)
         return bad_concepts_list

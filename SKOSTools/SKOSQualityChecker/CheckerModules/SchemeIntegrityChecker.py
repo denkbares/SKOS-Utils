@@ -6,6 +6,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 class SchemeIntegrityChecker(StructureTestInterfaceNavigate):
     """
     Check if every concept has a conceptScheme.
+    Implements a part of the definition as described in:
+    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
     """
     @property
     def status(self):
@@ -20,7 +22,7 @@ class SchemeIntegrityChecker(StructureTestInterfaceNavigate):
     def find_concepts(self, graph):
         bad_concepts_list = []
 
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        for concept in graph.subjects(predicate=RDF.type, object=SKOS.Concept):
             if (concept, SKOS.inScheme, None) not in graph:
                 bad_concepts_list.append(concept)
 

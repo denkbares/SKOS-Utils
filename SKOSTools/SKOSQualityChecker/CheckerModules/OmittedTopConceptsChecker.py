@@ -6,6 +6,9 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 class OmittedTopConceptsChecker(StructureTestInterfaceNavigate):
     """
     Identify concepts that are not connected to any top concept.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
 
     @property
@@ -25,9 +28,9 @@ class OmittedTopConceptsChecker(StructureTestInterfaceNavigate):
         unconnected_concepts = []
         connected_concepts = set()
 
-        for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
+        for concept in graph.subjects(predicate=SKOS.topConceptOf):
             top_concepts.add(concept)
-        for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
+        for o in graph.objects(predicate=SKOS.hasTopConcept):
             top_concepts.add(o)
 
         # Perform a deep search starting from top concepts
@@ -44,8 +47,8 @@ class OmittedTopConceptsChecker(StructureTestInterfaceNavigate):
                     stack.add(narrower_concept)
 
         # Find unconnected concepts
-        for conc in graph.subjects(predicate=SKOS.inScheme):
-            if conc not in connected_concepts:
-                unconnected_concepts.append(conc)
+        for concept in graph.subjects(predicate=SKOS.inScheme):
+            if concept not in connected_concepts:
+                unconnected_concepts.append(concept)
 
         return unconnected_concepts

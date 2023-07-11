@@ -6,6 +6,9 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 class OrphanConceptChecker(StructureTestInterfaceNavigate):
     """
     Identify concepts without any relation to another concept.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
 
     @property
@@ -21,7 +24,7 @@ class OrphanConceptChecker(StructureTestInterfaceNavigate):
 
     def find_concepts(self, graph):
         bad_concept_list = []
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        for concept in graph.subjects(predicate=RDF.type, object=SKOS.Concept):
             if not any(((concept, SKOS.related, None) in graph,
                         (None, SKOS.related, concept) in graph,
                         (concept, SKOS.broader, None) in graph,

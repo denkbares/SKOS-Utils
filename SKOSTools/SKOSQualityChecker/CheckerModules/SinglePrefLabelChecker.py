@@ -7,8 +7,11 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
     """
-    Check whether every concept has at most one prefLabel for each language.
+    Check whether every concept has at most one prefLabel for each language used in the graph.
     Considers prefLabels defined in standard SKOS and SKOS-XL.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
     @property
     def status(self):
@@ -21,7 +24,7 @@ class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
 
     def find_concepts(self, graph):
         bad_concepts_list = []
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        for concept in graph.subjects(predicate=RDF.type, object=SKOS.Concept):
             # we need to separate vanilla and xl SKOS labels, since some ontologies define labels in both ways
             labels = self.all_pref_labels(concept, graph)
             the_lang = self.is_duplicated_label(labels)

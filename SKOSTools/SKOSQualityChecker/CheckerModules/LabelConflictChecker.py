@@ -7,6 +7,9 @@ class LabelConflictChecker(StructureTestInterfaceNavigate):
     """
     Check whether there are multiple concepts with the same prefLabels in the same concept scheme.
     Considers prefLabels defined in standard SKOS and SKOS-XL.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
     @property
     def status(self):
@@ -20,11 +23,12 @@ class LabelConflictChecker(StructureTestInterfaceNavigate):
     def find_concepts(self, graph):
         bad_concepts_list = []
         labels = []
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        concepts = list(graph.subjects(predicate=RDF.type, object=SKOS.Concept))
+        for concept in concepts:
             for label in self.all_pref_labels(concept, graph):
                 labels.append([label, concept])
 
-        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+        for concept in concepts:
             if self.conflict_labels(labels, self.all_pref_labels(concept, graph), concept):
                 bad_concepts_list.append(concept)
         return bad_concepts_list
