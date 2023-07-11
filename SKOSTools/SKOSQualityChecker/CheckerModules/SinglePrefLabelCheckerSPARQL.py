@@ -5,6 +5,9 @@ class SinglePrefLabelCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Check whether every concept has at most one prefLabel for each language.
     Considers prefLabels defined in standard SKOS and SKOS-XL.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
     @property
     def status(self):

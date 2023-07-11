@@ -6,8 +6,7 @@ class TopConceptIdentifierSPARQL(StructureTestInterfaceSPARQL):
     Identify top concepts. "Keep the number of top concepts in any single concept scheme small (i.e., fewer than a half
     dozen)"
     Implements a part of the definition as described in:
-    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
-    """
+    D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.    """
     @property
     def status(self):
         return "Info"

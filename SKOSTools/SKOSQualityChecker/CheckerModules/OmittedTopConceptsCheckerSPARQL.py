@@ -4,6 +4,9 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 class OmittedTopConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Identify concepts that are not connected to any top concept.
+    Implements a part of the definition as described in:
+    O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
+    Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
     """
 
     @property

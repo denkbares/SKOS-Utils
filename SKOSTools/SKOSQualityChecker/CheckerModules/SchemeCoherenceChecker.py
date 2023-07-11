@@ -7,7 +7,7 @@ class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
     """
     Check if narrower and broader concepts of a concept are in the same conceptScheme.
     Implements a part of the definition as described in:
-    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
+    D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """
     @property
     def status(self):

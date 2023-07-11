@@ -4,6 +4,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 class SchemeIntegrityCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
     Check if every concept has a conceptScheme.
+    Implements a part of the definition as described in:
+    D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """
     @property
     def status(self):

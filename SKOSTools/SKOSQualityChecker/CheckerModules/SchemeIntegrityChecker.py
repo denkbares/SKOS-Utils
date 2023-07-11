@@ -7,8 +7,9 @@ class SchemeIntegrityChecker(StructureTestInterfaceNavigate):
     """
     Check if every concept has a conceptScheme.
     Implements a part of the definition as described in:
-    Allemang, D., Hendler, J. A., & Gandon, F. (2020). Semantic web for the working ontologist. ACM Press.
+    D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """
+
     @property
     def status(self):
         return "Error"
