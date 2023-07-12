@@ -40,7 +40,7 @@ class SKOSStatistics:
         relations_count = sum(1 for _ in graph.triples((None, None, None)))
         used_languages = self.identify_used_languages(graph)
         new_row = pd.Series([name, schemes_count, concept_count, pref_label_count,
-                             xl_labels_count, relations_count, len(str(used_languages)), str(used_languages)], index=df.columns)
+                             xl_labels_count, relations_count, len(used_languages), str(used_languages)], index=df.columns)
         df = df._append(new_row, ignore_index=True)
         return df
 
