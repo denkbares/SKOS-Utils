@@ -1,6 +1,7 @@
 output: tests/statistics.xlsx
 graphs:
-   - Bike: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
-   - Eurovoc: /Users/joba/Downloads/datasets/eurovoc-skos-ap-eu.ttl
-   - AGROVOC: /Users/joba/Downloads/datasets/agrovoc_2023-06-06_core.ttl
-   - GeoNames: /Users/joba/Downloads/datasets/geonames_ontology_v3.3_ext.ttl
+   #- Bike: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
+   #- Eurovoc: /Users/joba/Downloads/datasets/eurovoc-skos-ap-eu.ttl
+   #- AGROVOC: /Users/joba/Downloads/datasets/agrovoc_2023-06-06_core.ttl
+   #- GeoNames: /Users/joba/Downloads/datasets/geonames_ontology_v3.3_ext.ttl
+   - UNESCOThesaurus: /Users/joba/Downloads/datasets/unescothes.ttl

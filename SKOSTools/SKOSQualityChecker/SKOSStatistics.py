@@ -62,7 +62,6 @@ class SKOSStatistics:
         return used_languages
 
 
-
 if __name__ == '__main__':
     with open('configs/Statistics_config.yaml') as f:
         stats_config = yaml.load(f, Loader=SafeLoader)

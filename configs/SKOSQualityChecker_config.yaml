@@ -1,24 +1,31 @@
-input: /Users/joba/Downloads/datasets/geonames_ontology_v3.3_ext.ttl
+input: /Users/joba/Downloads/datasets/unescothes.ttl
 #input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
 #input: /Users/joba/Downloads/eurovoc-skos-ap-eu.ttl
 #input: /Users/joba/Downloads/datasets/agrovoc_2023-06-06_core.ttl
 #input: /Users/joba/Downloads/datasets/eurovoc-skos-ap-eu.ttl
 #output: /Users/joba/Downloads/test_results
-output: data/test_results_geonames
+output: data/test_results_unescothes.xls
 add_datetime_to_output_file: True
 write_results_to_excel: True
 logging: True
 log_file: /Users/joba/Downloads/SKOSQualityChecker.log
 tests:
-   # - SinglePrefLabelCheckerSPARQL
    - SinglePrefLabelChecker
-   - LooseConceptIdentifierSPARQL
-   - SchemeCoherenceCheckerSPARQL
+   - SchemeCoherenceChecker
+   - SchemeIntegrityChecker
    - SchemeIntegrityCheckerSPARQL
+   - TopConceptIdentifier
    - TopConceptIdentifierSPARQL
-   #- IncompleteLanguageCoverageCheckerSPARQL
-   - LabelConflictCheckerSPARQL
+   - IncompleteLanguageCoverageChecker
+   - IncompleteLanguageCoverageCheckerSPARQL
    - LabelConflictChecker
-   - OrphanConceptIdentifierSPARQL
-   - SolelyTransitivelyRelatedConceptsIdentifierSPARQL
+   - OrphanConceptChecker
+   - OrphanConceptCheckerSPARQL
+   - OmittedTopConceptsChecker
+   - SolelyTransitivelyRelatedConceptsChecker
+   - SolelyTransitivelyRelatedConceptsCheckerSPARQL
+   - TopConceptHavingBroaderConceptsChecker
    - TopConceptHavingBroaderConceptsCheckerSPARQL
+   - CyclicHierarchicalRelationChecker
+   - ValuelessAssociativeRelationsChecker
+   - InvalidLanguageTagChecker

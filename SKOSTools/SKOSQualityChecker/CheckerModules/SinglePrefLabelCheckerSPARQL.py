@@ -21,6 +21,7 @@ class SinglePrefLabelCheckerSPARQL(StructureTestInterfaceSPARQL):
     @property
     def query(self):
         return """
+            PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#>
             SELECT DISTINCT ?concept
             WHERE { { ?concept skos:prefLabel ?label1, ?label2 . }
                     UNION
