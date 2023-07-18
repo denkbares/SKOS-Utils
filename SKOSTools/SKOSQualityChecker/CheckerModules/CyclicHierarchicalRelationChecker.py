@@ -23,28 +23,54 @@ class CyclicHierarchicalRelationChecker(StructureTestInterfaceNavigate):
             message = "There are " + str(len(result_df)) + " concepts with cyclic hierarchical relations."
         return message
 
+    # def find_concepts(self, graph):
+    #     stack = []
+    #     cyclic_relation_concepts = set()
+    #     connected_concepts = []
+    #
+    #     for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
+    #         stack.append(concept)
+    #     for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
+    #         stack.append(o)
+    #
+    #     # Perform a deep search starting from top concepts
+    #     while stack:
+    #         concept = stack.pop()
+    #
+    #         connected_concepts.append(concept)
+    #         narrower_concepts1 = set(graph.subjects(predicate=SKOS.broader, object=concept))
+    #         narrower_concepts2 = set(graph.objects(subject=concept, predicate=SKOS.narrower))
+    #         narrower_concepts = set(itertools.chain(narrower_concepts1, narrower_concepts2))
+    #         for narrower_concept in narrower_concepts:
+    #             if narrower_concept in connected_concepts:
+    #                 cyclic_relation_concepts.add(concept)
+    #             else:
+    #                 stack.append(narrower_concept)
+    #
+    #     return cyclic_relation_concepts
+
     def find_concepts(self, graph):
-        stack = []
         cyclic_relation_concepts = set()
-        connected_concepts = []
+        visited_concepts = set()
+
+        def depth_first_search(con):
+            if con in visited_concepts:
+                return
+            visited_concepts.add(con)
+
+            narrower_concepts1 = set(graph.subjects(predicate=SKOS.broader, object=con))
+            narrower_concepts2 = set(graph.objects(subject=con, predicate=SKOS.narrower))
+            narrower_concepts = narrower_concepts1.union(narrower_concepts2)
+
+            for narrower_concept in narrower_concepts:
+                if narrower_concept in visited_concepts:
+                    cyclic_relation_concepts.add(con)
+                else:
+                    depth_first_search(narrower_concept)
 
         for concept, p, o in graph.triples((None, SKOS.topConceptOf, None)):
-            stack.append(concept)
+            depth_first_search(concept)
         for concept, p, o in graph.triples((None, SKOS.hasTopConcept, None)):
-            stack.append(o)
-
-        # Perform a deep search starting from top concepts
-        while stack:
-            concept = stack.pop()
-
-            connected_concepts.append(concept)
-            narrower_concepts1 = set(graph.subjects(predicate=SKOS.broader, object=concept))
-            narrower_concepts2 = set(graph.objects(subject=concept, predicate=SKOS.narrower))
-            narrower_concepts = set(itertools.chain(narrower_concepts1, narrower_concepts2))
-            for narrower_concept in narrower_concepts:
-                if narrower_concept in connected_concepts:
-                    cyclic_relation_concepts.add(concept)
-                else:
-                    stack.append(narrower_concept)
+            depth_first_search(o)
 
         return cyclic_relation_concepts
