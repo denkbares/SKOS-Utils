@@ -1,5 +1,4 @@
 import re
-from string import punctuation
 from rdflib import URIRef
 
 from SKOSTools.TSAConverter.SKOSUtils.IDGenerator import IDGenerator

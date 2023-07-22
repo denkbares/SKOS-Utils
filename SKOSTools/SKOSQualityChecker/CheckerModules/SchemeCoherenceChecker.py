@@ -16,44 +16,27 @@ class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
     def message(self, result_df):
         message = ""
         if len(result_df) > 0:
-            message = "There are " + str(len(result_df)) + " concepts with violated scheme coherence."
+            message = "There are " + str(len(result_df)) + " schemes with violated scheme coherence."
         return message
-
-    # def find_concepts(self, graph):
-    #     bad_concepts = set()
-    #     narrower_and_broader_concepts = set()
-    #     for concept, p, scheme in graph.triples((None, SKOS.inScheme, None)):
-    #         for narrower_concept in graph.objects(concept, SKOS.narrower, None):
-    #             narrower_and_broader_concepts.add(narrower_concept)
-    #         for broader_concept in graph.objects(concept, SKOS.broader, None):
-    #             narrower_and_broader_concepts.add(broader_concept)
-    #
-    #         for other_concept in narrower_and_broader_concepts:
-    #             other_scheme = graph.value(subject=other_concept, predicate=SKOS.inScheme)
-    #             if Literal(scheme) != Literal(other_scheme):
-    #                 bad_concepts.add(concept)
-    #
-    #     return bad_concepts
 
     def find_concepts(self, graph):
         bad_concepts = set()
-        narrower_and_broader_concepts = {}
-
-        for concept, p, scheme in graph.triples((None, SKOS.inScheme, None)):
+        for concept, p, o in graph.triples((None, RDF.type, SKOS.Concept)):
+            my_schemes = set(graph.objects(concept, SKOS.inScheme, None))
+            # check whether all defined schemes of narrower concepts equal to the own scheme
             narrower_concepts = set(graph.objects(concept, SKOS.narrower, None))
-            broader_concepts = set(graph.objects(concept, SKOS.broader, None))
-
             for narrower_concept in narrower_concepts:
-                narrower_and_broader_concepts[narrower_concept] = scheme
-
+                narrow_schemes = set(graph.objects(narrower_concept, SKOS.inScheme, None))
+                if narrow_schemes:
+                    if my_schemes != narrow_schemes:
+                        bad_concepts.add(concept)
+            # check whether all defined schemes of broader concepts equal to the own scheme
+            broader_concepts = set(graph.objects(concept, SKOS.broader, None))
             for broader_concept in broader_concepts:
-                narrower_and_broader_concepts[broader_concept] = scheme
-
-        for concept, scheme in narrower_and_broader_concepts.items():
-            other_scheme = graph.value(subject=concept, predicate=SKOS.inScheme)
-            if Literal(scheme) != Literal(other_scheme):
-                bad_concepts.add(concept)
-
+                broad_schemes = set(graph.objects(broader_concept, SKOS.inScheme, None))
+                if broad_schemes:
+                    if my_schemes != broad_schemes:
+                        bad_concepts.add(concept)
         return bad_concepts
 
 

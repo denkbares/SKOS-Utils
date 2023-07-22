@@ -21,41 +21,33 @@ class IncompleteLanguageCoverageCheckerSPARQL(StructureTestInterfaceSPARQL):
     @property
     def query(self):
         return """
-        
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         
                 SELECT ?concept
                 WHERE {
-                    
-                        {
-                          # Find the concept set of language tags
-                            SELECT ?concept (GROUP_CONCAT(DISTINCT ?lang; SEPARATOR="|") AS ?conceptLangs)
-                            WHERE {
-                                SELECT *
-                                    WHERE {
-                                        ?concept a skos:Concept ;
-                                            skos:prefLabel ?conceptLabel .
-                                            BIND  (LANG(?conceptLabel) AS ?lang)
-                                    }
-                                ORDER BY ASC(STR(?lang))
-                            } 
+                                    
+                    {
+                        # Find the concept set of language tags
+                        SELECT ?concept (GROUP_CONCAT(DISTINCT ?lang; SEPARATOR="|") AS ?conceptLangs)
+                        WHERE {
+                            ?concept a skos:Concept ;
+                                skos:prefLabel ?conceptLabel .
+                                BIND (LANG(?conceptLabel) AS ?lang)
+                        } 
                         GROUP BY ?concept
+                    }
+                                    
+                    {
+                        # Find the global set of language tags
+                        SELECT (GROUP_CONCAT(DISTINCT ?lang; SEPARATOR="|") AS ?globalLangs)
+                        WHERE {
+                            ?c a skos:Concept ;
+                                skos:prefLabel ?label .
+                            BIND (LANG(?label) AS ?lang)
                         }
-                    
-                        {
-                          # Find the global set of language tags
-                          SELECT (GROUP_CONCAT(DISTINCT ?lang; SEPARATOR="|") AS ?globalLangs)
-                          WHERE {
-                             SELECT (LANG(?label) AS ?lang)
-                                WHERE {
-                                    ?c a skos:Concept ;
-                                        skos:prefLabel ?label .
-                                } 
-                                ORDER BY ASC(STR(?lang))
-                            } 
-                        }
-                  FILTER (?conceptLangs != ?globalLangs)
+                    }
+                                    
+                    FILTER (?conceptLangs != ?globalLangs)
                 }
-                
-        """
+            """
 
