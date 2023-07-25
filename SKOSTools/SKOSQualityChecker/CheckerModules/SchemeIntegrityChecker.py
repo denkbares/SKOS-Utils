@@ -5,7 +5,7 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SchemeIntegrityChecker(StructureTestInterfaceNavigate):
     """
-    Check if every concept has a conceptScheme.
+    Lists all SKOS concepts that are not explicitly linked to a concept scheme.
     Implements a part of the definition as described in:
     D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """

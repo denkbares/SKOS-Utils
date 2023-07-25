@@ -2,6 +2,7 @@ import os
 import sys
 
 from SKOSTools import Utils
+from SKOSTools.TSAConverter.SKOSUtils.SKOS2ASCII import SKOS2ASCII
 
 from SKOSTools.TSAConverter.SKOSUtils.SKOS2XLS import SKOS2XLS
 from SKOSTools.TSAConverter.SKOSUtils.SKOS2XMind import SKOS2XMind
@@ -96,6 +97,11 @@ class TSAConverter:
         self.xmind_to_rdf(xmind_file=xmind_file, rdf_file=rdf_file, xmind_root_node_title=xmind_root_node_title)
         self.rdf_to_excel(rdf_file=rdf_file, xls_file=xls_file)
 
+    def rdf_to_ascii(self, rdf_file, ascii_file):
+        graph = SKOSGraph(rdf_file, self.namespaces)
+        app = SKOS2ASCII()
+        app.write(graph, pref_lang='de', filename=ascii_file)
+
 
 @converterApp.command()
 def excel_to_xmind(input=None, output=None, rdf_file=None):
@@ -172,6 +178,16 @@ def rdf_to_excel(input=None, output=None):
 
     print("Converting " + input + " to " + output + ".")
     converter.rdf_to_excel(rdf_file=input, xls_file=output)
+
+@converterApp.command()
+def rdf_to_ascii(input=None, output=None):
+    converter = create_converter()
+    if input is None:
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+    if output is None:
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".txt")
+    print("Converting " + input + " to " + output + ".")
+    converter.rdf_to_ascii(rdf_file=input, ascii_file=output)
 
 
 if __name__ == "__main__":

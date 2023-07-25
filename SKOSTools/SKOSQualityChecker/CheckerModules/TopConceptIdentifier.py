@@ -5,7 +5,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class TopConceptIdentifier(StructureTestInterfaceNavigate):
     """
-    Identify top concepts. "Keep the number of top concepts in any single concept scheme small (i.e., fewer than a half
+    Identify and count top concepts.
+    "Keep the number of top concepts in any single concept scheme small (i.e., fewer than a half
     dozen)"
     We return all schemes that have more than 12 top concepts.
     Implements a part of the definition as described in:

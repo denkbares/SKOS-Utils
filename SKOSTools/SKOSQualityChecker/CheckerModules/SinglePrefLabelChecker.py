@@ -7,8 +7,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SinglePrefLabelChecker(StructureTestInterfaceNavigate):
     """
-    Check whether every concept has at most one prefLabel for each language used in the graph.
-    Considers prefLabels defined in standard SKOS and SKOS-XL.
+    Lists all SKOS concepts that have more than one preferred label for each language
+    used in the graph (SKOS and SKOS-XL).
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.

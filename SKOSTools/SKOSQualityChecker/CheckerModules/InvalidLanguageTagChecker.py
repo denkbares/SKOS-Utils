@@ -5,7 +5,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class InvalidLanguageTagChecker(StructureTestInterfaceNavigate):
     """
-    Checks language tags against a list of all valid language tags defined in RFC3066.
+    Checks language tags used for SKOS concept labels against a list of
+    all valid language tags defined in RFC3066.
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.

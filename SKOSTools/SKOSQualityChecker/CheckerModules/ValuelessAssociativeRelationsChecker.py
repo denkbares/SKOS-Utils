@@ -7,9 +7,10 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class ValuelessAssociativeRelationsChecker(StructureTestInterfaceNavigate):
     """
-    Checks if there are concepts in the graph that are related by the property skos:related and have the same narrower
-    and broader concepts. These relations could overload the thesaurus with valueless relationships.
-    check ISO/DIS 25964-1 for more info.
+    Checks if there are concepts in the graph that are related by the property skos:related
+    and have the same narrower and broader concepts.
+    These relations could overload the thesaurus with valueless relationships.
+    Check ISO/DIS 25964-1 for more info.
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.

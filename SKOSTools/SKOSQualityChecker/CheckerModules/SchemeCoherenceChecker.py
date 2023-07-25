@@ -5,7 +5,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
     """
-    Check if narrower and broader concepts of a concept are in the same conceptScheme.
+    Lists all SKOS concepts, for which the narrower and broader concepts
+    are not in the same conceptScheme.
     Implements a part of the definition as described in:
     D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """

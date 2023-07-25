@@ -1,4 +1,4 @@
-from SKOSTools.skosutils.SKOSTraversal import SKOSTraversal
+from SKOSTools.TSAConverter.SKOSUtils.SKOSTraversal import SKOSTraversal
 
 
 class TextWriter(SKOSTraversal):

@@ -5,7 +5,8 @@ from SKOSTools.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 
 class SolelyTransitivelyRelatedConceptsChecker(StructureTestInterfaceNavigate):
     """
-    Check if two concepts are related by skos:broaderTransitive and/or skos:narrowerTransitive.
+    Check whether two SKOS concepts are related by skos:broaderTransitive and/or
+    skos:narrowerTransitive properties.
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.

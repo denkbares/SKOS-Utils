@@ -1,0 +1,30 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ex: <http://example.org/> .
+
+ex:CyclicConceptScheme a skos:ConceptScheme ;
+  skos:prefLabel "Example Concept Scheme"@en ;
+  skos:hasTopConcept ex:TopConcept .
+
+ex:TopConcept a skos:Concept;
+  skos:topConceptOf ex:CyclicConceptScheme ;
+  skos:prefLabel "Top Concept"@en ;
+  skos:inScheme ex:ConceptScheme ;
+  skos:narrower ex:ConceptA .
+
+ex:ConceptA
+  a skos:Concept ;
+  skos:prefLabel "Concept A"@en ;
+  skos:inScheme ex:ConceptScheme ;
+  skos:narrower ex:ConceptB .
+
+ex:ConceptB
+  a skos:Concept ;
+  skos:prefLabel "Concept B"@en ;
+  skos:inScheme ex:ConceptScheme ;
+  skos:narrower ex:ConceptC .
+
+ex:ConceptC
+  a skos:Concept ;
+  skos:prefLabel "Concept C"@en ;
+  skos:inScheme ex:ConceptScheme ;
+  skos:narrower ex:ConceptA .
