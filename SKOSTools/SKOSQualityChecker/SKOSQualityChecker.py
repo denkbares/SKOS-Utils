@@ -11,6 +11,8 @@ from yaml.loader import SafeLoader
 from SKOSTools import Utils
 import time
 
+from SKOSTools.UtilDir.SKOSGraph import SKOSGraph
+
 Utils.activate_venv()
 sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
 
@@ -41,6 +43,7 @@ class SKOSQualityChecker:
         logging.info('Open SKOS file [' + file_name + ']')
         graph = rdflib.Graph()
         graph.parse(file_name, format='turtle')
+        graph = SKOSGraph.poor_man_reasoning(graph)
         logging.info('SKOS file parsed')
 
         # Read the selected tests from a config file and only run those
