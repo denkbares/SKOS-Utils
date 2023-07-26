@@ -1,12 +1,12 @@
 import os
 import sys
-from SKOSTools import Utils
-from SKOSTools.TSAConverter.SKOSUtils.SKOSGraph import SKOSGraph
-from SKOSTools.TSAConverter.TSAConverter import TSAConverter
+from SKOSTools import UtilDir
+from SKOSTools.UtilDir.SKOSGraph import SKOSGraph
+from SKOSTools.Converter.SKOSConverter import SKOSConverter
 from SKOSTools.examples_tobe_removed.SKOS2SAPXLS import SKOS2SAPXLS
 from SKOSTools.examples_tobe_removed.SegmentIDAdder import SegmentIDAdder
 
-Utils.activate_venv()
+UtilDir.activate_venv()
 sys.path.append(os.path.join(os.path.abspath(".."), "SKOSUtils"))
 
 workspace = '/Users/joba/denkCloud/Staff/Projekte/CLAAS/2019 TSA/Funktionen/Funktionen2023/_temp/'
@@ -21,7 +21,7 @@ xls_filename = workspace + out_name_prefix + '.xlsx'
 ns = {'cfus': 'http://www.claas.com/cfus#'}
 lns = 'http://www.claas.com/cfus#'
 
-con = TSAConverter(namespaces=ns, local_namespace=lns, scheme_name="Functions", preferred_language='de')
+con = SKOSConverter(namespaces=ns, local_namespace=lns, scheme_name="Functions", preferred_language='de')
 
 # We first convert the original XMind file to RDF
 con.xmind_to_rdf(xmind_in_filename, rdf_filename)

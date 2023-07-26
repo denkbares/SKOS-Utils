@@ -1,8 +1,8 @@
 import pandas as pd
 
-from SKOSTools.TSAConverter.SKOSUtils.Generic2SKOS import Generic2SKOS
-from SKOSTools.TSAConverter.SKOSUtils.SKOSConcept import SKOSConcept
-from SKOSTools.TSAConverter.SKOSUtils.SKOSScheme import SKOSScheme
+from SKOSTools.Converter.Generic2SKOS import Generic2SKOS
+from SKOSTools.Converter.SKOSConcept import SKOSConcept
+from SKOSTools.Converter.SKOSScheme import SKOSScheme
 
 
 class XLS2SKOS(Generic2SKOS):

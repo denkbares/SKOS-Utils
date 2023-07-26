@@ -2,8 +2,8 @@ from unittest import TestCase
 import os
 import sys
 
-# sys.path.append(os.path.join(os.path.abspath("../SKOSTools/TSAConverter"), "SKOSUtils"))
-# sys.path.append(os.path.abspath("../SKOSTools/TSAConverter/SKOSUtils"))
+# sys.path.append(os.path.join(os.path.abspath("../SKOSTools/Converter"), "SKOSUtils"))
+# sys.path.append(os.path.abspath("../SKOSTools/Converter/SKOSUtils"))
 sys.path.append(os.path.join(os.path.abspath(".."), "SKOSUtils"))
 
 
@@ -15,7 +15,7 @@ import xmind
 import re
 from pathlib import Path
 
-from SKOSTools.TSAConverter.TSAConverter import TSAConverter
+from SKOSTools.Converter.SKOSConverter import SKOSConverter
 
 
 # Returns true, if both xls-files have the save entries
@@ -131,7 +131,7 @@ class TestConverter(TestCase):
         namespaces = {'http://www.claas.com/casis#': 'cl'}
         scheme_name = 'Functions'
         preferred_language = 'de'
-        self.test_converter = TSAConverter(namespaces, local_namespace, scheme_name, preferred_language)
+        self.test_converter = SKOSConverter(namespaces, local_namespace, scheme_name, preferred_language)
 
         out_dir = 'Testdata/'
 

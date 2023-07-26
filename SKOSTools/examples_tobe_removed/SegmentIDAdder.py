@@ -1,6 +1,6 @@
 from rdflib import SKOS, Literal
 
-from SKOSTools.TSAConverter.SKOSUtils.SKOSGraph import SKOSGraph
+from SKOSTools.UtilDir.SKOSGraph import SKOSGraph
 
 
 class SegmentIDAdder:

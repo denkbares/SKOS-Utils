@@ -1,10 +1,9 @@
-import xmind
 from xmindparser import xmind_to_dict
 import re
 
-from SKOSTools.TSAConverter.SKOSUtils.Generic2SKOS import Generic2SKOS
-from SKOSTools.TSAConverter.SKOSUtils.SKOSConcept import SKOSConcept
-from SKOSTools.TSAConverter.SKOSUtils.SKOSScheme import SKOSScheme
+from SKOSTools.Converter.Generic2SKOS import Generic2SKOS
+from SKOSTools.Converter.SKOSConcept import SKOSConcept
+from SKOSTools.Converter.SKOSScheme import SKOSScheme
 
 
 class XMind2SKOS(Generic2SKOS):

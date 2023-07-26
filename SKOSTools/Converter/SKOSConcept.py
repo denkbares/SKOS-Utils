@@ -1,7 +1,7 @@
 import re
 from rdflib import URIRef
 
-from SKOSTools.TSAConverter.SKOSUtils.IDGenerator import IDGenerator
+from SKOSTools.Converter.IDGenerator import IDGenerator
 from SKOSTools.examples_tobe_removed.ProcessUtils import ProcessUtils
 
 

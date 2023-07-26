@@ -1,7 +1,7 @@
 import xmind
 import os.path
 
-from SKOSTools.TSAConverter.SKOSUtils.XMindWriter import XMindWriter
+from SKOSTools.Converter.XMindWriter import XMindWriter
 
 
 class SKOS2XMind:

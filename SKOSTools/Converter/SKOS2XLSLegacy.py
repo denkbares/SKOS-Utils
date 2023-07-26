@@ -1,4 +1,4 @@
-from SKOSTools.TSAConverter.SKOSUtils.SKOS2XLS import SKOS2XLS
+from SKOSTools.Converter.SKOS2XLS import SKOS2XLS
 
 
 class SKOS2XLSLegacy (SKOS2XLS):

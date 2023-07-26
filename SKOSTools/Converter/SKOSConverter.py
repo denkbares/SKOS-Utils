@@ -1,14 +1,14 @@
 import os
-import sys
 
-from SKOSTools import Utils
-from SKOSTools.TSAConverter.SKOSUtils.SKOS2ASCII import SKOS2ASCII
+from SKOSTools import UtilDir, Utils
+from SKOSTools.Converter.SKOS2ASCII import SKOS2ASCII
+from SKOSTools.Converter.SKOS2GRAPHVIZ import SKOS2GRAPHVIZ
 
-from SKOSTools.TSAConverter.SKOSUtils.SKOS2XLS import SKOS2XLS
-from SKOSTools.TSAConverter.SKOSUtils.SKOS2XMind import SKOS2XMind
-from SKOSTools.TSAConverter.SKOSUtils.SKOSGraph import SKOSGraph
-from SKOSTools.TSAConverter.SKOSUtils.XLS2SKOS import XLS2SKOS
-from SKOSTools.TSAConverter.SKOSUtils.XMind2SKOS import XMind2SKOS
+from SKOSTools.Converter.SKOS2XLS import SKOS2XLS
+from SKOSTools.Converter.SKOS2XMind import SKOS2XMind
+from SKOSTools.UtilDir.SKOSGraph import SKOSGraph
+from SKOSTools.Converter.XLS2SKOS import XLS2SKOS
+from SKOSTools.Converter.XMind2SKOS import XMind2SKOS
 
 Utils.activate_venv()
 from rdflib import Namespace
@@ -29,7 +29,7 @@ def create_converter():
     scheme_name = config_data["schemeName"]
     preferred_language = config_data["preferredLanguage"]
 
-    result_converter = TSAConverter(namespaces, local_namespace, scheme_name, preferred_language)
+    result_converter = SKOSConverter(namespaces, local_namespace, scheme_name, preferred_language)
 
     if "outputDirectory" in config_data:
         result_converter.output_directory = config_data["outputDirectory"]
@@ -39,7 +39,7 @@ def create_converter():
     if "fileNamePrefix" in config_data:
         result_converter.file_name_prefix = config_data["fileNamePrefix"]
     else:
-        result_converter.file_name_prefix = "SKOSUtils/tempFile"
+        result_converter.file_name_prefix = "tempFile"
     if "xMindRootTitle" in config_data:
         result_converter.xmind_root_node_title = config_data["xMindRootTitle"]
     else:
@@ -48,7 +48,7 @@ def create_converter():
     return result_converter
 
 
-class TSAConverter:
+class SKOSConverter:
     def __init__(self, namespaces, local_namespace, scheme_name, preferred_language,
                  output_directory=None, file_name_prefix=None, xmind_root_node_title=None):
         self.namespaces = namespaces
@@ -78,7 +78,7 @@ class TSAConverter:
 
     def rdf_to_xmind(self, rdf_file, xmind_file):
         # Load function_ttl_file and generate a XMind File from it
-        graph = SKOSGraph(rdf_file, self.namespaces)
+        graph = SKOSGraph(rdf_file, self.namespaces, poor_man_reasoning=True)
         SKOS2XMind.write(graph, xmind_file, self.preferred_language)
 
     def rdf_to_excel(self, xls_file, rdf_file):
@@ -101,6 +101,26 @@ class TSAConverter:
         graph = SKOSGraph(rdf_file, self.namespaces)
         app = SKOS2ASCII()
         app.write(graph, pref_lang='de', filename=ascii_file)
+
+    def rdf_to_graphviz(self, rdf_file, dot_file):
+        graph = self.read_graph(rdf_file, self.namespaces)
+        prolog = "  rankdir=LRnode\n  shape=plaintext\n"
+        # This is an example of how to pass a tailored function of what label to print
+        app = SKOS2GRAPHVIZ(graph, preferred_language='de', prolog_definitions=prolog, label_function=self.hidden_label)
+        app.write(graph, filename=dot_file)
+
+    @staticmethod
+    def hidden_label(concept, graph, preferred_language):
+        lab = graph.hidden_label(concept, preferred_language)
+        if lab:
+            return lab
+        else:
+            return graph.pref_label(concept, preferred_language)
+
+
+    @staticmethod
+    def read_graph(rdf_file, namespaces):
+        return SKOSGraph(rdf_file, namespaces=namespaces, poor_man_reasoning=True)
 
 
 @converterApp.command()
@@ -178,6 +198,18 @@ def rdf_to_excel(input=None, output=None):
 
     print("Converting " + input + " to " + output + ".")
     converter.rdf_to_excel(rdf_file=input, xls_file=output)
+
+
+@converterApp.command()
+def rdf_to_graphviz(input=None, output=None):
+    converter = create_converter()
+    if input is None:
+        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+    if output is None:
+        output = os.path.join(converter.output_directory, converter.file_name_prefix + ".dot")
+    print("Converting " + input + " to " + output + ".")
+    converter.rdf_to_graphviz(rdf_file=input, dot_file=output)
+
 
 @converterApp.command()
 def rdf_to_ascii(input=None, output=None):

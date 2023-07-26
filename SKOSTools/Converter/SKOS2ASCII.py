@@ -1,4 +1,4 @@
-from SKOSTools.TSAConverter.SKOSUtils.TextExporter import TextWriter
+from SKOSTools.Converter.TextExporter import TextWriter
 
 
 class SKOS2ASCII:
