@@ -101,7 +101,7 @@ class SKOSQualityChecker:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="This script checks the structure of the graph in a given RDF-file.")
+    parser = argparse.ArgumentParser(description="This script checks the structure of a given SKOS vocabulary.")
 
     with open('configs/SKOSQualityChecker_config.yaml') as f:
         config_data = yaml.load(f, Loader=SafeLoader)
