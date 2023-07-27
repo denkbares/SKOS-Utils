@@ -1,0 +1,8 @@
+input: tests/Testdata/Bike_Testdata.ttl
+output: tests/Testdata/temp/example_cyclic_check_results.xls
+add_datetime_to_output_file: True
+write_results_to_excel: True
+logging: True
+log_file: tests/Testdata/temp/SKOSQualityChecker.log
+tests:
+   - CyclicHierarchicalRelationChecker

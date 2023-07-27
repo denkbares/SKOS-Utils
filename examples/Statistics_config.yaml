@@ -1,0 +1,3 @@
+output: tests/Testdata/temp/statistics.xlsx
+graphs:
+   - Bike: tests/Testdata/Bike_Testdata.ttl

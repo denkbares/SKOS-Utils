@@ -1,0 +1,26 @@
+input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
+#input: tests/Testdata/Bike_Testdata.ttl
+output: tests/Testdata/temp/example_Bike_Testdata_check_results.xls
+add_datetime_to_output_file: True
+write_results_to_excel: True
+logging: True
+log_file: tests/Testdata/temp/SKOSQualityChecker.log
+tests:
+   - SinglePrefLabelChecker
+   - SchemeCoherenceChecker
+   - SchemeIntegrityChecker
+   - SchemeIntegrityCheckerSPARQL
+   - TopConceptIdentifier
+   - IncompleteLanguageCoverageChecker
+   - IncompleteLanguageCoverageCheckerSPARQL
+   - LabelConflictChecker
+   - OrphanConceptChecker
+   - OrphanConceptCheckerSPARQL
+   - OmittedTopConceptsChecker
+   - SolelyTransitivelyRelatedConceptsChecker
+   - SolelyTransitivelyRelatedConceptsCheckerSPARQL
+   - TopConceptHavingBroaderConceptsChecker
+   - TopConceptHavingBroaderConceptsCheckerSPARQL
+   - CyclicHierarchicalRelationChecker
+   - ValuelessAssociativeRelationsChecker
+   - InvalidLanguageTagChecker

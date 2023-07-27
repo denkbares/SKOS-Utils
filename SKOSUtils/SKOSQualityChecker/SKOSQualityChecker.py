@@ -14,7 +14,7 @@ import time
 from SKOSUtils.UtilDir.SKOSGraph import SKOSGraph
 
 Utils.activate_venv()
-sys.path.append(os.path.abspath("../../../SKOSTools/SKOSTools"))
+sys.path.append(os.path.abspath("../../../SKOSUtils"))
 
 
 class SKOSQualityChecker:
@@ -24,7 +24,9 @@ class SKOSQualityChecker:
 
     def run_test(self, test_name, graph):
         # import the module containing the test class
-        test_module = importlib.import_module("CheckerModules." + test_name)
+        checker_module = 'SKOSUtils.SKOSQualityChecker.CheckerModules.'
+        test_module = importlib.import_module(checker_module + test_name)
+
 
         test_class = getattr(test_module, test_name)
         test = test_class()
@@ -47,7 +49,7 @@ class SKOSQualityChecker:
         logging.info('SKOS file parsed')
 
         # Read the selected tests from a config file and only run those
-        selected_tests = config_data["tests"]
+        selected_tests = self.config["tests"]
         # print(str(len(selected_tests)) + " checks selected:")
         logging.info(str(len(selected_tests)) + " checks selected.")
 
@@ -75,16 +77,16 @@ class SKOSQualityChecker:
 
         # Set date and time string to concat to output file name
         now = ""
-        if config_data["add_datetime_to_output_file"]:
+        if self.config["add_datetime_to_output_file"]:
             now = datetime.now().strftime('%Y-%m-%d_%H-%M')
 
-        if "output" in config_data:
-            output_file = config_data["output"] + now + ".xlsx"
+        if "output" in self.config:
+            output_file = self.config["output"] + now + ".xlsx"
         else:
             output_file = f'test_results_{now}.xlsx'
 
         # export dataframe to excel
-        if config_data["write_results_to_excel"]:
+        if self.config["write_results_to_excel"]:
             # final.to_excel(output_file)
             with pd.ExcelWriter(output_file) as writer:
                 final.to_excel(writer, sheet_name='Checker_Results')
@@ -106,7 +108,7 @@ class SKOSQualityChecker:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="This script checks the structure of a given SKOS vocabulary.")
 
-    with open('configs/SKOSQualityChecker_config.yaml') as f:
+    with open('configs/Cyclic_checker_config.yaml') as f:
         config_data = yaml.load(f, Loader=SafeLoader)
 
     # Get input file name from config file if existing

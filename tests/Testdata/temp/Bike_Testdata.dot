@@ -1,0 +1,64 @@
+digraph generated_graph {
+  rankdir=LRnode
+  shape=plaintext
+
+// http://www.example.org/bike#Bremshebel7
+node_1 [label="Bremshebel"]
+
+// http://www.example.org/bike#Bremsscheibe8
+node_2 [label="Bremsscheibe"]
+
+// http://www.example.org/bike#Klingelgehaeuse5
+node_3 [label="Klingelgehäuse"]
+
+// http://www.example.org/bike#Lenkstange3
+node_4 [label="Lenkstange"]
+
+// http://www.example.org/bike#Sattelfeder11
+node_5 [label="Sattelfeder"]
+
+// http://www.example.org/bike#Sattelschraube12
+node_6 [label="Sattelschraube"]
+
+// http://www.example.org/bike#Sattelstange13
+node_7 [label="Sattelstange"]
+
+// http://www.example.org/bike#Klingel4
+node_8 [label="Klingel"]
+
+// http://www.example.org/bike#Bike1
+node_9 [label="Bike"]
+
+// http://www.example.org/bike#Bremse6
+node_10 [label="Bremse"]
+
+// http://www.example.org/bike#Lenker2
+node_11 [label="Lenker"]
+
+// http://www.example.org/bike#Sattel10
+node_12 [label="Sattel"]
+
+// http://www.example.org/bike#Sitz9
+node_13 [label="Sitz"]
+
+// http://www.example.org/bike#Functions
+node_14 [label="Functions"]
+
+// http://www.example.org/bike#Bike1
+node_15 [label="Bike"]
+
+node_14 -> node_15 [label="top concept"]
+node_8 -> node_3 [label="narrower"]
+node_15 -> node_10 [label="narrower"]
+node_15 -> node_11 [label="narrower"]
+node_15 -> node_13 [label="narrower"]
+node_10 -> node_1 [label="narrower"]
+node_10 -> node_2 [label="narrower"]
+node_11 -> node_8 [label="narrower"]
+node_11 -> node_4 [label="narrower"]
+node_12 -> node_5 [label="narrower"]
+node_12 -> node_6 [label="narrower"]
+node_13 -> node_12 [label="narrower"]
+node_13 -> node_7 [label="narrower"]
+
+}
