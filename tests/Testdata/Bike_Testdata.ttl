@@ -1,124 +1,125 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ex: <http://www.example.org/bike#> .
 
-<http://www.denkbares.com/casis#Bremshebel7> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Bremse6> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Bremshebel7 a skos:Concept ;
+    skos:broader ex:Bremse6 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 10" ;
     skos:prefLabel "Bremshebel",
         "Bremshebel"@de .
 
-<http://www.denkbares.com/casis#Bremsscheibe8> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Bremse6> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Bremsscheibe8 a skos:Concept ;
+    skos:broader ex:Bremse6 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Bremsscheibe",
         "Bremsscheibe"@de .
 
-<http://www.denkbares.com/casis#Klingelgehaeuse5> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Klingel4> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Klingelgehaeuse5 a skos:Concept ;
+    skos:broader ex:Klingel4 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 10" ;
     skos:prefLabel "Klingelgehäuse",
         "Klingelgehäuse"@de .
 
-<http://www.denkbares.com/casis#Lenkstange3> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Lenker2> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Lenkstange3 a skos:Concept ;
+    skos:broader ex:Lenker2 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 10" ;
     skos:prefLabel "Lenkstange",
         "Lenkstange"@de .
 
-<http://www.denkbares.com/casis#Sattelfeder11> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Sattel10> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Sattelfeder11 a skos:Concept ;
+    skos:broader ex:Sattel10 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 10" ;
     skos:prefLabel "Sattelfeder",
         "Sattelfeder"@de .
 
-<http://www.denkbares.com/casis#Sattelschraube12> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Sattel10> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Sattelschraube12 a skos:Concept ;
+    skos:broader ex:Sattel10 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 20" ;
     skos:prefLabel "Sattelschraube",
         "Sattelschraube"@de .
 
-<http://www.denkbares.com/casis#Sattelstange13> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Sitz9> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
+ex:Sattelstange13 a skos:Concept ;
+    skos:broader ex:Sitz9 ;
+    skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Sattelstange",
         "Sattelstange"@de .
 
-<http://www.denkbares.com/casis#Klingel4> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Lenker2> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Klingelgehaeuse5> ;
+ex:Klingel4 a skos:Concept ;
+    skos:broader ex:Lenker2 ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Klingelgehaeuse5 ;
     skos:note "@level: 3",
         "@order: 20" ;
     skos:prefLabel "Klingel",
         "Klingel"@de .
 
-<http://www.denkbares.com/casis#Bike1> a skos:Concept ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Bremse6>,
-        <http://www.denkbares.com/casis#Lenker2>,
-        <http://www.denkbares.com/casis#Sitz9> ;
+ex:Bike1 a skos:Concept ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Bremse6,
+        ex:Lenker2,
+        ex:Sitz9 ;
     skos:note "@level: 1",
         "@order: 0",
         "Test0" ;
     skos:prefLabel "Bike",
         "Bike"@de ;
-    skos:topConceptOf <http://www.denkbares.com/casis#Functions> .
+    skos:topConceptOf ex:Functions .
 
-<http://www.denkbares.com/casis#Bremse6> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Bike1> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Bremshebel7>,
-        <http://www.denkbares.com/casis#Bremsscheibe8> ;
+ex:Bremse6 a skos:Concept ;
+    skos:broader ex:Bike1 ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Bremshebel7,
+        ex:Bremsscheibe8 ;
     skos:note "@level: 2",
         "@order: 20" ;
     skos:prefLabel "Bremse",
         "Bremse"@de .
 
-<http://www.denkbares.com/casis#Lenker2> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Bike1> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Klingel4>,
-        <http://www.denkbares.com/casis#Lenkstange3> ;
+ex:Lenker2 a skos:Concept ;
+    skos:broader ex:Bike1 ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Klingel4,
+        ex:Lenkstange3 ;
     skos:note "@level: 2",
         "@order: 10",
         "Test1" ;
     skos:prefLabel "Lenker",
         "Lenker"@de .
 
-<http://www.denkbares.com/casis#Sattel10> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Sitz9> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Sattelfeder11>,
-        <http://www.denkbares.com/casis#Sattelschraube12> ;
+ex:Sattel10 a skos:Concept ;
+    skos:broader ex:Sitz9 ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Sattelfeder11,
+        ex:Sattelschraube12 ;
     skos:note "@level: 3",
         "@order: 10" ;
     skos:prefLabel "Sattel",
         "Sattel"@de .
 
-<http://www.denkbares.com/casis#Sitz9> a skos:Concept ;
-    skos:broader <http://www.denkbares.com/casis#Bike1> ;
-    skos:inScheme <http://www.denkbares.com/casis#Functions> ;
-    skos:narrower <http://www.denkbares.com/casis#Sattel10>,
-        <http://www.denkbares.com/casis#Sattelstange13> ;
+ex:Sitz9 a skos:Concept ;
+    skos:broader ex:Bike1 ;
+    skos:inScheme ex:Functions ;
+    skos:narrower ex:Sattel10,
+        ex:Sattelstange13 ;
     skos:note "@level: 2",
         "@order: 30" ;
     skos:prefLabel "Sitz",
         "Sitz"@de .
 
-<http://www.denkbares.com/casis#Functions> a skos:ConceptScheme ;
+ex:Functions a skos:ConceptScheme ;
     skos:prefLabel "Functions",
         "Functions"@de .
 

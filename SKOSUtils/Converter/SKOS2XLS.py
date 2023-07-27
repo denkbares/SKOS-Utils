@@ -2,7 +2,7 @@ import pandas as pd
 from pandas import DataFrame
 from rdflib import SKOS, Literal, Namespace
 
-from SKOSUtils.examples_tobe_removed.ProcessUtils import ProcessUtils
+from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class SKOS2XLS:

@@ -2,7 +2,7 @@ import re
 from rdflib import URIRef
 
 from SKOSUtils.Converter.IDGenerator import IDGenerator
-from SKOSUtils.examples_tobe_removed.ProcessUtils import ProcessUtils
+from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class SKOSConcept:

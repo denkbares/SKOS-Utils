@@ -3,7 +3,7 @@ import uuid
 from rdflib import URIRef, RDF, Literal, Graph, RDFS
 from rdflib.namespace import SKOS, Namespace
 
-from SKOSUtils.examples_tobe_removed.ProcessUtils import ProcessUtils
+from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class Generic2SKOS:

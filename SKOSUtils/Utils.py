@@ -8,10 +8,11 @@ def get_project_root() -> Path:
 
 
 def activate_venv():
-    venv_path = os.environ['VIRTUAL_ENV']
-    if sys.platform.startswith("win"):
-        activate_this = os.path.join(venv_path, "Scripts", "activate_this.py")
-    else:
-        activate_this = os.path.join(venv_path, "bin", "activate_this.py")
+    if 'VIRTUAL_ENV' in os.environ:
+        venv_path = os.environ['VIRTUAL_ENV']
+        if sys.platform.startswith("win"):
+            activate_this = os.path.join(venv_path, "Scripts", "activate_this.py")
+        else:
+            activate_this = os.path.join(venv_path, "bin", "activate_this.py")
 
-    exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+        exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
