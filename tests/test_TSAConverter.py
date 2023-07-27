@@ -2,8 +2,8 @@ from unittest import TestCase
 import os
 import sys
 
-# sys.path.append(os.path.join(os.path.abspath("../SKOSTools/Converter"), "SKOSUtils"))
-# sys.path.append(os.path.abspath("../SKOSTools/Converter/SKOSUtils"))
+# sys.path.append(os.path.join(os.path.abspath("../SKOSUtils/Converter"), "SKOSUtils"))
+# sys.path.append(os.path.abspath("../SKOSUtils/Converter/SKOSUtils"))
 sys.path.append(os.path.join(os.path.abspath(".."), "SKOSUtils"))
 
 
@@ -15,7 +15,7 @@ import xmind
 import re
 from pathlib import Path
 
-from SKOSTools.Converter.SKOSConverter import SKOSConverter
+from SKOSUtils.Converter.SKOSConverter import SKOSConverter
 
 
 # Returns true, if both xls-files have the save entries
