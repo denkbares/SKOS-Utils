@@ -10,7 +10,7 @@ with open(requirements_path, "r") as f:
 
 # Setup configuration
 setup(
-    name="SKOSTools",
+    name="SKOS-Utils",
     version="0.1",
     install_requires=requirements,
 )
