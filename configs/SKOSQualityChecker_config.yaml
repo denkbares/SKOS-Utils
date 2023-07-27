@@ -1,21 +1,15 @@
-input: /Users/joba/Downloads/datasets/unescothes.ttl
-#input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
-#input: /Users/joba/Downloads/eurovoc-skos-ap-eu.ttl
-#input: /Users/joba/Downloads/datasets/agrovoc_2023-06-06_core.ttl
-#input: /Users/joba/Downloads/datasets/eurovoc-skos-ap-eu.ttl
-#output: /Users/joba/Downloads/test_results
-output: data/test_results_unescothes.xls
+input: tests/Testdata/Bike_Quality_Checker_Debug_File.ttl
+output: test/Testdata/Bike_Quality_Checker_Debug_File.xls
 add_datetime_to_output_file: True
 write_results_to_excel: True
 logging: True
-log_file: /Users/joba/Downloads/SKOSQualityChecker.log
+log_file: test/Testdata/SKOSQualityChecker.log
 tests:
    - SinglePrefLabelChecker
    - SchemeCoherenceChecker
    - SchemeIntegrityChecker
    - SchemeIntegrityCheckerSPARQL
    - TopConceptIdentifier
-   - TopConceptIdentifierSPARQL
    - IncompleteLanguageCoverageChecker
    - IncompleteLanguageCoverageCheckerSPARQL
    - LabelConflictChecker
