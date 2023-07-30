@@ -37,11 +37,12 @@ class LabelConflictChecker(StructureTestInterfaceNavigate):
 
         return bad_concepts_list
 
-    @staticmethod
-    def conflict_labels(labels, concept_labels, concept):
+    def conflict_labels(self, labels, concept_labels, concept):
         for label in concept_labels:
             if label.value in labels:
                 for other_concept in labels[label.value]:
                     if other_concept != concept:
+                        self.send_log(str(concept) + ' has same prefLabel of another concept ' +
+                                      str(other_concept + '.'))
                         return True
         return False

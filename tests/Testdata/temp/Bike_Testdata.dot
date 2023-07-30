@@ -1,64 +1,104 @@
 digraph generated_graph {
-  rankdir=LRnode
+ rankdir=LR
   shape=plaintext
+ node [fontname="Helvetica"]
 
 // http://www.example.org/bike#Bremshebel7
-node_1 [label="Bremshebel"]
+node_1 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake lever (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Bremsscheibe8
-node_2 [label="Bremsscheibe"]
+node_2 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake disc (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Klingelgehaeuse5
-node_3 [label="Klingelgehäuse"]
+node_3 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bell housing (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Lenkstange3
-node_4 [label="Lenkstange"]
+node_4 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Handle (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Sattelfeder11
-node_5 [label="Sattelfeder"]
+node_5 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle spring (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Sattelschraube12
-node_6 [label="Sattelschraube"]
+node_6 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle bolt (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Sattelstange13
-node_7 [label="Sattelstange"]
+node_7 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Seat post (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Klingel4
-node_8 [label="Klingel"]
+node_8 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bell (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Bike1
-node_9 [label="Bike"]
+node_9 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bike (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Bremse6
-node_10 [label="Bremse"]
+node_10 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Lenker2
-node_11 [label="Lenker"]
+node_11 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Handlebar (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Sattel10
-node_12 [label="Sattel"]
+node_12 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Sitz9
-node_13 [label="Sitz"]
+node_13 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Seat (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
+</TABLE>>];
 
 // http://www.example.org/bike#Functions
-node_14 [label="Functions"]
+node_14 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
+   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Functions (en)</TD></TR>
+   <TR><TD  ALIGN="LEFT">skos:ConceptScheme</TD></TR>
+</TABLE>>];
 
-// http://www.example.org/bike#Bike1
-node_15 [label="Bike"]
-
-node_14 -> node_15 [label="top concept"]
-node_8 -> node_3 [label="narrower"]
-node_15 -> node_10 [label="narrower"]
-node_15 -> node_11 [label="narrower"]
-node_15 -> node_13 [label="narrower"]
-node_10 -> node_1 [label="narrower"]
-node_10 -> node_2 [label="narrower"]
-node_11 -> node_8 [label="narrower"]
-node_11 -> node_4 [label="narrower"]
-node_12 -> node_5 [label="narrower"]
-node_12 -> node_6 [label="narrower"]
-node_13 -> node_12 [label="narrower"]
-node_13 -> node_7 [label="narrower"]
+node_14 -> node_9 [label="skos:hasTopConcept"]
+node_8 -> node_3 [label="skos:narrower"]
+node_9 -> node_10 [label="skos:narrower"]
+node_9 -> node_11 [label="skos:narrower"]
+node_9 -> node_13 [label="skos:narrower"]
+node_10 -> node_1 [label="skos:narrower"]
+node_10 -> node_2 [label="skos:narrower"]
+node_11 -> node_8 [label="skos:narrower"]
+node_11 -> node_4 [label="skos:narrower"]
+node_12 -> node_5 [label="skos:narrower"]
+node_12 -> node_6 [label="skos:narrower"]
+node_13 -> node_12 [label="skos:narrower"]
+node_13 -> node_7 [label="skos:narrower"]
 
 }

@@ -3,7 +3,8 @@ from SKOSUtils.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 class LabelConflictCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
-    Check whether there are multiple concepts with the same prefLabels in the same concept scheme.
+    Checks whether there are multiple concepts with the same prefLabels in the same concept scheme
+    (currently only supports skos:preLabel).
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.

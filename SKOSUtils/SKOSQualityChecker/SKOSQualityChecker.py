@@ -26,8 +26,6 @@ class SKOSQualityChecker:
         # import the module containing the test class
         checker_module = 'SKOSUtils.SKOSQualityChecker.CheckerModules.'
         test_module = importlib.import_module(checker_module + test_name)
-
-
         test_class = getattr(test_module, test_name)
         test = test_class()
         return test.execute(graph, self.config['logging'])
@@ -50,7 +48,6 @@ class SKOSQualityChecker:
 
         # Read the selected tests from a config file and only run those
         selected_tests = self.config["tests"]
-        # print(str(len(selected_tests)) + " checks selected:")
         logging.info(str(len(selected_tests)) + " checks selected.")
 
         result_df_list = []
@@ -72,7 +69,6 @@ class SKOSQualityChecker:
         final = pd.concat(result_df_list, ignore_index=True)
         benchmark_df = pd.DataFrame(columns=['CheckName', 'Time', 'Findings'], data=benchmark_list)
 
-        # print(final)
         print(benchmark_df)
 
         # Set date and time string to concat to output file name

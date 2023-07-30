@@ -1,6 +1,7 @@
 import uuid
 
 from rdflib import namespace, Graph, SKOS, RDF, URIRef, RDFS
+from rdflib.namespace import NamespaceManager
 
 
 class SKOSGraph:
@@ -13,8 +14,21 @@ class SKOSGraph:
     NOTE = URIRef(namespace.SKOS + 'note')
 
     def __init__(self, rdf_filename, namespaces={}, poor_man_reasoning=False):
+        # standard namespaces
+        standard_ns = { 'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+                        'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
+                        'skos': 'http://www.w3.org/2004/02/skos/core#',
+                        'xsd': 'http://www.w3.org/2001/XMLSchema#',
+                        'ex':'http://www.example.org/bike'}
         self.g = Graph()
         self.namespaces = namespaces
+        for k in standard_ns:
+            self.namespaces[k] = standard_ns[k]
+
+        self.namespace_manager = NamespaceManager(self.g)
+        self.g.namespace_manager = self.namespace_manager
+        for ns in self.namespaces:
+            self.g.namespace_manager.bind(ns, self.namespaces[ns])
         self.g.parse(rdf_filename, format='turtle')
         if poor_man_reasoning:
             self.g = self.poor_man_reasoning(self.g)
@@ -31,11 +45,13 @@ class SKOSGraph:
 
     def pref_label(self, uri, lang):
         literals = list(self.g.objects(uri, SKOS.prefLabel))
+        if lang is None:
+            return literals
         for lit in literals:
             if lit.language == lang:
                 return lit
         if literals and len(literals) > 0:
-                return str(literals[0])
+            return str(literals[0])
         return ""
 
     def hidden_label(self, uri, lang):
@@ -53,6 +69,18 @@ class SKOSGraph:
             if lit.language == lang:
                 return lit
         return literals
+
+    def uri_type(self, concept):
+        type_list = list(self.g.objects(concept, RDF.type))
+        if type_list and len(type_list) > 0:
+            return type_list[0]
+        return None
+
+    def qstr(self, uri):
+        """
+        Returns the qualified string of the given uri
+        """
+        return self.g.namespace_manager.qname(uri)
 
     def concept_schemes(self):
         return self.g.subjects(RDF.type, self.CONCEPT_SCHEME)
@@ -110,10 +138,18 @@ class SKOSGraph:
 
     @staticmethod
     def poor_man_reasoning(g):
+        """
+        This method adds very simple and direct derivations of
+        skos:Concept, skos:broader, skos:narrower, skos:topConceptOf, etc.
+        to the specified graph, e.g., a direct subClassOf/subPropertyOf.
+        """
         # add simple subclass properties
         for kid_class, p, o in g.triples((None, RDFS.subClassOf, SKOS.Concept)):
             for concept, p2, o2 in g.triples((None, RDF.type, kid_class)):
                 g.add((concept, RDF.type, SKOS.Concept))
+        for kid_class, p, o in g.triples((None, RDFS.subClassOf, SKOS.ConceptScheme)):
+            for concept, p2, o2 in g.triples((None, RDF.type, kid_class)):
+                g.add((concept, RDF.type, SKOS.ConceptScheme))
         # add simple subproperty properties
         for kid_prop, p, o in g.triples((None, RDFS.subPropertyOf, SKOS.broader)):
             for c1, p2, c2 in g.triples((None, kid_prop, None)):

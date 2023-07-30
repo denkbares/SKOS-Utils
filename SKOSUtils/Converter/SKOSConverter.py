@@ -11,7 +11,7 @@ from SKOSUtils.Converter.XLS2SKOS import XLS2SKOS
 from SKOSUtils.Converter.XMind2SKOS import XMind2SKOS
 
 Utils.activate_venv()
-from rdflib import Namespace
+from rdflib import Namespace, SKOS
 import typer
 import yaml
 from yaml.loader import SafeLoader
@@ -60,8 +60,6 @@ class SKOSConverter:
         self.xmind_root_node_title = xmind_root_node_title
 
     def xmind_to_rdf(self, xmind_file, rdf_file, xmind_root_node_title=None, sheet_no=0):
-        #if xmind_root_node_title is None:
-        #    xmind_root_node_title = self.xmind_root_node_title
         xmindapp = XMind2SKOS(self.local_namespace, self.scheme_name, default_language=self.preferred_language,
                               bindings=self.namespaces)
         xmindapp.read_xmind(xmind_file=xmind_file, rdf_file=rdf_file,
@@ -83,7 +81,7 @@ class SKOSConverter:
 
     def rdf_to_excel(self, xls_file, rdf_file):
         graph = SKOSGraph(rdf_file, self.namespaces)
-        app = SKOS2XLS(prefered_language='de', graph=graph)
+        app = SKOS2XLS(prefered_language=self.preferred_language, graph=graph)
         app.write(xls_filename=xls_file)
 
     def excel_to_xmind(self, xls_file, xmind_file, rdf_file):
@@ -100,13 +98,23 @@ class SKOSConverter:
     def rdf_to_ascii(self, rdf_file, ascii_file):
         graph = SKOSGraph(rdf_file, self.namespaces)
         app = SKOS2ASCII()
-        app.write(graph, pref_lang='de', filename=ascii_file)
+        app.write(graph, pref_lang=self.preferred_language, filename=ascii_file)
 
-    def rdf_to_graphviz(self, rdf_file, dot_file):
+    def rdf_to_graphviz(self, rdf_file, dot_file, dot_prolog='',
+                        visited_relations=[SKOS.narrower, SKOS.broader],
+                        html_nodes=True,
+                        html_nodes_with_pref_labels=True,
+                        html_nodes_with_rdftype=True):
         graph = self.read_graph(rdf_file, self.namespaces)
-        prolog = "  rankdir=LRnode\n  shape=plaintext\n"
+        prolog = dot_prolog
         # This is an example of how to pass a tailored function of what label to print
-        app = SKOS2GRAPHVIZ(graph, preferred_language='de', prolog_definitions=prolog, label_function=self.hidden_label)
+        app = SKOS2GRAPHVIZ(graph, preferred_language=self.preferred_language,
+                            prolog_definitions=prolog,
+                            label_function=self.hidden_label,
+                            visited_relations=visited_relations,
+                            html_nodes=html_nodes,
+                            html_nodes_with_rdftype=html_nodes_with_rdftype,
+                            html_nodes_with_pref_labels=html_nodes_with_pref_labels)
         app.write(graph, filename=dot_file)
 
     @staticmethod
@@ -116,7 +124,6 @@ class SKOSConverter:
             return lab
         else:
             return graph.pref_label(concept, preferred_language)
-
 
     @staticmethod
     def read_graph(rdf_file, namespaces):

@@ -6,7 +6,7 @@ from SKOSUtils.SKOSQualityChecker.CheckerModules.StructureTestInterfaceNavigate 
 class SchemeCoherenceChecker(StructureTestInterfaceNavigate):
     """
     Lists all SKOS concepts, for which the narrower and broader concepts
-    are not in the same conceptScheme.
+    are not in the same concept scheme.
     Implements a part of the definition as described in:
     D. Allemang, J. A. Hendler, & F. Gandon, Semantic web for the working ontologist (2020). ACM Press.
     """

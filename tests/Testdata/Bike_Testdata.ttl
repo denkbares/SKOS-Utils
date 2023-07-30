@@ -6,56 +6,63 @@ ex:Bremshebel7 a skos:Concept ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 10" ;
-    skos:prefLabel "Bremshebel",
-        "Bremshebel"@de .
+    skos:prefLabel
+        "Bremshebel"@de,
+        "Brake lever"@en .
 
 ex:Bremsscheibe8 a skos:Concept ;
     skos:broader ex:Bremse6 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 20" ;
-    skos:prefLabel "Bremsscheibe",
-        "Bremsscheibe"@de .
+    skos:prefLabel
+        "Bremsscheibe"@de,
+        "Brake disc"@en .
 
 ex:Klingelgehaeuse5 a skos:Concept ;
     skos:broader ex:Klingel4 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 10" ;
-    skos:prefLabel "Klingelgehäuse",
-        "Klingelgehäuse"@de .
+    skos:prefLabel
+        "Klingelgehäuse"@de,
+        "Bell housing"@en .
 
 ex:Lenkstange3 a skos:Concept ;
     skos:broader ex:Lenker2 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 10" ;
-    skos:prefLabel "Lenkstange",
-        "Lenkstange"@de .
+    skos:prefLabel
+        "Lenkstange"@de,
+        "Handle"@en .
 
 ex:Sattelfeder11 a skos:Concept ;
     skos:broader ex:Sattel10 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 10" ;
-    skos:prefLabel "Sattelfeder",
-        "Sattelfeder"@de .
+    skos:prefLabel
+        "Sattelfeder"@de ,
+        "Saddle spring"@en .
 
 ex:Sattelschraube12 a skos:Concept ;
     skos:broader ex:Sattel10 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 4",
         "@order: 20" ;
-    skos:prefLabel "Sattelschraube",
-        "Sattelschraube"@de .
+    skos:prefLabel
+        "Sattelschraube"@de,
+        "Saddle bolt"@en .
 
 ex:Sattelstange13 a skos:Concept ;
     skos:broader ex:Sitz9 ;
     skos:inScheme ex:Functions ;
     skos:note "@level: 3",
         "@order: 20" ;
-    skos:prefLabel "Sattelstange",
-        "Sattelstange"@de .
+    skos:prefLabel
+        "Sattelstange"@de,
+        "Seat post"@en .
 
 ex:Klingel4 a skos:Concept ;
     skos:broader ex:Lenker2 ;
@@ -63,19 +70,19 @@ ex:Klingel4 a skos:Concept ;
     skos:narrower ex:Klingelgehaeuse5 ;
     skos:note "@level: 3",
         "@order: 20" ;
-    skos:prefLabel "Klingel",
-        "Klingel"@de .
+    skos:prefLabel
+        "Klingel"@de,
+        "Bell"@en .
 
 ex:Bike1 a skos:Concept ;
     skos:inScheme ex:Functions ;
     skos:narrower ex:Bremse6,
         ex:Lenker2,
         ex:Sitz9 ;
-    skos:note "@level: 1",
-        "@order: 0",
-        "Test0" ;
-    skos:prefLabel "Bike",
-        "Bike"@de ;
+    skos:note "This is a demo note"@en ;
+    skos:prefLabel
+        "Bike"@en,
+        "Fahrrad"@de ;
     skos:topConceptOf ex:Functions .
 
 ex:Bremse6 a skos:Concept ;
@@ -83,21 +90,18 @@ ex:Bremse6 a skos:Concept ;
     skos:inScheme ex:Functions ;
     skos:narrower ex:Bremshebel7,
         ex:Bremsscheibe8 ;
-    skos:note "@level: 2",
-        "@order: 20" ;
-    skos:prefLabel "Bremse",
-        "Bremse"@de .
+    skos:prefLabel
+        "Bremse"@de,
+        "Brake"@en .
 
 ex:Lenker2 a skos:Concept ;
     skos:broader ex:Bike1 ;
     skos:inScheme ex:Functions ;
     skos:narrower ex:Klingel4,
         ex:Lenkstange3 ;
-    skos:note "@level: 2",
-        "@order: 10",
-        "Test1" ;
-    skos:prefLabel "Lenker",
-        "Lenker"@de .
+    skos:prefLabel
+        "Lenker"@de,
+        "Handlebar"@en .
 
 ex:Sattel10 a skos:Concept ;
     skos:broader ex:Sitz9 ;
@@ -106,8 +110,9 @@ ex:Sattel10 a skos:Concept ;
         ex:Sattelschraube12 ;
     skos:note "@level: 3",
         "@order: 10" ;
-    skos:prefLabel "Sattel",
-        "Sattel"@de .
+    skos:prefLabel
+        "Sattel"@de,
+        "Saddle"@en .
 
 ex:Sitz9 a skos:Concept ;
     skos:broader ex:Bike1 ;
@@ -116,10 +121,12 @@ ex:Sitz9 a skos:Concept ;
         ex:Sattelstange13 ;
     skos:note "@level: 2",
         "@order: 30" ;
-    skos:prefLabel "Sitz",
-        "Sitz"@de .
+    skos:prefLabel
+        "Sitz"@de,
+        "Seat"@en .
 
 ex:Functions a skos:ConceptScheme ;
-    skos:prefLabel "Functions",
-        "Functions"@de .
+    skos:prefLabel
+        "Funktionen"@de,
+        "Functions"@en .
 

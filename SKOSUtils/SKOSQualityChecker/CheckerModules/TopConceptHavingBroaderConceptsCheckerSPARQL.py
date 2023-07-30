@@ -3,7 +3,7 @@ from SKOSUtils.SKOSQualityChecker.CheckerModules.StructureTestInterfaceSPARQL im
 
 class TopConceptHavingBroaderConceptsCheckerSPARQL(StructureTestInterfaceSPARQL):
     """
-    Check if Top Concepts have broader concepts.
+    Checks whether top concepts have broader concepts.
     Implements a part of the definition as described in:
     O. Suominen, C. Mader, Assessing and improving the quality of skos vocabularies,
     Journal on Data Semantics 3 (2014). doi:10.1007/s13740-013-0026-0.
