@@ -14,7 +14,7 @@ setup(
     version="0.1",
     install_requires=requirements,
     packages=find_packages(),
-    description='Tool suite for developing and checking SKOS vocabulaires.',
+    description='Tool suite for developing and checking SKOS vocabularies.',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

@@ -19,8 +19,8 @@ sys.path.append(os.path.abspath("../../../SKOSUtils"))
 
 class SKOSQualityChecker:
 
-    def __init__(self, config):
-        self.config = config
+    def __init__(self):
+        self.config = None
 
     def run_test(self, test_name, graph):
         # import the module containing the test class
@@ -30,7 +30,28 @@ class SKOSQualityChecker:
         test = test_class()
         return test.execute(graph, self.config['logging'])
 
-    def main(self, file_name):
+    def main(self):
+
+        if args.config:
+            config_path = args.config
+        else:
+            # TODO: Default config?
+            config_path = os.path.join('configs', 'SKOSQualityChecker_config.yaml')
+
+        with open(config_path) as f:
+            self.config = yaml.load(f, Loader=SafeLoader)
+
+        # Get input file name from argument or config file if existing
+        if args.graph:
+            input_file = args.graph
+            print("Input file \"" + input_file + "\" selected with \"-graph\" argument.")
+        elif "input" in self.config:
+            input_file = self.config["input"]
+            print("Input file \"" + input_file + "\" selected with config file \"" + config_path + "\" .")
+        else:
+            # TODO: Default input?
+            input_file = "tests/Testdata/Bike_Quality_Checker_Debug_File.ttl"
+
         if self.config['logging']:
             if 'log_file' in self.config:
                 log_file = self.config['log_file']
@@ -40,9 +61,9 @@ class SKOSQualityChecker:
                                 format='%(asctime)s - %(levelname)s - %(message)s',
                                 level=logging.INFO)
 
-        logging.info('Open SKOS file [' + file_name + ']')
+        logging.info('Open SKOS file [' + input_file + ']')
         graph = rdflib.Graph()
-        graph.parse(file_name, format='turtle')
+        graph.parse(input_file, format='turtle')
         graph = SKOSGraph.poor_man_reasoning(graph)
         logging.info('SKOS file parsed')
 
@@ -103,17 +124,9 @@ class SKOSQualityChecker:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="This script checks the structure of a given SKOS vocabulary.")
+    parser.add_argument("-config", required=False, help="Configuration of SKOSQualityChecker in yaml-format")
+    parser.add_argument("-graph", required=False, help="Graph to be checked")
 
-    with open('configs/Cyclic_checker_config.yaml') as f:
-        config_data = yaml.load(f, Loader=SafeLoader)
-
-    # Get input file name from config file if existing
-    if "input" in config_data:
-        input_file = config_data["input"]
-    else:
-        args = parser.parse_args()
-        input_file = args.input
-    parser.add_argument("input")
-
-    app = SKOSQualityChecker(config=config_data)
-    app.main(input_file)
+    app = SKOSQualityChecker()
+    args = parser.parse_args()
+    app.main()
