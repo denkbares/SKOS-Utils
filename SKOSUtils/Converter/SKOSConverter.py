@@ -76,11 +76,11 @@ class SKOSConverter:
 
     def rdf_to_xmind(self, rdf_file, xmind_file):
         # Load function_ttl_file and generate a XMind File from it
-        graph = SKOSGraph(rdf_file, self.namespaces, poor_man_reasoning=True)
+        graph = self.read_graph(rdf_file, self.namespaces)
         SKOS2XMind.write(graph, xmind_file, self.preferred_language)
 
     def rdf_to_excel(self, xls_file, rdf_file):
-        graph = SKOSGraph(rdf_file, self.namespaces)
+        graph = self.read_graph(rdf_file, self.namespaces)
         app = SKOS2XLS(prefered_language=self.preferred_language, graph=graph)
         app.write(xls_filename=xls_file)
 
@@ -96,7 +96,7 @@ class SKOSConverter:
         self.rdf_to_excel(rdf_file=rdf_file, xls_file=xls_file)
 
     def rdf_to_ascii(self, rdf_file, ascii_file):
-        graph = SKOSGraph(rdf_file, self.namespaces)
+        graph = self.read_graph(rdf_file, self.namespaces)
         app = SKOS2ASCII()
         app.write(graph, pref_lang=self.preferred_language, filename=ascii_file)
 

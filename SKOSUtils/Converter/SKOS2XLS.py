@@ -6,7 +6,8 @@ from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class SKOS2XLS:
-    def __init__(self, graph, prefered_language='en', handled_properties=[SKOS.prefLabel, SKOS.altLabel, SKOS.note]):
+    def __init__(self, graph, prefered_language='en',
+                 handled_properties=[SKOS.prefLabel, SKOS.altLabel, SKOS.note]):
         self.pref_lang = prefered_language
         self.graph = graph
         self.headers = []
@@ -38,7 +39,7 @@ class SKOS2XLS:
                     lang_add = '@' + lang
                 self.headers.append(str(hprop) + lang_add)
 
-        # iterate through graph as depth first search
+        # iterate through graph by depth first search
         for concept in self.graph.top_concepts(scheme):
             self.traverse_rec(frame, level, concept)
 
@@ -119,13 +120,6 @@ class SKOS2XLS:
         if value.endswith('\n'):
             value = value[:len(value) - 1]
         return value
-
-    @staticmethod
-    def abbr(p):
-        ps = str(p)
-        if ps.startswith(Namespace(SKOS)):
-            ps = ps.replace(Namespace(SKOS), 'skos:')
-        return ps
 
     @staticmethod
     def trim_columns(df):

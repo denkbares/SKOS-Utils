@@ -10,12 +10,12 @@ out_dir = 'tests/Testdata/temp/'
 
 rdf_file = 'Bike_Testdata.ttl'
 xls_file = 'Bike_Testdata.xlsx'
-xmind_file = 'Bike_Testdata.xmind'
 dot_file = 'Bike_Testdata.dot'
+xmind_file = 'Bike_Testdata.xmind'
 
-# Hey ya, just choose a conversion from the list of commands
+# Hey ya, just choose a converter from the list of commands
 commands = ['rdf->xls', 'rdf->xmind', 'rdf->graphviz']
-command = commands[2]
+command = commands[0]
 
 con = SKOSConverter(namespaces=ns, local_namespace=lns,
                     scheme_name="Example", preferred_language='en')
@@ -29,8 +29,8 @@ elif command == 'rdf->graphviz':
                         html_nodes=True,
                         html_nodes_with_rdftype=True,
                         html_nodes_with_pref_labels=False,
-                        dot_prolog=' rankdir=LR\n' +
+                        dot_prolog='  rankdir=LR\n' +
                                    '  shape=plaintext\n' +
-                                   ' node [fontname="Helvetica"]\n')
+                                   '  node [fontname="Helvetica"]\n')
 else:
     print('Please choose from one of the commands: ' + str(commands))

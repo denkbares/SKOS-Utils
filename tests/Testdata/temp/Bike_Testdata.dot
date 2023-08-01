@@ -1,7 +1,7 @@
 digraph generated_graph {
- rankdir=LR
+  rankdir=LR
   shape=plaintext
- node [fontname="Helvetica"]
+  node [fontname="Helvetica"]
 
 // http://www.example.org/bike#Bremshebel7
 node_1 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
