@@ -1,8 +1,10 @@
-nameSpace: http://www.example.org/example#
-nameSpaceKey: ex
-schemeName: exampleScheme
-preferredLanguage: de
-fileNamePrefix: TestData
-xMindRootTitle: Bike
-# outputDirectory:
+name_space: http://www.example.org/example#
+name_space_key: ex
+scheme_name: exampleScheme
+preferred_language: de
+file_name_prefix: Bike_Testdata
+xMind_root_title: Bike
+input_directory: tests\Testdata
+output_directory: tests\Testdata
+
 

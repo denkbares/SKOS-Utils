@@ -21,27 +21,32 @@ converterApp = typer.Typer()
 
 def create_converter():
     # Open the file and load the file
-    with open('../../configs/TSAConverter_config.yaml') as f:
+    with open('configs/TSAConverter_config.yaml') as f:
         config_data = yaml.load(f, Loader=SafeLoader)
     # define the namespace, in which the newly generated concepts are located
-    local_namespace = Namespace(config_data["nameSpace"])
-    namespaces = {config_data["nameSpace"]: config_data["nameSpaceKey"]}
-    scheme_name = config_data["schemeName"]
-    preferred_language = config_data["preferredLanguage"]
+    local_namespace = Namespace(config_data["name_space"])
+    namespaces = {config_data["name_space"]: config_data["name_space_key"]}
+    scheme_name = config_data["scheme_name"]
+    preferred_language = config_data["preferred_language"]
 
     result_converter = SKOSConverter(namespaces, local_namespace, scheme_name, preferred_language)
 
-    if "outputDirectory" in config_data:
-        result_converter.output_directory = config_data["outputDirectory"]
+    if "input_directory" in config_data:
+        result_converter.input_directory = config_data["input_directory"]
+    else:
+        root_path = Utils.get_project_root()
+        result_converter.input_directory = os.path.join(root_path, "data")
+    if "output_directory" in config_data:
+        result_converter.output_directory = config_data["output_directory"]
     else:
         root_path = Utils.get_project_root()
         result_converter.output_directory = os.path.join(root_path, "data")
-    if "fileNamePrefix" in config_data:
-        result_converter.file_name_prefix = config_data["fileNamePrefix"]
+    if "file_name_prefix" in config_data:
+        result_converter.file_name_prefix = config_data["file_name_prefix"]
     else:
-        result_converter.file_name_prefix = "tempFile"
-    if "xMindRootTitle" in config_data:
-        result_converter.xmind_root_node_title = config_data["xMindRootTitle"]
+        result_converter.file_name_prefix = "temp_file"
+    if "xMind_root_title" in config_data:
+        result_converter.xmind_root_node_title = config_data["xMind_root_title"]
     else:
         result_converter.xmind_root_node_title = None
 
@@ -51,11 +56,12 @@ def create_converter():
 class SKOSConverter:
     def __init__(self, namespaces, local_namespace, scheme_name, preferred_language,
                  output_directory=None, file_name_prefix=None, xmind_root_node_title=None):
+        self.input_directory = None
+        self.output_directory = None
         self.namespaces = namespaces
         self.preferred_language = preferred_language
         self.local_namespace = local_namespace
         self.scheme_name = scheme_name
-        self.output_directory = None
         self.file_name_prefix = None
         self.xmind_root_node_title = xmind_root_node_title
 
@@ -135,7 +141,7 @@ def excel_to_xmind(input=None, output=None, rdf_file=None):
     remove_rdf_file = False
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".xlsx")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
     if rdf_file is None:
@@ -151,7 +157,7 @@ def xmind_to_excel(input=None, output=None, rdf_file=None, xmind_root_node_title
     remove_rdf_file = False
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".xmind")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
     if rdf_file is None:
@@ -167,7 +173,7 @@ def xmind_to_excel(input=None, output=None, rdf_file=None, xmind_root_node_title
 def xmind_to_rdf(input=None, output=None, xmind_root_node_title=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".xmind")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
     converter.xmind_to_rdf(xmind_file=input, rdf_file=output, xmind_root_node_title=xmind_root_node_title)
@@ -177,7 +183,7 @@ def xmind_to_rdf(input=None, output=None, xmind_root_node_title=None):
 def excel_to_rdf(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".xlsx")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
 
@@ -189,7 +195,7 @@ def excel_to_rdf(input=None, output=None):
 def rdf_to_xmind(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".ttl")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xmind")
     converter.rdf_to_xmind(rdf_file=input, xmind_file=output)
@@ -199,7 +205,7 @@ def rdf_to_xmind(input=None, output=None):
 def rdf_to_excel(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".ttl")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".xlsx")
 
@@ -211,7 +217,7 @@ def rdf_to_excel(input=None, output=None):
 def rdf_to_graphviz(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".ttl")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".dot")
     print("Converting " + input + " to " + output + ".")
@@ -222,7 +228,7 @@ def rdf_to_graphviz(input=None, output=None):
 def rdf_to_ascii(input=None, output=None):
     converter = create_converter()
     if input is None:
-        input = os.path.join(converter.output_directory, converter.file_name_prefix + ".ttl")
+        input = os.path.join(converter.input_directory, converter.file_name_prefix + ".ttl")
     if output is None:
         output = os.path.join(converter.output_directory, converter.file_name_prefix + ".txt")
     print("Converting " + input + " to " + output + ".")
