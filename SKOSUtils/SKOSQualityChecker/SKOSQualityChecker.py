@@ -35,8 +35,8 @@ class SKOSQualityChecker:
         if args.config:
             config_path = args.config
         else:
-            # TODO: Default config?
             config_path = os.path.join('configs', 'SKOSQualityChecker_config.yaml')
+            print("Using default config.")
 
         with open(config_path) as f:
             self.config = yaml.load(f, Loader=SafeLoader)
@@ -49,8 +49,8 @@ class SKOSQualityChecker:
             input_file = self.config["input"]
             print("Input file \"" + input_file + "\" selected with config file \"" + config_path + "\" .")
         else:
-            # TODO: Default input?
-            input_file = "tests/Testdata/Bike_Quality_Checker_Debug_File.ttl"
+            input_file = "tests/Testdata/SKOS_Checker_Debug_File.ttl"
+            print("Using default input file.")
 
         if self.config['logging']:
             if 'log_file' in self.config:
