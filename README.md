@@ -8,12 +8,12 @@ and mindmaps in order to facilitate the bottom-up development of SKOS vocabulari
 checks is used for testing the created vocabularies.
 
 ## Project Structure
-The main files of this project are located in the SKOSUtils directory. Here you can find the SKOSConverter-file, which
+The main files of this project are located in the SKOSUtils directory. Here you can find the `SKOSConverter`, which
 includes functions to convert different data formats. You can simply switch between the well-known RDF syntax 
-definitions XML, Turtle, and JSON-LD. The suite provides scripts to bridge this data model from/to the mindmapping
+definitions XML, Turtle, and JSON-LD. The suite provides scripts to bridge this data model from/to the mind-mapping
 application XMind, to Graphviz, and from/to the spreadsheet application MS-Excel.
 
-You can also find the SKOSQualityChecker in the directory of the same name. For the quality assessment a suite of 
+You can also find the `SKOSQualityChecker` in the directory of the same name. For the quality assessment a suite of 
 configurable checks is executed as a pipeline. The results for each check are collected and reported after finishing 
 the entire pipeline.
 
@@ -30,7 +30,7 @@ example directory.
 
 ### Converter
 To use the converter, simple specify the converter and input and output file and run the main-function of the 
-SKOSConverter.
+`SKOSConverter`.
 For example:
 ```excel-to-rdf --input "D:/SKOSUTILS/Tests/TestData.xlsx" --output "D:/SKOSUTILS/Tests/TestData.ttl"```
 
@@ -70,7 +70,7 @@ The settings in the charts below can be changed in the respective config file.
 | log_file                    | Specify the location and name of the used log file                                    |
 | tests                       | Create a test pipeline by writing all tests you want the SKOS Quality Checker to use  |
 
-## Extend this Tool
+## How to Extend this Tool
 If you want to extend the quality checks of SKOS-graphs, you can write new checker modules in rdf or SPARQL.
 Create the checker file and add your check to your YAML-config-file.
 Inherit from the class `StructureTestInterfaceNavigate` or `StructureTestInterfaceSPARQL` and set the status flag and
