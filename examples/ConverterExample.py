@@ -15,7 +15,7 @@ xmind_file = 'Bike_Testdata.xmind'
 
 # Hey ya, just choose a converter from the list of commands
 commands = ['rdf->xls', 'rdf->xmind', 'rdf->graphviz']
-command = commands[0]
+command = commands[2]
 
 con = SKOSConverter(namespaces=ns, local_namespace=lns,
                     scheme_name="Example", preferred_language='en')

@@ -24,7 +24,7 @@ class QuickRDFConverter:
 
 
 if __name__ == '__main__':
-    in_file = '/Users/joba/Downloads/datasets/geonames_ontology_v3.3.rdf'
-    out_file = '/Users/joba/Downloads/datasets/geonames_ontology_v3.3.ttl'
+    in_file = 'tests/geonames_ontology_v3.3.rdf'
+    out_file = 'tests/geonames_ontology_v3.3.ttl'
     app = QuickRDFConverter()
     app.convert(in_file=in_file, out_file=out_file, in_syntax='ttl', out_syntax='xml')

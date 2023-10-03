@@ -4,8 +4,8 @@
 We introduce the tool suite SKOS-Utils for the development and quality assessment of SKOS vocabularies
 (Simple Knowledge Organisation System). SKOS is a wide-spread standard for organizing hierarchical
 knowledge structures, that uses RDF as basic data model. SKOS-Utils provides converters for spreadsheets
-and mindmaps in order to facilitate the bottom-up development of SKOS vocabularies. A suite of quality
-checks is used for testing the created vocabularies.
+and mindmaps in order to facilitate the bottom-up development of SKOS vocabularies. 
+SKOS-Utils also offers a suite of quality checks for testing the created vocabularies.
 
 ## Project Structure
 The main files of this project are located in the SKOSUtils directory. Here you can find the `SKOSConverter`, which
@@ -16,9 +16,12 @@ application XMind, to Graphviz, and from/to the spreadsheet application MS-Excel
 You can also find the `SKOSQualityChecker` in the directory of the same name. For the quality assessment a suite of 
 configurable checks is executed as a pipeline. The results for each check are collected and reported after finishing 
 the entire pipeline.
+Please note, that there is no real reasoning support for the checks, so the quality checks basically only 
+analyse the knowledge graph as given from the file.
+We, however, can activate `PoorMansReasoning` in order to infer further triples to the graph that can be derived by 
+very simple subclass and subproperty axioms. 
 
-[TODO] QuickRDFConverter
-[TODO] PoorMansReasoning
+The class `QuickRDFConverter` is used to quickly convert between different RDF syntaxes, such as XML, Turtle, and JSON-LD.
 
 In the configs directory you can write your own configs to personalize the modules of this project.
 
@@ -70,7 +73,8 @@ The settings in the charts below can be changed in the respective config file.
 | log_file                    | Specify the location and name of the used log file                                    |
 | tests                       | Create a test pipeline by writing all tests you want the SKOS Quality Checker to use  |
 
-## How to Extend this Tool
+## How to extend SKOS-Utils
+
 If you want to extend the quality checks of SKOS-graphs, you can write new checker modules in rdf or SPARQL.
 Create the checker file and add your check to your YAML-config-file.
 Inherit from the class `StructureTestInterfaceNavigate` or `StructureTestInterfaceSPARQL` and set the status flag and
