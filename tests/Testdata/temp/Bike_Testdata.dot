@@ -1,91 +1,51 @@
 digraph generated_graph {
   rankdir=LR
   shape=plaintext
+  overlap = scale;
+   sep = 0.5;
   node [fontname="Helvetica"]
 
 // http://www.example.org/bike#Bremshebel7
-node_1 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake lever (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_1 [label="Brake lever" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Bremsscheibe8
-node_2 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake disc (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_2 [label="Brake disc" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Klingelgehaeuse5
-node_3 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bell housing (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_3 [label="Bell housing" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Lenkstange3
-node_4 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Handle (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_4 [label="Handle" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Sattelfeder11
-node_5 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle spring (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_5 [label="Saddle spring" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Sattelschraube12
-node_6 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle bolt (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_6 [label="Saddle bolt" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Sattelstange13
-node_7 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Seat post (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_7 [label="Seat post" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Klingel4
-node_8 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bell (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_8 [label="Bell" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Bike1
-node_9 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Bike (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_9 [label="Bike" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Bremse6
-node_10 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Brake (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_10 [label="Brake" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Lenker2
-node_11 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Handlebar (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_11 [label="Handlebar" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Sattel10
-node_12 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Saddle (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_12 [label="Saddle" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Sitz9
-node_13 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Seat (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:Concept</TD></TR>
-</TABLE>>];
+node_13 [label="Seat" style=filled fillcolor=lightgray]
 
 // http://www.example.org/bike#Functions
-node_14 [shape=plaintext label=<<TABLE  BORDER="0" CELLBORDER="1" CELLSPACING="0">
-   <TR><TD  ALIGN="LEFT" BGCOLOR="gray">Functions (en)</TD></TR>
-   <TR><TD  ALIGN="LEFT">skos:ConceptScheme</TD></TR>
-</TABLE>>];
+node_14 [label="Functions" style=filled fillcolor=lightgray]
 
 node_14 -> node_9 [label="skos:hasTopConcept"]
 node_8 -> node_3 [label="skos:narrower"]
@@ -100,5 +60,61 @@ node_12 -> node_5 [label="skos:narrower"]
 node_12 -> node_6 [label="skos:narrower"]
 node_13 -> node_12 [label="skos:narrower"]
 node_13 -> node_7 [label="skos:narrower"]
+node_15 [label="Bremshebel@de" shape=rect]
+node_1 -> node_15 [label="skos:prefLabel"]
+node_16 [label="Brake lever@en" shape=rect]
+node_1 -> node_16 [label="skos:prefLabel"]
+node_17 [label="Bremsscheibe@de" shape=rect]
+node_2 -> node_17 [label="skos:prefLabel"]
+node_18 [label="Brake disc@en" shape=rect]
+node_2 -> node_18 [label="skos:prefLabel"]
+node_19 [label="Klingelgehäuse@de" shape=rect]
+node_3 -> node_19 [label="skos:prefLabel"]
+node_20 [label="Bell housing@en" shape=rect]
+node_3 -> node_20 [label="skos:prefLabel"]
+node_21 [label="Lenkstange@de" shape=rect]
+node_4 -> node_21 [label="skos:prefLabel"]
+node_22 [label="Handle@en" shape=rect]
+node_4 -> node_22 [label="skos:prefLabel"]
+node_23 [label="Sattelfeder@de" shape=rect]
+node_5 -> node_23 [label="skos:prefLabel"]
+node_24 [label="Saddle spring@en" shape=rect]
+node_5 -> node_24 [label="skos:prefLabel"]
+node_25 [label="Sattelschraube@de" shape=rect]
+node_6 -> node_25 [label="skos:prefLabel"]
+node_26 [label="Saddle bolt@en" shape=rect]
+node_6 -> node_26 [label="skos:prefLabel"]
+node_27 [label="Sattelstange@de" shape=rect]
+node_7 -> node_27 [label="skos:prefLabel"]
+node_28 [label="Seat post@en" shape=rect]
+node_7 -> node_28 [label="skos:prefLabel"]
+node_29 [label="Klingel@de" shape=rect]
+node_8 -> node_29 [label="skos:prefLabel"]
+node_30 [label="Bell@en" shape=rect]
+node_8 -> node_30 [label="skos:prefLabel"]
+node_31 [label="Bike@en" shape=rect]
+node_9 -> node_31 [label="skos:prefLabel"]
+node_32 [label="Fahrrad@de" shape=rect]
+node_9 -> node_32 [label="skos:prefLabel"]
+node_33 [label="Bremse@de" shape=rect]
+node_10 -> node_33 [label="skos:prefLabel"]
+node_34 [label="Brake@en" shape=rect]
+node_10 -> node_34 [label="skos:prefLabel"]
+node_35 [label="Lenker@de" shape=rect]
+node_11 -> node_35 [label="skos:prefLabel"]
+node_36 [label="Handlebar@en" shape=rect]
+node_11 -> node_36 [label="skos:prefLabel"]
+node_37 [label="Sattel@de" shape=rect]
+node_12 -> node_37 [label="skos:prefLabel"]
+node_38 [label="Saddle@en" shape=rect]
+node_12 -> node_38 [label="skos:prefLabel"]
+node_39 [label="Sitz@de" shape=rect]
+node_13 -> node_39 [label="skos:prefLabel"]
+node_40 [label="Seat@en" shape=rect]
+node_13 -> node_40 [label="skos:prefLabel"]
+node_41 [label="Funktionen@de" shape=rect]
+node_14 -> node_41 [label="skos:prefLabel"]
+node_42 [label="Functions@en" shape=rect]
+node_14 -> node_42 [label="skos:prefLabel"]
 
 }

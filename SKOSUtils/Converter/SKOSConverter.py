@@ -87,7 +87,7 @@ class SKOSConverter:
 
     def rdf_to_excel(self, xls_file, rdf_file):
         graph = self.read_graph(rdf_file, self.namespaces)
-        app = SKOS2XLS(prefered_language=self.preferred_language, graph=graph)
+        app = SKOS2XLS(preferred_language=self.preferred_language, graph=graph)
         app.write(xls_filename=xls_file)
 
     def excel_to_xmind(self, xls_file, xmind_file, rdf_file):

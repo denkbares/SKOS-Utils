@@ -7,19 +7,18 @@ from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 class SKOSConcept:
     def __init__(self, name='Noname', note=None, namespace=None, uuid=None, uuid_prefix='C_'):
-        self.nc = namespace
-        self.name = ProcessUtils.trim(name)
-
         if not uuid:
             generator = IDGenerator()
             uuid = uuid_prefix + generator.generate_uuid()
-
         uriname = uuid
-
+        self.nc = namespace
         if self.nc:
             self.uri = URIRef(namespace + uriname)
         else:
             self.uri = uriname
+
+        self.name = ProcessUtils.trim(name)
+        self.phrase = ''
         self.props = []
         self.broader = []
         self.narrower = []
@@ -61,13 +60,28 @@ class SKOSConcept:
             new_string += x.capitalize()
         return new_string
 
+    def trunk(self, content):
+        """Remove leading and ending spaces and paratheses from a string."""
+        while content.startswith(' '):
+            content = content[1:]
+        while content.endswith(' '):
+            content = content[:-1]
+        if content.startswith('"'):
+            content = content[1:]
+        if content.endswith('"'):
+            content = content[:-1]
+        return content
+
+    def add_phrase(self, phrase):
+        if phrase.startswith('@phrase'):
+            phrase = phrase[7:]
+        phrase = self.trunk(phrase)
+        self.phrase = phrase
+
     def add_note(self, note_attr='', note_value=None):
         if note_attr:
             if note_value:
-                if note_value.startswith('"'):
-                    note_value = note_value[1:]
-                if note_value.endswith('"'):
-                    note_value = note_value[:-1]
+                note_value = self.trunk(note_value)
                 if note_attr != 'order':
                     note_value = '"' + note_value + '"'
                 self.notes.append('@' + note_attr + ': ' + note_value)
@@ -87,7 +101,8 @@ class SKOSConcept:
         elif n.startswith('@phrase:'):
             regex = r"@phrase:\s*\"?([^\"]+)\"?\s*"
             value = '"' + re.sub(regex, "\\1", n, 0, re.MULTILINE) + '"'
-            self.add_note('phrase', value)
+            # self.add_note('phrase', value)
+            self.add_phrase(value)
         elif n.startswith('@'):
             i = n.find(' ')
             attr = n[1:i]
@@ -101,5 +116,6 @@ class SKOSConcept:
             attr = attr[:-1]
         self.props.append((attr, value))
 
-
-
+    def remove_property(self, attr):
+        new_properties = [element for element in self.props if not element[0] == attr]
+        self.props = new_properties

@@ -6,9 +6,9 @@ from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class SKOS2XLS:
-    def __init__(self, graph, prefered_language='en',
+    def __init__(self, graph, preferred_language='en',
                  handled_properties=[SKOS.prefLabel, SKOS.altLabel, SKOS.note]):
-        self.pref_lang = prefered_language
+        self.pref_lang = preferred_language
         self.graph = graph
         self.headers = []
         self.handled_properties = handled_properties

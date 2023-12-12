@@ -46,6 +46,14 @@ class Generic2SKOS:
         graph.add((su, SKOS.prefLabel, Literal(schemename)))
         return su
 
+    def instantiate_notes(self, graph, uri, concept):
+        for note in concept.notes:
+            graph.add((uri, SKOS.note, Literal(note)))
+
+    def instantiate_external_properties(self, graph, uri, concept):
+        """Template method for overwriting classes, that can export additional properties for this URI"""
+        pass
+
     def instantiate_rec(self, concept, graph):
         if concept.uri:
             uri = concept.uri
@@ -61,10 +69,9 @@ class Generic2SKOS:
             graph.add((uri, SKOS.prefLabel, Literal(concept.name)))
 
         if concept.notes:
-            for note in concept.notes:
-                graph.add((uri, SKOS.note, Literal(note)))
-        if concept.uuid:
-            graph.add((uri, SKOS.note, Literal('@uuid: ' + concept.uuid)))
+            self.instantiate_notes(graph, uri, concept)
+        self.instantiate_external_properties(graph, uri, concept)
+
         graph.add((uri, SKOS.inScheme, self.scheme.scheme_uri))
 
         for b in concept.broader:

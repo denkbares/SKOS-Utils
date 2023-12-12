@@ -40,6 +40,7 @@ class SKOS2GRAPHVIZ:
         self.write_buffer(filename)
 
     def create_node(self, concept):
+        suffix = '" style=filled fillcolor=lightgray]\n'
         if concept in self.uri_node_map:
             return  # the node has been already created
         node_id = self.node_id()
@@ -48,15 +49,23 @@ class SKOS2GRAPHVIZ:
             node_str += self.create_html_node(concept, node_id)
         else:
             label = self.quote(self.label(concept, self.graph, self.preferred_language))
-            node_str += node_id + ' [label="' + label + '"]\n'
+            node_str += node_id + ' [label="' + label + suffix
         self.uri_node_map[concept] = node_id
         self.send_buffer(node_str)
 
     def create_literal_node(self, literal):
+        suffix = '" shape=rect]'
         node_id = self.node_id()
         litstr = str(literal)
+        lang = ''
+        if isinstance(literal, Literal) and literal.language:
+            lang = literal.language
         litstr = litstr.replace('\n', '<BR/>')
-        node_str = node_id + ' [label="' + self.quote(litstr) + '"]'
+        node_str = node_id + ' [label="' + self.quote(litstr)
+        if lang:
+            node_str += '@' + lang + suffix
+        else:
+            node_str += suffix
         self.uri_node_map[literal] = node_id
         self.send_buffer(node_str)
 
@@ -108,7 +117,8 @@ class SKOS2GRAPHVIZ:
         link_label = ' -> '
         link_str = self.uri_node_map[uri_a] + link_label + self.uri_node_map[uri_b]
         if label_uri:
-            label_str = self.graph.qstr(label_uri)
+            label_str = self.graph.g.qname(label_uri)
+            #label_str = self.graph.qstr(label_uri)
             link_str += ' [label="' + label_str + '"]'
 
         self.send_buffer(link_str)
