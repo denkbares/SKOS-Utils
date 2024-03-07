@@ -1,8 +1,13 @@
+from datetime import datetime
+
+
 class SKOSScheme:
     def __init__(self, schemename='Noname'):
         self.name = schemename
         self.top_concepts = []
         self.scheme_uri = None
+        current_datetime = datetime.now()
+        self.generation_time = current_datetime.strftime("%Y-%m-%dT%H:%M:%S")
 
     def add_top_concept(self, concept):
         self.top_concepts.append(concept)

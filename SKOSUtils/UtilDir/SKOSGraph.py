@@ -11,6 +11,7 @@ class SKOSGraph:
     NARROWER = URIRef(namespace.SKOS + "narrower")
     PREF_LABEL = URIRef(namespace.SKOS + 'prefLabel')
     NOTE = URIRef(namespace.SKOS + 'note')
+    ORDER = URIRef(namespace.SH + 'order')
 
     def __init__(self, rdf_filename, namespaces={}, poor_man_reasoning=False):
         self.g = Graph()
@@ -84,10 +85,16 @@ class SKOSGraph:
         return None
 
     def order(self, uri):
-        for note in self.note(uri):
-            n = str(note)
-            if n.startswith('@order:'):
-                return int(n[7:].strip())
+        order_uris = list(self.g.objects(uri, self.ORDER))
+        if order_uris and len(order_uris) > 0:
+            order = order_uris[0].toPython()
+            return order
+        else:
+            # deprecated code: in the old days, the order was coded in the notes
+            for note in self.note(uri):
+                n = str(note)
+                if n.startswith('@order:'):
+                    return int(n[7:].strip())
         return 1
 
     def plain_notes(self, uri):

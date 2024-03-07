@@ -16,16 +16,15 @@ class SKOSConcept:
             self.uri = URIRef(namespace + uriname)
         else:
             self.uri = uriname
-
         self.name = ProcessUtils.trim(name)
         self.phrase = ''
         self.props = []
         self.broader = []
         self.narrower = []
         self.notes = []
-        self.hiddenName = None
+        self.order = None
+        self.hiddenLabel = None
         self.add_notes(note)
-        self.add_note('xmind_name', self.name)
         self.uuid = uuid
 
     def add_broader(self, concept=None):

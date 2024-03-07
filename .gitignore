@@ -124,3 +124,4 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+/examples/CL_Examples.py

@@ -77,7 +77,7 @@ class SKOSConverter:
                        bindings=self.namespaces)
         # level_col: defines the column name of the hierarchy level
         # value_col: defines the column name of the element name
-        loaded_scheme = app.read_xls(xls_file, level_col='Level', value_col='Name', note_col='Notes', sheet_number=0)
+        loaded_scheme = app.read_xls(xls_file, level_col_name='Level', value_col_name='Name', note_col='Notes', sheet_number=0)
         app.to_rdf(loaded_scheme, rdf_file)
 
     def rdf_to_xmind(self, rdf_file, xmind_file):

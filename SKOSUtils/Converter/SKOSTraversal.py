@@ -20,11 +20,7 @@ class SKOSTraversal:
             return str(generator)
 
     def print_label(self, uri):
-        alt_label = self.g.alt_label(uri,self.preferred_lang)
-        if isinstance(alt_label, Literal):
-            return self.tos(alt_label)
-        else:
-            return self.tos(self.g.pref_label(uri, self.preferred_lang))
+        return self.tos(self.g.pref_label(uri, self.preferred_lang))
 
     def abbr_id(self, uri):
         return self.g.str_abbr(uri)

@@ -1,19 +1,25 @@
+import os
 import uuid
+from datetime import datetime
 
-from rdflib import URIRef, RDF, Literal, Graph, RDFS
+from rdflib import URIRef, RDF, Literal, Graph, RDFS, PROV, XSD, BNode
 from rdflib.namespace import SKOS, Namespace
+from rdflib import namespace
 
 from SKOSUtils.Converter.ProcessUtils import ProcessUtils
 
 
 class Generic2SKOS:
-    def __init__(self, namespace, scheme_name, bindings={}, default_language='de'):
+    def __init__(self, local_namespace, scheme_name, bindings={}, default_language='de'):
         self.default_language = default_language
         self.scheme_name = scheme_name
-        self.namespace = namespace
+        self.namespace = local_namespace
         self.scheme = None
         self.created_concepts = {}
         self.bindings = bindings
+        self.order_prop = namespace.SH.order
+        self.source_filename = 'Source filename undefined'
+        self.source_filename_changed = None
 
     def create_scheme_uri(self, graph):
         schemename = self.scheme_name
@@ -26,17 +32,19 @@ class Generic2SKOS:
     def add_binding(self, abbr, uri):
         self.bindings[uri] = abbr
 
-    def to_rdf(self, scheme, out_filename):
+    def to_rdf(self, scheme, out_filename, serialize_format='turtle'):
         self.created_concepts = {}
         graph = Graph()
         skos_ns = Namespace(SKOS)
         graph.bind("skos", skos_ns)
+        graph.bind("sh", namespace.SH)
+        graph.bind("prov", namespace.PROV)
         scheme.scheme_uri = self.create_scheme_uri(graph, scheme)
-        for buri, babbr in self.bindings.items():
-            graph.bind(buri, Namespace(babbr))
+        for babbr, buri in self.bindings.items():
+            graph.bind(buri, babbr)
         for tc in scheme.top_concepts:
             self.instantiate_rec(tc, graph)
-        graph.serialize(format='turtle', destination=out_filename)
+        graph.serialize(format=serialize_format, destination=out_filename)
 
     def create_scheme_uri(self, graph, scheme):
         schemename = scheme.name
@@ -44,7 +52,30 @@ class Generic2SKOS:
         graph.add((su, RDF.type, SKOS.ConceptScheme))
         graph.add((su, SKOS.prefLabel, Literal(schemename, self.default_language)))
         graph.add((su, SKOS.prefLabel, Literal(schemename)))
+        # Also add some PROV information
+        graph.add((su, RDF.type, PROV.entity))
+        graph.add((su, PROV.generatedAtTime, Literal(scheme.generation_time, datatype=XSD.dateTime)))
+        run_activity = URIRef(self.namespace + 'SKOS-Utils-Run')
+        graph.add((su, PROV.wasGeneratedBy, run_activity))
+        graph.add((run_activity, RDF.type, PROV.activity))
+        graph.add((run_activity, SKOS.prefLabel, Literal('SKOS-Utils Run')))
+
+        source_entity = BNode()
+        graph.add((run_activity, PROV.used, source_entity))
+        graph.add((source_entity, RDF.type, PROV.entity))
+        graph.add((source_entity, PROV.value, Literal(self.source_filename)))
+        if self.source_filename_changed:
+            graph.add((source_entity, PROV.generatedAtTime, Literal(self.source_filename_changed, datatype=XSD.dateTime)))
+
         return su
+
+    def set_source_filename(self, filename):
+        """
+        Get the modified date of the specified filename
+        """
+        self.source_filename = filename
+        stats = os.stat(filename)
+        self.source_filename_changed = datetime.fromtimestamp(stats.st_mtime).strftime("%Y-%m-%dT%H:%M:%S")
 
     def instantiate_notes(self, graph, uri, concept):
         for note in concept.notes:
@@ -74,6 +105,11 @@ class Generic2SKOS:
 
         graph.add((uri, SKOS.inScheme, self.scheme.scheme_uri))
 
+        if concept.hiddenLabel:
+            graph.add((uri, SKOS.hiddenLabel, Literal(concept.hiddenLabel)))
+        if concept.order:
+            graph.add((uri, self.order_prop, Literal(concept.order)))
+
         for b in concept.broader:
             graph.add((uri, SKOS.broader, b.uri))
             graph.add((b.uri, SKOS.narrower, uri))
@@ -91,12 +127,19 @@ class Generic2SKOS:
     def collect_and_add_notes(notes, concept):
         if notes:
             for n in notes.split('\n'):
+                current_note = ''
                 if n != 'nan':
                     if n.startswith('@phrase:'):
                         n = n[7:]
                         concept.add_note('phrase', n)
+                    elif n.startswith('@'):
+                        if current_note:
+                            concept.add_note(current_note)
+                        current_note = ''
                     else:
-                        concept.add_note(n)
+                        current_note += n
+            if current_note:
+                concept.add_note(current_note)
 
     def add_properties(self, graph, concept, uri):
         if concept.props:

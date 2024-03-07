@@ -63,6 +63,7 @@ class XMind2SKOS(Generic2SKOS):
             raise ValueError('The given root node does not exist in XMind sheet.')
 
     def read_xmind(self, xmind_file, rdf_file, sheet_no=0, xmind_root_node_title=None, max_depth=None):
+        self.set_source_filename(xmind_file)
         self.scheme = SKOSScheme(self.scheme_name)
         self.max_depth = max_depth
         xmind_dict = xmind_to_dict(xmind_file)
