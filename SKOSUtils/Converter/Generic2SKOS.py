@@ -38,7 +38,6 @@ class Generic2SKOS:
         skos_ns = Namespace(SKOS)
         graph.bind("skos", skos_ns)
         graph.bind("sh", namespace.SH)
-        graph.bind("prov", namespace.PROV)
         scheme.scheme_uri = self.create_scheme_uri(graph, scheme)
         for babbr, buri in self.bindings.items():
             graph.bind(buri, babbr)
@@ -109,6 +108,14 @@ class Generic2SKOS:
             graph.add((uri, SKOS.hiddenLabel, Literal(concept.hiddenLabel)))
         if concept.order:
             graph.add((uri, self.order_prop, Literal(concept.order)))
+
+        # add exact matches
+        for em in concept.exact_matches:
+            if isinstance(em, URIRef):
+                em_uri = em
+            else:
+                em_uri = URIRef(str(em))
+            graph.add((uri, SKOS.exactMatch, em_uri))
 
         for b in concept.broader:
             graph.add((uri, SKOS.broader, b.uri))

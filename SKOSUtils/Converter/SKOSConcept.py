@@ -26,6 +26,11 @@ class SKOSConcept:
         self.hiddenLabel = None
         self.add_notes(note)
         self.uuid = uuid
+        self.exact_matches = []
+
+    def add_exact_match(self, concept=None):
+        if concept and concept not in self.exact_matches:
+            self.exact_matches.append(concept)
 
     def add_broader(self, concept=None):
         if concept and concept not in self.broader:
