@@ -29,7 +29,7 @@ class SKOSConcept:
         self.exact_matches = []
 
     def add_exact_match(self, concept=None):
-        if concept and concept not in self.exact_matches:
+        if concept and concept not in self.exact_matchesex:
             self.exact_matches.append(concept)
 
     def add_broader(self, concept=None):

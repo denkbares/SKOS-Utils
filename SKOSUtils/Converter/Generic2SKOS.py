@@ -45,6 +45,7 @@ class Generic2SKOS:
             self.instantiate_rec(tc, graph)
         graph.serialize(format=serialize_format, destination=out_filename)
 
+
     def create_scheme_uri(self, graph, scheme):
         schemename = scheme.name
         su = URIRef(self.namespace + schemename)
